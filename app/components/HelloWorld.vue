@@ -13,14 +13,16 @@
       </select>
 
       <div class="grid-container">
-        <div v-for="week in weeks" :key="week.start" :class="['week-square', { 'has-message': hasMessage(week.number) }]">
+        <div v-for="week in weeks" :key="+week.start" :class="['week-square', { 'has-message': hasMessage(week.number) }]">
           <div>Week {{ week.number }}</div>
           <div>{{ formatDate(week.start) }} - {{ formatDate(week.end) }}</div>
           <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button>
           <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
             {{ getMessage(week.number) }}
           </div>
-          <button v-if="!hasMessage(week.number) && week.number <= currentWeekNumber && selectedYear.value === currentYear" @click="addMessage(week.number)">Add Message</button>
+          <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" @click="addMessage(week.number)">
+            Add New Message
+          </button>
         </div>
       </div>
     </div>
@@ -28,7 +30,9 @@
 </template>
 
 <script setup lang="ts">
-const client = useSupabaseClient()
+import type { Database } from '~~/types/database.types'
+
+const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
 // Greeting message
@@ -41,9 +45,10 @@ const greatingMessage = computed(() => {
 const { data: messages } = await useAsyncData(
   'messages',
   async () => {
-    return await client.from('gratitude_messages').select('id, message, week, year').order('week', { ascending: true })
+    if (!user.value) return
+    return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
   },
-  { transform: (result) => result.data, watch: user }
+  { transform: (result) => (result ? result.data : []), watch: [user] }
 )
 
 // Available years for selection
@@ -59,10 +64,10 @@ const startOfYear = new Date(today.getFullYear(), 0, 1)
 const currentWeekNumber = Math.ceil(((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7)
 
 // Reactive map to track visibility of messages
-const messageVisibility = ref({})
+const messageVisibility = ref<Record<number, boolean>>({})
 
 // Function to calculate weeks with start and end dates
-function calculateWeeks(year) {
+function calculateWeeks(year: number) {
   const weeks = []
   let date = new Date(year, 0, 1) // Start from January 1st of the selected year
 
@@ -92,7 +97,7 @@ function calculateWeeks(year) {
 const weeks = computed(() => calculateWeeks(selectedYear.value))
 
 // Function to format dates
-function formatDate(date) {
+function formatDate(date: Date) {
   const day = String(date.getDate()).padStart(2, '0')
   const month = String(date.getMonth() + 1).padStart(2, '0')
   const year = date.getFullYear()
@@ -101,31 +106,44 @@ function formatDate(date) {
 }
 
 // Check if there's a message for the given week
-function hasMessage(weekNumber) {
-  return messages.value.some((message) => message.week === weekNumber && message.year === selectedYear.value)
+function hasMessage(weekNumber: number) {
+  return messages.value?.some((message) => message.week === weekNumber && message.year === selectedYear.value)
 }
 
 // Get the message for the given week
-function getMessage(weekNumber) {
-  const message = messages.value.find((message) => message.week === weekNumber && message.year === selectedYear.value)
+function getMessage(weekNumber: number) {
+  const message = messages.value?.find((message) => message.week === weekNumber && message.year === selectedYear.value)
   return message ? message.message : ''
 }
 
 // Toggle message visibility for a given week
-function toggleMessage(weekNumber) {
+function toggleMessage(weekNumber: number) {
   messageVisibility.value[weekNumber] = !messageVisibility.value[weekNumber]
 }
 
 // Check if message is visible for a given week
-function isMessageVisible(weekNumber) {
+function isMessageVisible(weekNumber: number) {
   return messageVisibility.value[weekNumber] || false
 }
 
 // Function to add a new message
-function addMessage(weekNumber) {
-  // Implement the logic to add a new message for the given week
-  // This could involve opening a dialog or directly interacting with your backend
-  console.log(`Add message for week ${weekNumber}`)
+// function addMessage(weekNumber: number) {
+//   client.from('gratitude_messages').insert([{ week: weekNumber, year: selectedYear.value, message: 'New message', user_id: user.value?.id }])
+// }
+
+async function addMessage(weekNumber: number) {
+  try {
+    const { data, error } = await client.from('gratitude_messages').insert([{ week: weekNumber, year: selectedYear.value, message: 'New message', user_id: user.value?.id }])
+
+    if (error) {
+      console.error('Error inserting message:', error)
+    } else {
+      console.log('Message inserted successfully:', data)
+      // Optionally, update the local messages state or refetch data
+    }
+  } catch (err) {
+    console.error('Unexpected error:', err)
+  }
 }
 </script>
 
