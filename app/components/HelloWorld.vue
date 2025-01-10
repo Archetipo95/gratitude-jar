@@ -20,10 +20,20 @@
           <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
             {{ getMessage(week.number) }}
           </div>
-          <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" @click="addMessage(week.number)">
+          <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" @click="openModal(week.number)">
             Add New Message
           </button>
         </div>
+      </div>
+    </div>
+
+    <!-- Modal for Adding a New Message -->
+    <div v-if="isModalOpen" class="modal">
+      <div class="modal-content">
+        <span class="close" @click="closeModal">&times;</span>
+        <h2>Add New Message for Week {{ modalWeekNumber }}</h2>
+        <textarea v-model="newMessage" placeholder="Enter your message here"></textarea>
+        <button @click="submitMessage">Submit</button>
       </div>
     </div>
   </div>
@@ -65,6 +75,11 @@ const currentWeekNumber = Math.ceil(((today.getTime() - startOfYear.getTime()) /
 
 // Reactive map to track visibility of messages
 const messageVisibility = ref<Record<number, boolean>>({})
+
+// Modal state management
+const isModalOpen = ref(false)
+const modalWeekNumber = ref<number | null>(null)
+const newMessage = ref<string>('')
 
 // Function to calculate weeks with start and end dates
 function calculateWeeks(year: number) {
@@ -126,23 +141,41 @@ function isMessageVisible(weekNumber: number) {
   return messageVisibility.value[weekNumber] || false
 }
 
-// Function to add a new message
-// function addMessage(weekNumber: number) {
-//   client.from('gratitude_messages').insert([{ week: weekNumber, year: selectedYear.value, message: 'New message', user_id: user.value?.id }])
-// }
+// Open modal to add a new message
+function openModal(weekNumber: number) {
+  modalWeekNumber.value = weekNumber
+  isModalOpen.value = true
+}
 
-async function addMessage(weekNumber: number) {
-  try {
-    const { data, error } = await client.from('gratitude_messages').insert([{ week: weekNumber, year: selectedYear.value, message: 'New message', user_id: user.value?.id }])
+// Close modal
+function closeModal() {
+  isModalOpen.value = false
+  newMessage.value = ''
+}
 
-    if (error) {
-      console.error('Error inserting message:', error)
-    } else {
-      console.log('Message inserted successfully:', data)
-      // Optionally, update the local messages state or refetch data
+// Submit new message
+async function submitMessage() {
+  if (modalWeekNumber.value && newMessage.value) {
+    try {
+      const { data, error } = await client.from('gratitude_messages').insert([
+        {
+          week: modalWeekNumber.value,
+          year: selectedYear.value,
+          message: newMessage.value,
+          user_id: user.value?.id,
+        },
+      ])
+
+      if (error) {
+        console.error('Error inserting message:', error)
+      } else {
+        console.log('Message inserted successfully:', data)
+        // Optionally, update the local messages state or refetch data
+        closeModal()
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err)
     }
-  } catch (err) {
-    console.error('Unexpected error:', err)
   }
 }
 </script>
@@ -166,5 +199,38 @@ async function addMessage(weekNumber: number) {
 
 .week-square.has-message {
   background-color: #d4f8d4; /* Light green color for boxes with messages */
+}
+
+.modal {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 5px;
+  width: 300px;
+  text-align: center;
+}
+
+.close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+}
+
+textarea {
+  width: 100%;
+  height: 80px;
+  margin-bottom: 10px;
 }
 </style>
