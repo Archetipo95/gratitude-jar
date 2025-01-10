@@ -2,7 +2,7 @@
   <div>
     <h1>{{ greatingMessage }}</h1>
     <button v-if="!!user" @click="client.auth.signOut()">Log Out</button>
-    <button v-else @click="client.auth.signInWithOAuth({ provider: 'github', options: { redirectTo: '/redirect' } })">Log In</button>
+    <button v-else @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In</button>
 
     <div v-if="!!user">
       <label for="year-select">Select Year:</label>
