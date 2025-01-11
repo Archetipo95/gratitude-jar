@@ -13,17 +13,7 @@
       </select>
 
       <div class="grid-container">
-        <div v-for="week in weeks" :key="+week.start" :class="['week-square', { 'has-message': hasMessage(week.number) }]">
-          <div>Week {{ week.number }}</div>
-          <div>{{ formatDate(week.start) }} - {{ formatDate(week.end) }}</div>
-          <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button>
-          <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
-            {{ getMessage(week.number) }}
-          </div>
-          <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" @click="openModal(week.number)">
-            Add New Message
-          </button>
-        </div>
+        <WeekTile v-for="week in weeks" :week :selected-year :current-year @open-modal="openModal($event)" :key="week.number + selectedYear" />
       </div>
     </div>
 
@@ -44,30 +34,12 @@ const greatingMessage = computed(() => {
   return `Hello ${user.value.user_metadata.user_name}`
 })
 
-// Fetch messages from Supabase
-const { data: messages } = await useAsyncData(
-  'messages',
-  async () => {
-    if (!user.value) return
-    return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
-  },
-  { transform: (result) => (result ? result.data : []), watch: [user] }
-)
-
 // Available years for selection
 const currentYear = new Date().getFullYear()
 const availableYears = ref([currentYear - 1, currentYear, currentYear + 1])
 
 // Reactive variable for selected year
 const selectedYear = ref(currentYear)
-
-// Calculate the current week number
-const today = new Date()
-const startOfYear = new Date(today.getFullYear(), 0, 1)
-const currentWeekNumber = Math.ceil(((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7)
-
-// Reactive map to track visibility of messages
-const messageVisibility = ref<Record<number, boolean>>({})
 
 // Modal state management
 const isModalOpen = ref(false)
@@ -104,36 +76,6 @@ function calculateWeeks(year: number) {
 
 // Reactive calculation of weeks based on selected year
 const weeks = computed(() => calculateWeeks(selectedYear.value))
-
-// Function to format dates
-function formatDate(date: Date) {
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-
-  return `${day}/${month}/${year}`
-}
-
-// Check if there's a message for the given week
-function hasMessage(weekNumber: number) {
-  return messages.value?.some((message) => message.week === weekNumber && message.year === selectedYear.value)
-}
-
-// Get the message for the given week
-function getMessage(weekNumber: number) {
-  const message = messages.value?.find((message) => message.week === weekNumber && message.year === selectedYear.value)
-  return message ? message.message : ''
-}
-
-// Toggle message visibility for a given week
-function toggleMessage(weekNumber: number) {
-  messageVisibility.value[weekNumber] = !messageVisibility.value[weekNumber]
-}
-
-// Check if message is visible for a given week
-function isMessageVisible(weekNumber: number) {
-  return messageVisibility.value[weekNumber] || false
-}
 
 // Open modal to add a new message
 function openModal(weekNumber: number) {
@@ -180,21 +122,8 @@ async function submitMessage() {
 <style scoped>
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(10, 1fr); /* Adjust the number of columns as needed */
+  grid-template-columns: repeat(10, 1fr);
   gap: 10px;
   padding: 10px;
-}
-
-.week-square {
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-}
-
-.week-square.has-message {
-  background-color: #d4f8d4; /* Light green color for boxes with messages */
 }
 </style>
