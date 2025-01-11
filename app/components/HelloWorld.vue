@@ -33,7 +33,7 @@
         <span class="close" @click="closeModal">&times;</span>
         <h2>Add New Message for Week {{ modalWeekNumber }}</h2>
         <textarea v-model="newMessage" placeholder="Enter your message here"></textarea>
-        <button @click="submitMessage">Submit</button>
+        <button :disabled="isSubmitting" @click="submitMessage">Submit</button>
       </div>
     </div>
   </div>
@@ -153,9 +153,12 @@ function closeModal() {
   newMessage.value = ''
 }
 
+const isSubmitting = ref(false)
+
 // Submit new message
 async function submitMessage() {
   if (modalWeekNumber.value && newMessage.value) {
+    isSubmitting.value = true
     try {
       const { data, error } = await client.from('gratitude_messages').insert([
         {
@@ -175,6 +178,8 @@ async function submitMessage() {
       }
     } catch (err) {
       console.error('Unexpected error:', err)
+    } finally {
+      isSubmitting.value = false
     }
   }
 }
