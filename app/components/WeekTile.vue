@@ -95,7 +95,10 @@ const { data: messages } = await useAsyncData(
     ]"
   >
     <div>Week {{ week.number }}</div>
-    <div>{{ formatDate(week.start) }} - {{ formatDate(week.end) }}</div>
+    <div class="date-range">
+      <p>From {{ formatDate(week.start) }}</p>
+      <p>to {{ formatDate(week.end) }}</p>
+    </div>
     <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button>
     <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
       {{ getMessage(week.number) }}
@@ -114,6 +117,8 @@ const { data: messages } = await useAsyncData(
   border-radius: 5px;
   text-align: center;
   font-size: 14px;
+  margin-bottom: 10px;
+  transition: background-color 0.3s, opacity 0.3s;
 }
 
 .week-square.missing-message {
@@ -131,5 +136,30 @@ const { data: messages } = await useAsyncData(
 .week-square.future-week {
   background-color: #f0f0f0; /* Light gray color for future weeks */
   opacity: 0.6;
+}
+
+/* Responsive adjustments */
+@media (min-width: 1024px) {
+  /* Desktop styles */
+  .week-square {
+    font-size: 16px;
+    padding: 15px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Tablet styles */
+  .week-square {
+    font-size: 15px;
+    padding: 12px;
+  }
+}
+
+@media (max-width: 767px) {
+  /* Mobile styles */
+  .week-square {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
 </style>

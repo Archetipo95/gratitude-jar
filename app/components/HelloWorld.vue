@@ -1,16 +1,20 @@
 <template>
   <div>
-    <h1>{{ greatingMessage }}</h1>
-    <button v-if="!!user" @click="client.auth.signOut()">Log Out</button>
-    <button v-else @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In</button>
+    <div class="navbar">
+      <h1>{{ greatingMessage }}</h1>
+      <button v-if="!!user" @click="client.auth.signOut()">Log Out</button>
+      <button v-else @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In</button>
+    </div>
 
     <div v-if="!!user">
-      <label for="year-select">Select Year:</label>
-      <select id="year-select" v-model="selectedYear">
-        <option v-for="year in availableYears" :key="year" :value="year">
-          {{ year }}
-        </option>
-      </select>
+      <div class="year-select-container">
+        <label for="year-select">Select Year:</label>
+        <select id="year-select" v-model="selectedYear">
+          <option v-for="year in availableYears" :key="year" :value="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
 
       <div class="grid-container">
         <WeekTile v-for="week in weeks" :week :selected-year :current-year @open-modal="openModal($event)" />
@@ -95,10 +99,88 @@ async function submitMessage() {
 </script>
 
 <style scoped>
+/* Base styles for the navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #f8f9fa;
+}
+
+/* Base styles for all screen sizes */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(10, 1fr);
   gap: 10px;
   padding: 10px;
+}
+
+/* Styles for larger screens (desktops) */
+@media (min-width: 1024px) {
+  .grid-container {
+    grid-template-columns: repeat(8, 1fr);
+  }
+}
+
+/* Styles for medium screens (tablets) */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .grid-container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* Styles for small screens (mobile) */
+@media (max-width: 767px) {
+  .grid-container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* General styles for buttons and other elements */
+button {
+  padding: 8px 16px;
+  font-size: 16px;
+  margin: 5px;
+  border-radius: 5px;
+  border: none;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.year-select-container {
+  padding: 10px;
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: fit-content;
+  margin-top: 10px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+select {
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
 </style>
