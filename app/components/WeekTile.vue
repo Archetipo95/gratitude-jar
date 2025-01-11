@@ -116,16 +116,16 @@ const { data: messages } = await useAsyncData(
   font-size: 14px;
 }
 
-.week-square.has-message {
-  background-color: #d4f8d4; /* Light green color for boxes with messages */
-}
-
 .week-square.missing-message {
   background-color: #f8d7da; /* Light red color for weeks without messages */
 }
 
 .week-square.current-week {
   background-color: #fcf7d9; /* Light yellow color for the current week */
+}
+
+.week-square.has-message {
+  background-color: #d4f8d4; /* Light green color for boxes with messages */
 }
 
 .week-square.future-week {
