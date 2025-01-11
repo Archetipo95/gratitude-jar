@@ -13,7 +13,7 @@
       </select>
 
       <div class="grid-container">
-        <WeekTile v-for="week in weeks" :week :selected-year :current-year @open-modal="openModal($event)" :key="week.number + selectedYear" />
+        <WeekTile v-for="week in weeks" :week :selected-year :current-year @open-modal="openModal($event)" />
       </div>
     </div>
 
