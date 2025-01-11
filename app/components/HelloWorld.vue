@@ -37,7 +37,8 @@ const greatingMessage = computed(() => {
 
 // Available years for selection
 const currentYear = new Date().getFullYear()
-const availableYears = ref([currentYear - 1, currentYear, currentYear + 1])
+// calculate availableYears from 2024 to currentYear
+const availableYears = ref(Array.from({ length: currentYear - 2023 }, (_, i) => currentYear - i))
 
 // Reactive variable for selected year
 const selectedYear = ref(currentYear)
