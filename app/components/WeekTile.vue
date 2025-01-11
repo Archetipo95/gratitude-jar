@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { calculateWeeks } from '~/utils/TimeUtils'
+
 type Week = {
   number: number
   start: Date
@@ -11,17 +13,25 @@ type WeekTileProps = {
   currentYear: number
 }
 
-const { selectedYear } = defineProps<WeekTileProps>()
+const { selectedYear, currentYear } = defineProps<WeekTileProps>()
 
 defineEmits<{
   openModal: [value: number]
 }>()
 
-// Calculate the current week number
-const today = new Date()
-const startOfYear = new Date(today.getFullYear(), 0, 1)
+function getCurrentWeekNumber() {
+  const weeks = calculateWeeks(currentYear)
+  const today = new Date()
 
-const currentWeekNumber = Math.ceil(((today.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7)
+  for (const week of weeks) {
+    if (today >= week.start && today <= week.end) {
+      return week.number
+    }
+  }
+
+  // If today's date is not found within the weeks, return 0 or handle as needed
+  return 0
+}
 
 // Check if there's a message for the given week
 function hasMessage(weekNumber: number) {
@@ -73,14 +83,24 @@ const { data: messages } = await useAsyncData(
 </script>
 
 <template>
-  <div :class="['week-square', { 'has-message': hasMessage(week.number) }]">
+  <div
+    :class="[
+      'week-square',
+      {
+        'has-message': hasMessage(week.number),
+        'current-week': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
+        'missing-message': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
+        'future-week': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+      },
+    ]"
+  >
     <div>Week {{ week.number }}</div>
     <div>{{ formatDate(week.start) }} - {{ formatDate(week.end) }}</div>
     <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button>
     <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
       {{ getMessage(week.number) }}
     </div>
-    <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" @click="$emit('openModal', week.number)">
+    <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear))" @click="$emit('openModal', week.number)">
       Add New Message
     </button>
   </div>
@@ -98,5 +118,18 @@ const { data: messages } = await useAsyncData(
 
 .week-square.has-message {
   background-color: #d4f8d4; /* Light green color for boxes with messages */
+}
+
+.week-square.missing-message {
+  background-color: #f8d7da; /* Light red color for weeks without messages */
+}
+
+.week-square.current-week {
+  background-color: #fcf7d9; /* Light yellow color for the current week */
+}
+
+.week-square.future-week {
+  background-color: #f0f0f0; /* Light gray color for future weeks */
+  opacity: 0.6;
 }
 </style>

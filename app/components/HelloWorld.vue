@@ -24,6 +24,7 @@
 
 <script setup lang="ts">
 import type { Database } from '~~/types/database.types'
+import { calculateWeeks } from '~/utils/TimeUtils'
 
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
@@ -46,33 +47,6 @@ const isModalOpen = ref(false)
 const isSubmitting = ref(false)
 const modalWeekNumber = ref<number>()
 const newMessage = ref<string>('')
-
-// Function to calculate weeks with start and end dates
-function calculateWeeks(year: number) {
-  const weeks = []
-  let date = new Date(year, 0, 1) // Start from January 1st of the selected year
-
-  // Calculate weeks
-  let weekNumber = 1
-  while (date.getFullYear() === year) {
-    const start = new Date(date) // Start of the week
-
-    // Move to the next Sunday (end of the week)
-    date.setDate(date.getDate() + ((7 - date.getDay()) % 7))
-    if (date.getFullYear() !== year) {
-      date = new Date(year, 11, 31) // Ensure the last week ends on December 31st
-    }
-    const end = new Date(date)
-
-    weeks.push({ number: weekNumber, start, end })
-
-    // Move to the next Monday
-    date.setDate(date.getDate() + 1)
-    weekNumber++
-  }
-
-  return weeks
-}
 
 // Reactive calculation of weeks based on selected year
 const weeks = computed(() => calculateWeeks(selectedYear.value))
