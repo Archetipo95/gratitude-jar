@@ -22,7 +22,6 @@
 
         <br />
         <em>Disclaimer: This app is for demonstration purposes only. Currently, the messages are stored in plain text and are NOT encrypted. Please do NOT store sensitive information.</em>
-        <br />
       </p>
     </div>
 
@@ -37,7 +36,7 @@
       </div>
 
       <div class="grid-container">
-        <WeekTile v-for="week in weeks" :week :selected-year :current-year @open-modal="openModal($event)" />
+        <WeekTile v-for="week in weeks" :week :selected-year :current-year :is-submitting @open-modal="openModal($event)" />
       </div>
     </div>
 

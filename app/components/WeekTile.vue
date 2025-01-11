@@ -11,9 +11,10 @@ type WeekTileProps = {
   week: Week
   selectedYear: number
   currentYear: number
+  isSubmitting?: boolean
 }
 
-const { selectedYear, currentYear } = defineProps<WeekTileProps>()
+const { selectedYear, currentYear, isSubmitting } = defineProps<WeekTileProps>()
 
 defineEmits<{
   openModal: [value: number]
@@ -56,9 +57,9 @@ function isMessageVisible(weekNumber: number) {
 const messageVisibility = ref<Record<number, boolean>>({})
 
 // Toggle message visibility for a given week
-function toggleMessage(weekNumber: number) {
-  messageVisibility.value[weekNumber] = !messageVisibility.value[weekNumber]
-}
+// function toggleMessage(weekNumber: number) {
+//   messageVisibility.value[weekNumber] = !messageVisibility.value[weekNumber]
+// }
 
 // Get the message for the given week
 function getMessage(weekNumber: number) {
@@ -75,10 +76,11 @@ const user = useSupabaseUser()
 const { data: messages } = await useAsyncData(
   'messages',
   async () => {
+    if (isSubmitting) return
     if (!user.value) return
     return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
   },
-  { transform: (result) => (result ? result.data : []), watch: [user] }
+  { transform: (result) => (result ? result.data : []), watch: [user, () => isSubmitting] }
 )
 </script>
 
@@ -104,9 +106,14 @@ const { data: messages } = await useAsyncData(
     <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
       {{ getMessage(week.number) }}
     </div>
-    <button v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear))" @click="$emit('openModal', week.number)">
-      Add New Message
+    <button
+      v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear))"
+      @click="$emit('openModal', week.number)"
+      :disabled="isSubmitting"
+    >
+      {{ isSubmitting ? 'Submitting...' : 'Add New Message' }}
     </button>
+    <div v-if="isSubmitting || !messages" class="loading-indicator">Loading...</div>
   </div>
 </template>
 
@@ -137,6 +144,12 @@ const { data: messages } = await useAsyncData(
 .week-square.future-week {
   background-color: #f0f0f0; /* Light gray color for future weeks */
   opacity: 0.6;
+}
+
+.loading-indicator {
+  margin-top: 10px;
+  font-size: 12px;
+  color: #555;
 }
 
 /* Responsive adjustments */
