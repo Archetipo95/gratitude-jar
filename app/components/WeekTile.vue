@@ -99,7 +99,8 @@ const { data: messages } = await useAsyncData(
       <p>From {{ formatDate(week.start) }}</p>
       <p>to {{ formatDate(week.end) }}</p>
     </div>
-    <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button>
+    <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
+    <div v-if="hasMessage(week.number)">DONE!</div>
     <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
       {{ getMessage(week.number) }}
     </div>

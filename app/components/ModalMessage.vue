@@ -18,6 +18,7 @@ const newMessage = defineModel<string>({ required: true })
       <span class="close" @click="$emit('closeModal')">&times;</span>
       <h2>Add New Message for Week {{ modalWeekNumber }}</h2>
       <textarea v-model="newMessage" placeholder="Enter your message here"></textarea>
+      <small class="disclaimer">Your message is not editable and not viewable until the end of the year</small>
       <button :disabled="isSubmitting" @click="$emit('submitMessage')">Submit</button>
     </div>
   </div>
@@ -55,6 +56,14 @@ const newMessage = defineModel<string>({ required: true })
 textarea {
   width: 100%;
   height: 80px;
+  margin-bottom: 10px;
+}
+
+.disclaimer {
+  font-size: 12px;
+  color: red;
+  display: block;
+  margin-top: 10px;
   margin-bottom: 10px;
 }
 </style>

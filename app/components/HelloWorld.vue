@@ -1,12 +1,29 @@
 <template>
   <div>
     <div class="navbar">
-      <h1>{{ greatingMessage }}</h1>
+      <h1>Gratitude Jar</h1>
+      <h2>{{ greatingMessage }}</h2>
       <button v-if="!!user" @click="client.auth.signOut()">Log Out</button>
       <div v-else>
         <button @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In with GitHub</button>
         <button @click="client.auth.signInWithOAuth({ provider: 'google' })">Log In with Google</button>
       </div>
+    </div>
+
+    <div>
+      <p class="explanation">
+        Welcome to the Gratitude Jar! This app allows you to reflect on your week and note down things you're grateful for. Each week, add a message to capture your thoughts, and at the end of the
+        year, review all the positive moments you've recorded.
+      </p>
+
+      <p>
+        <strong>Instructions:</strong> Select a year from the dropdown above, and click on the "Add New Message" button for each week to add a message. Your messages are private and will only be
+        visible to you at the end of the year.
+
+        <br />
+        <em>Disclaimer: This app is for demonstration purposes only. Currently, the messages are stored in plain text and are NOT encrypted. Please do NOT store sensitive information.</em>
+        <br />
+      </p>
     </div>
 
     <div v-if="!!user">
@@ -38,7 +55,7 @@ const user = useSupabaseUser()
 
 // Greeting message
 const greatingMessage = computed(() => {
-  if (!user.value) return 'Hello World'
+  if (!user.value) return 'Hello Guest'
   return `Hello ${user.value.user_metadata.user_name}`
 })
 
