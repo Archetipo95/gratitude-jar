@@ -28,14 +28,7 @@
     </div>
 
     <!-- Modal for Adding a New Message -->
-    <div v-if="isModalOpen" class="modal">
-      <div class="modal-content">
-        <span class="close" @click="closeModal">&times;</span>
-        <h2>Add New Message for Week {{ modalWeekNumber }}</h2>
-        <textarea v-model="newMessage" placeholder="Enter your message here"></textarea>
-        <button :disabled="isSubmitting" @click="submitMessage">Submit</button>
-      </div>
-    </div>
+    <ModalMessage :is-modal-open :modal-week-number :is-submitting v-model="newMessage" @close-modal="closeModal" @submit-message="submitMessage" />
   </div>
 </template>
 
@@ -78,7 +71,8 @@ const messageVisibility = ref<Record<number, boolean>>({})
 
 // Modal state management
 const isModalOpen = ref(false)
-const modalWeekNumber = ref<number | null>(null)
+const isSubmitting = ref(false)
+const modalWeekNumber = ref<number>()
 const newMessage = ref<string>('')
 
 // Function to calculate weeks with start and end dates
@@ -153,8 +147,6 @@ function closeModal() {
   newMessage.value = ''
 }
 
-const isSubmitting = ref(false)
-
 // Submit new message
 async function submitMessage() {
   if (modalWeekNumber.value && newMessage.value) {
@@ -204,38 +196,5 @@ async function submitMessage() {
 
 .week-square.has-message {
   background-color: #d4f8d4; /* Light green color for boxes with messages */
-}
-
-.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  text-align: center;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-textarea {
-  width: 100%;
-  height: 80px;
-  margin-bottom: 10px;
 }
 </style>
