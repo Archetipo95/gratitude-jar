@@ -3,7 +3,10 @@
     <div class="navbar">
       <h1>{{ greatingMessage }}</h1>
       <button v-if="!!user" @click="client.auth.signOut()">Log Out</button>
-      <button v-else @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In</button>
+      <div v-else>
+        <button @click="client.auth.signInWithOAuth({ provider: 'github' })">Log In with GitHub</button>
+        <button @click="client.auth.signInWithOAuth({ provider: 'google' })">Log In with Google</button>
+      </div>
     </div>
 
     <div v-if="!!user">
