@@ -61,7 +61,7 @@ const weeks = computed(() => calculateWeeks(selectedYear.value))
         </select>
       </div>
 
-      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 p-2">
+      <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-2 p-2">
         <WeekTile v-for="week in weeks" :week :selected-year :current-year />
       </div>
     </div>
