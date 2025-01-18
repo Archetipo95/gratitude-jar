@@ -1,5 +1,7 @@
 <script setup lang="ts">
+import type { Database } from '~~/types/database.types'
 import { calculateWeeks } from '~/utils/TimeUtils'
+import { LazyModalMessage } from '#components'
 
 type Week = {
   number: number
@@ -14,7 +16,7 @@ type WeekTileProps = {
   isSubmitting?: boolean
 }
 
-const { selectedYear, currentYear, isSubmitting } = defineProps<WeekTileProps>()
+const { selectedYear, currentYear, isSubmitting, week } = defineProps<WeekTileProps>()
 
 defineEmits<{
   openModal: [value: number]
@@ -67,8 +69,6 @@ function getMessage(weekNumber: number) {
   return message ? message.message : ''
 }
 
-import type { Database } from '~~/types/database.types'
-
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
@@ -82,17 +82,33 @@ const { data: messages } = await useAsyncData(
   },
   { transform: (result) => (result ? result.data : []), watch: [user, () => isSubmitting] }
 )
+
+const modal = useModal()
+
+function openModal() {
+  modal.open(LazyModalMessage, {
+    weekNumber: week.number,
+    selectedYear,
+    isSubmitting,
+    // successSubmit() {
+    //   // TODO: add toast message
+    // },
+    // failedSubmit() {
+    //   // TODO: add toast message
+    // },
+  })
+}
 </script>
 
 <template>
   <div
     :class="[
-      'week-square',
+      'week-square p-2 border rounded-md text-sm mb-2 text-black',
       {
-        'has-message': hasMessage(week.number),
-        'current-week': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
-        'missing-message': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
-        'future-week': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+        '!bg-green-200': hasMessage(week.number),
+        'bg-yellow-100': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
+        'bg-red-200': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
+        'bg-gray-400': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
       },
     ]"
   >
@@ -106,74 +122,16 @@ const { data: messages } = await useAsyncData(
     <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
       {{ getMessage(week.number) }}
     </div>
-    <button
+
+    <UButton
       v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear))"
-      @click="$emit('openModal', week.number)"
+      :label="isSubmitting ? 'Submitting...' : 'Add New Message'"
+      color="neutral"
+      variant="subtle"
+      @click="openModal"
       :disabled="isSubmitting"
-    >
-      {{ isSubmitting ? 'Submitting...' : 'Add New Message' }}
-    </button>
-    <div v-if="isSubmitting || !messages" class="loading-indicator">Loading...</div>
+    />
+
+    <div v-if="isSubmitting || !messages" class="mt-2 text-sm">Loading...</div>
   </div>
 </template>
-
-<style scoped>
-.week-square {
-  padding: 10px;
-  background-color: #f0f0f0;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  text-align: center;
-  font-size: 14px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s, opacity 0.3s;
-}
-
-.week-square.missing-message {
-  background-color: #f8d7da; /* Light red color for weeks without messages */
-}
-
-.week-square.current-week {
-  background-color: #fcf7d9; /* Light yellow color for the current week */
-}
-
-.week-square.has-message {
-  background-color: #d4f8d4; /* Light green color for boxes with messages */
-}
-
-.week-square.future-week {
-  background-color: #f0f0f0; /* Light gray color for future weeks */
-  opacity: 0.6;
-}
-
-.loading-indicator {
-  margin-top: 10px;
-  font-size: 12px;
-  color: #555;
-}
-
-/* Responsive adjustments */
-@media (min-width: 1024px) {
-  /* Desktop styles */
-  .week-square {
-    font-size: 16px;
-    padding: 15px;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1023px) {
-  /* Tablet styles */
-  .week-square {
-    font-size: 15px;
-    padding: 12px;
-  }
-}
-
-@media (max-width: 767px) {
-  /* Mobile styles */
-  .week-square {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
-</style>

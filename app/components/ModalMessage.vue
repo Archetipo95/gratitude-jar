@@ -1,69 +1,68 @@
 <script setup lang="ts">
+import type { Database } from '~~/types/database.types'
+
+const client = useSupabaseClient<Database>()
+const user = useSupabaseUser()
+
+const modal = useModal()
+
 type ModelMessageProps = {
-  isModalOpen: boolean
-  modalWeekNumber?: number
+  weekNumber: number
   isSubmitting: boolean
+  selectedYear: number
 }
 
-defineProps<ModelMessageProps>()
+const { weekNumber, selectedYear } = defineProps<ModelMessageProps>()
 
 defineEmits(['closeModal', 'submitMessage'])
 
-const newMessage = defineModel<string>({ required: true })
+// Modal state management
+const isSubmitting = ref(false)
+const newMessage = ref<string>('')
+
+// Submit new message
+async function submitMessage() {
+  if (weekNumber && newMessage.value) {
+    isSubmitting.value = true
+    try {
+      const { data, error } = await client.from('gratitude_messages').insert([
+        {
+          week: weekNumber,
+          year: selectedYear,
+          message: newMessage.value,
+          user_id: user.value?.id,
+        },
+      ])
+
+      if (error) {
+        console.error('Error inserting message:', error)
+      } else {
+        console.log('Message inserted successfully:', data)
+        // Optionally, update the local messages state or refetch data
+        modal.close()
+      }
+    } catch (err) {
+      console.error('Unexpected error:', err)
+    } finally {
+      newMessage.value = ''
+      isSubmitting.value = false
+    }
+  }
+}
 </script>
 
 <template>
-  <div v-if="isModalOpen" class="modal">
-    <div class="modal-content">
-      <span class="close" @click="$emit('closeModal')">&times;</span>
-      <h2>Add New Message for Week {{ modalWeekNumber }}</h2>
-      <textarea v-model="newMessage" placeholder="Enter your message here"></textarea>
+  <UModal :title="`Add New Message for Week ${weekNumber}`">
+    <template #body>
+      <UTextarea class="w-full" v-model="newMessage" placeholder="Enter your message here" />
+      <br />
       <small class="disclaimer">Your message is not editable and not viewable until the end of the year</small>
-      <button :disabled="isSubmitting" @click="$emit('submitMessage')">Submit</button>
-    </div>
-  </div>
+    </template>
+    <template #footer>
+      <div class="flex gap-2">
+        <UButton color="neutral" label="Close" @click="modal.close()" />
+        <UButton label="Submit" :disabled="isSubmitting" @click="submitMessage" />
+      </div>
+    </template>
+  </UModal>
 </template>
-
-<style scoped>
-.modal {
-  position: fixed;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 5px;
-  width: 300px;
-  text-align: center;
-  position: relative;
-}
-
-.close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  cursor: pointer;
-}
-
-textarea {
-  width: 100%;
-  height: 80px;
-  margin-bottom: 10px;
-}
-
-.disclaimer {
-  font-size: 12px;
-  color: red;
-  display: block;
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-</style>
