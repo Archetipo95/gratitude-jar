@@ -1,5 +1,5 @@
 <template>
-  <div>
-    <HelloWorld />
-  </div>
+  <UApp>
+    <NuxtPage />
+  </UApp>
 </template>
