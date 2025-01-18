@@ -1,18 +1,13 @@
 <script setup lang="ts">
 import type { Database } from '~~/types/database.types'
+import type { ModalMessageProps } from './ModalMessage.props'
 
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
 const modal = useModal()
 
-type ModelMessageProps = {
-  weekNumber: number
-  isSubmitting: boolean
-  selectedYear: number
-}
-
-const { weekNumber, selectedYear } = defineProps<ModelMessageProps>()
+const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
 
 defineEmits(['closeModal', 'submitMessage'])
 

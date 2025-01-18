@@ -1,20 +1,7 @@
 <script setup lang="ts">
 import type { Database } from '~~/types/database.types'
-import { calculateWeeks } from '~/utils/TimeUtils'
 import { LazyModalMessage } from '#components'
-
-type Week = {
-  number: number
-  start: Date
-  end: Date
-}
-
-type WeekTileProps = {
-  week: Week
-  selectedYear: number
-  currentYear: number
-  isSubmitting?: boolean
-}
+import type { WeekTileProps } from './WeekTile.props'
 
 const { selectedYear, currentYear, isSubmitting, week } = defineProps<WeekTileProps>()
 
@@ -39,15 +26,6 @@ function getCurrentWeekNumber() {
 // Check if there's a message for the given week
 function hasMessage(weekNumber: number) {
   return messages.value?.some((message) => message.week === weekNumber && message.year === selectedYear)
-}
-
-// Function to format dates
-function formatDate(date: Date) {
-  const day = String(date.getDate()).padStart(2, '0')
-  const month = String(date.getMonth() + 1).padStart(2, '0')
-  const year = date.getFullYear()
-
-  return `${day}/${month}/${year}`
 }
 
 // Check if message is visible for a given week
