@@ -9,10 +9,10 @@ defineEmits<{
   openModal: [value: number]
 }>()
 
-function getCurrentWeekNumber() {
-  const weeks = calculateWeeks(currentYear)
-  const today = new Date()
+const weeks = calculateWeeks(currentYear)
+const today = new Date()
 
+const getCurrentWeekNumber = () => {
   for (const week of weeks) {
     const weekStart = new Date(week.start)
     const weekEnd = new Date(week.end)
@@ -87,23 +87,23 @@ function openModal() {
 <template>
   <div
     :class="[
-      'week-square p-2 border rounded-md text-sm mb-2 text-black',
+      'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300',
       {
         '!bg-green-200': hasMessage(week.number),
         'bg-yellow-100': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
         'bg-red-200': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
-        'bg-gray-400': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+        'bg-gray-400 opacity-40 dark:opacity-30': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
       },
     ]"
   >
-    <div>Week {{ week.number }}</div>
-    <div class="date-range">
+    <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
+    <div class="date-range mt-1 text-gray-700">
       <p>From {{ formatDate(week.start) }}</p>
       <p>to {{ formatDate(week.end) }}</p>
     </div>
     <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
-    <div v-if="hasMessage(week.number)">DONE!</div>
-    <div v-if="isMessageVisible(week.number) && hasMessage(week.number)">
+    <div v-if="hasMessage(week.number)" class="mt-2 text-green-700 font-medium">DONE!</div>
+    <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-2 text-gray-800">
       {{ getMessage(week.number) }}
     </div>
 
@@ -114,8 +114,9 @@ function openModal() {
       variant="subtle"
       @click="openModal"
       :disabled="isSubmitting"
+      class="mt-3"
     />
 
-    <div v-if="isSubmitting || !messages" class="mt-2 text-sm">Loading...</div>
+    <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600">Loading...</div>
   </div>
 </template>
