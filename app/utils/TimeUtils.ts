@@ -1,21 +1,36 @@
+import type { Week } from '~~/types/time.types'
+
 // Function to calculate weeks with start and end dates
-export function calculateWeeks(year: number) {
+export function calculateWeeks(year: number): Week[] {
+  const today = new Date()
   const weeks = []
-  let date = new Date(year, 0, 1) // Start from January 1st of the selected year
+
+  // Start from January 1st of the selected year
+  let date = new Date(year, 0, 1)
 
   // Calculate weeks
   let weekNumber = 1
   while (date.getFullYear() === year) {
-    const start = new Date(date) // Start of the week
+    const weekStart = new Date(date)
 
     // Move to the next Sunday (end of the week)
     date.setDate(date.getDate() + ((7 - date.getDay()) % 7))
-    if (date.getFullYear() !== year) {
-      date = new Date(year, 11, 31) // Ensure the last week ends on December 31st
-    }
-    const end = new Date(date)
 
-    weeks.push({ number: weekNumber, start, end })
+    // Ensure the last week ends on December 31st
+    if (date.getFullYear() !== year) {
+      date = new Date(year, 11, 31)
+    }
+
+    const weekEnd = new Date(date)
+
+    // Include the entire end day
+    weekEnd.setHours(weekEnd.getHours() + 23)
+    weekEnd.setMinutes(weekEnd.getMinutes() + 59)
+    weekEnd.setSeconds(weekEnd.getSeconds() + 59)
+
+    const isCurrentWeek = today >= weekStart && today <= weekEnd
+
+    weeks.push({ number: weekNumber, weekStart, weekEnd, isCurrentWeek })
 
     // Move to the next Monday
     date.setDate(date.getDate() + 1)
@@ -25,6 +40,12 @@ export function calculateWeeks(year: number) {
   return weeks
 }
 
+// Function to get current week number
+export function getCurrentWeekNumber(weeks: Week[]): number {
+  const currentWeek = weeks.find((week) => week.isCurrentWeek)
+  return currentWeek ? currentWeek.number : 0
+}
+
 // Function to format dates
 export function formatDate(date: Date) {
   const day = String(date.getDate()).padStart(2, '0')
@@ -32,24 +53,4 @@ export function formatDate(date: Date) {
   const year = date.getFullYear()
 
   return `${day}/${month}/${year}`
-}
-
-export function getCurrentWeekNumber() {
-  const today = new Date()
-  const weeks = calculateWeeks(today.getFullYear())
-
-  for (const week of weeks) {
-    const weekStart = new Date(week.start)
-    const weekEnd = new Date(week.end)
-
-    // Add 24 hours to include the entire end day
-    weekEnd.setHours(weekEnd.getHours() + 24)
-
-    if (today >= weekStart && today <= weekEnd) {
-      return week.number
-    }
-  }
-
-  // If today's date is not found within the weeks, return 0 or handle as needed
-  return 0
 }
