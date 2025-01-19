@@ -16,11 +16,13 @@ const currentYear = new Date().getFullYear()
 // calculate availableYears from 2024 to currentYear
 const availableYears = ref(Array.from({ length: currentYear - 2023 }, (_, i) => currentYear - i))
 
-// Reactive variable for selected year
 const selectedYear = ref(currentYear)
 
-// Reactive calculation of weeks based on selected year
-const weeks = computed(() => calculateWeeks(selectedYear.value))
+const { weeks, changeYear } = useWeek()
+
+watch(selectedYear, () => {
+  changeYear(selectedYear.value)
+})
 </script>
 
 <template>
@@ -55,6 +57,10 @@ const weeks = computed(() => calculateWeeks(selectedYear.value))
         </div>
         <ColorModeButton />
       </div>
+    </div>
+
+    <div>
+      <CountDown />
     </div>
 
     <div v-if="!!user" class="space-y-4">
