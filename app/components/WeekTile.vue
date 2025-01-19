@@ -90,9 +90,9 @@ function openModal() {
       'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300',
       {
         '!bg-green-200': hasMessage(week.number),
-        'bg-yellow-100': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
-        'bg-red-200': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
-        'bg-gray-400 opacity-40 dark:bg-gray-700 dark:opacity-30': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+        'bg-yellow-100 ': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
+        'bg-red-200 ': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
+        'bg-gray-400 opacity-40 ': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
       },
     ]"
   >
