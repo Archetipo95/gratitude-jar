@@ -9,26 +9,6 @@ defineEmits<{
   openModal: [value: number]
 }>()
 
-const weeks = calculateWeeks(currentYear)
-const today = new Date()
-
-const getCurrentWeekNumber = () => {
-  for (const week of weeks) {
-    const weekStart = new Date(week.start)
-    const weekEnd = new Date(week.end)
-
-    // Add 24 hours to include the entire end day
-    weekEnd.setHours(weekEnd.getHours() + 24)
-
-    if (today >= weekStart && today <= weekEnd) {
-      return week.number
-    }
-  }
-
-  // If today's date is not found within the weeks, return 0 or handle as needed
-  return 0
-}
-
 // Check if there's a message for the given week
 function hasMessage(weekNumber: number) {
   return messages.value?.some((message) => message.week === weekNumber && message.year === selectedYear)

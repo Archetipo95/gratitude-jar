@@ -33,3 +33,23 @@ export function formatDate(date: Date) {
 
   return `${day}/${month}/${year}`
 }
+
+export function getCurrentWeekNumber() {
+  const today = new Date()
+  const weeks = calculateWeeks(today.getFullYear())
+
+  for (const week of weeks) {
+    const weekStart = new Date(week.start)
+    const weekEnd = new Date(week.end)
+
+    // Add 24 hours to include the entire end day
+    weekEnd.setHours(weekEnd.getHours() + 24)
+
+    if (today >= weekStart && today <= weekEnd) {
+      return week.number
+    }
+  }
+
+  // If today's date is not found within the weeks, return 0 or handle as needed
+  return 0
+}
