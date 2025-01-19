@@ -14,7 +14,13 @@ function getCurrentWeekNumber() {
   const today = new Date()
 
   for (const week of weeks) {
-    if (today >= week.start && today <= week.end) {
+    const weekStart = new Date(week.start)
+    const weekEnd = new Date(week.end)
+
+    // Add 24 hours to include the entire end day
+    weekEnd.setHours(weekEnd.getHours() + 24)
+
+    if (today >= weekStart && today <= weekEnd) {
       return week.number
     }
   }
