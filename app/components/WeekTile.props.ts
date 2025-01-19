@@ -1,8 +1,4 @@
-type Week = {
-  number: number
-  start: Date
-  end: Date
-}
+import type { Week } from '~~/types/time.types'
 
 export type WeekTileProps = {
   week: Week

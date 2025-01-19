@@ -62,6 +62,8 @@ function openModal() {
     // },
   })
 }
+
+const { currentWeekNumber } = useWeek()
 </script>
 
 <template>
@@ -70,16 +72,16 @@ function openModal() {
       'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300',
       {
         '!bg-green-200': hasMessage(week.number),
-        'bg-yellow-100 ': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
-        'bg-red-200 ': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
-        'bg-gray-400 opacity-40 ': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+        'bg-yellow-100 ': week.isCurrentWeek && selectedYear === currentYear,
+        'bg-red-200 ': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)),
+        'bg-gray-400 opacity-40 ': selectedYear > currentYear || (week.number > currentWeekNumber && selectedYear === currentYear),
       },
     ]"
   >
     <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
     <div class="date-range mt-1 text-gray-700">
-      <p>From {{ formatDate(week.start) }}</p>
-      <p>to {{ formatDate(week.end) }}</p>
+      <p>From {{ formatDate(week.weekStart) }}</p>
+      <p>to {{ formatDate(week.weekEnd) }}</p>
     </div>
     <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
     <div v-if="hasMessage(week.number)" class="mt-2 text-green-700 font-medium">DONE!</div>
@@ -88,7 +90,7 @@ function openModal() {
     </div>
 
     <UButton
-      v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear))"
+      v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))"
       :label="isSubmitting ? 'Submitting...' : 'Add New Message'"
       color="neutral"
       variant="subtle"
