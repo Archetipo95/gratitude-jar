@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { Database } from '~~/types/database.types'
-import { calculateWeeks } from '~/utils/TimeUtils'
 
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
