@@ -92,7 +92,7 @@ function openModal() {
         '!bg-green-200': hasMessage(week.number),
         'bg-yellow-100': week.number === getCurrentWeekNumber() && selectedYear === currentYear,
         'bg-red-200': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= getCurrentWeekNumber() && selectedYear === currentYear)),
-        'bg-gray-400 opacity-40 dark:opacity-30': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
+        'bg-gray-400 opacity-40 dark:bg-gray-700 dark:opacity-30': selectedYear > currentYear || (week.number > getCurrentWeekNumber() && selectedYear === currentYear),
       },
     ]"
   >
@@ -103,7 +103,7 @@ function openModal() {
     </div>
     <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
     <div v-if="hasMessage(week.number)" class="mt-2 text-green-700 font-medium">DONE!</div>
-    <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-2 text-gray-800">
+    <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-2 text-gray-800 dark:text-gray-200">
       {{ getMessage(week.number) }}
     </div>
 
@@ -117,6 +117,6 @@ function openModal() {
       class="mt-3"
     />
 
-    <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600">Loading...</div>
+    <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600 dark:text-gray-400">Loading...</div>
   </div>
 </template>
