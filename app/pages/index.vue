@@ -1,13 +1,7 @@
 <template>
-  <UContainer>
-    <div class="space-y-4">
-      <NavigationBar />
+  <div class="space-y-4">
+    <CountDown />
 
-      <CountDown />
-
-      <WeekGrid />
-
-      <DisclamerMessage />
-    </div>
-  </UContainer>
+    <WeekGrid />
+  </div>
 </template>
