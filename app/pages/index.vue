@@ -4,8 +4,8 @@ const user = useSupabaseUser()
 
 <template>
   <div class="space-y-4">
-    <CountDown v-if="user" />
-    <DisclamerMessage v-else />
+    <CountDown />
+    <DisclamerMessage v-if="!user" />
 
     <WeekGrid />
   </div>

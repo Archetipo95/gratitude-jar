@@ -6,8 +6,9 @@
     </p>
 
     <p class="text-gray-700 dark:text-gray-300">
-      <strong class="font-semibold text-gray-800 dark:text-gray-100">Instructions:</strong> Select a year from the dropdown above, and click on the "Add New Message" button for each week to add a
-      message. Your messages are private and will only be visible to you at the end of the year.
+      <strong class="font-semibold text-gray-800 dark:text-gray-100">Instructions:</strong>
+      You need to login first. Select a year from the dropdown above, and click on the "Add New Message" button for each week to add a message. Your messages are private and will only be visible to
+      you at the end of the year.
 
       <br />
       <em class="block mt-2 text-sm text-gray-600 dark:text-gray-400"
