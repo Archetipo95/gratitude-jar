@@ -66,7 +66,7 @@ const { currentWeekNumber } = useWeek()
 <template>
   <div
     :class="[
-      'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300',
+      'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300 min-h-48 flex flex-col justify-between',
       {
         '!bg-green-200': hasMessage(week.number),
         'bg-yellow-100 ': week.isCurrentWeek && selectedYear === currentYear,
@@ -75,29 +75,38 @@ const { currentWeekNumber } = useWeek()
       },
     ]"
   >
-    <div class="flex justify-between items-center">
-      <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
-      <div class="text-lg text-gray-700 uppercase">{{ getMonthName(week.weekStart) }}</div>
-    </div>
-    <div class="date-range mt-1 text-gray-700 text-sm">
-      <p>{{ formatDate(week.weekStart) }} - {{ formatDate(week.weekEnd) }}</p>
-    </div>
-    <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
-    <div v-if="hasMessage(week.number)" class="mt-2 text-green-700 font-medium">DONE!</div>
-    <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-2 text-gray-800 dark:text-gray-200">
-      {{ getMessage(week.number) }}
+    <div>
+      <div class="flex justify-between items-center">
+        <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
+        <div class="text-lg text-gray-700 uppercase">{{ getMonthName(week.weekStart) }}</div>
+      </div>
+      <div class="date-range mt-1 text-gray-700 text-sm">
+        <p>{{ formatDate(week.weekStart) }} - {{ formatDate(week.weekEnd) }}</p>
+      </div>
+      <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
+
+      <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-2 text-gray-800 dark:text-gray-200">
+        {{ getMessage(week.number) }}
+      </div>
     </div>
 
-    <UButton
-      v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))"
-      :label="isSubmitting ? 'Submitting...' : 'Add New Message'"
-      color="neutral"
-      variant="subtle"
-      @click="openModal"
-      :disabled="isSubmitting"
-      class="mt-3"
-    />
+    <div>
+      <UButton
+        v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))"
+        :label="isSubmitting ? 'Submitting...' : 'Add New Message'"
+        color="neutral"
+        variant="subtle"
+        @click="openModal"
+        :disabled="isSubmitting"
+        class="mt-3"
+      />
 
-    <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600 dark:text-gray-400">Loading...</div>
+      <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600 dark:text-gray-400">Loading...</div>
+    </div>
+    <div class="font-medium">
+      <p v-if="week.isCurrentWeek && selectedYear === currentYear" class="text-yellow-600 font-bold">Current week</p>
+      <p v-else-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" class="text-red-600 font-bold">Missing message</p>
+      <p v-else-if="hasMessage(week.number)" class="text-green-700">DONE!</p>
+    </div>
   </div>
 </template>
