@@ -78,7 +78,10 @@ const { currentWeekNumber } = useWeek()
       },
     ]"
   >
-    <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
+    <div class="flex justify-between items-center">
+      <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
+      <div class="text-lg text-gray-700 uppercase">{{ getMonthName(week.weekStart) }}</div>
+    </div>
     <div class="date-range mt-1 text-gray-700">
       <p>From {{ formatDate(week.weekStart) }}</p>
       <p>to {{ formatDate(week.weekEnd) }}</p>

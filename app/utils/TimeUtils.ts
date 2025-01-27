@@ -54,3 +54,8 @@ export function formatDate(date: Date) {
 
   return `${day}/${month}/${year}`
 }
+
+// Get first 3 letters of the month
+export function getMonthName(date: Date) {
+  return date.toLocaleString('default', { month: 'short' })
+}
