@@ -7,6 +7,6 @@ const user = useSupabaseUser()
     <CountDown />
     <DisclamerMessage v-if="!user" />
 
-    <WeekGrid />
+    <WeekGrid v-if="user" />
   </div>
 </template>

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
-
 // Available years for selection
 const currentYear = new Date().getFullYear()
 // calculate availableYears from 2024 to currentYear
@@ -16,7 +14,7 @@ watch(selectedYear, () => {
 </script>
 
 <template>
-  <div v-if="!!user" class="space-y-4">
+  <div class="space-y-4">
     <div class="year-select-container flex items-center space-x-2">
       <label for="year-select" class="text-lg font-medium text-gray-700 dark:text-gray-300">Select Year:</label>
       <select
