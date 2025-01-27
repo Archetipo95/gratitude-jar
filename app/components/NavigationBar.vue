@@ -12,11 +12,11 @@ const greatingMessage = computed(() => {
 </script>
 
 <template>
-  <div class="flex justify-between items-center p-4 border-b bg-white dark:bg-gray-800 shadow-sm">
+  <div class="flex justify-between items-center p-4 border-b bg-white dark:bg-gray-800 shadow-sm flex-wrap">
     <div class="gap-y-1 flex items-center gap-x-4 flex-wrap">
       <NuxtLink to="/" class="flex gap-0.5 items-center">
-        <GratitudeLogo class="size-28" />
-        <h1 class="text-5xl font-bold text-gray-800 dark:text-white shrink-0">Gratitude Jar</h1>
+        <GratitudeLogo class="size-16 md:size-28" />
+        <h1 class="text-2xl md:text-5xl font-bold text-gray-800 dark:text-white shrink-0">Gratitude Jar</h1>
       </NuxtLink>
     </div>
     <div class="flex items-center space-x-4">
