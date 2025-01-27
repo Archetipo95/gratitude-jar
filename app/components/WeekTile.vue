@@ -82,9 +82,8 @@ const { currentWeekNumber } = useWeek()
       <div class="font-semibold text-lg text-gray-700">Week {{ week.number }}</div>
       <div class="text-lg text-gray-700 uppercase">{{ getMonthName(week.weekStart) }}</div>
     </div>
-    <div class="date-range mt-1 text-gray-700">
-      <p>From {{ formatDate(week.weekStart) }}</p>
-      <p>to {{ formatDate(week.weekEnd) }}</p>
+    <div class="date-range mt-1 text-gray-700 text-sm">
+      <p>{{ formatDate(week.weekStart) }} - {{ formatDate(week.weekEnd) }}</p>
     </div>
     <!-- <button v-if="hasMessage(week.number)" @click="toggleMessage(week.number)">{{ isMessageVisible(week.number) ? 'Hide' : 'Show' }} Message</button> -->
     <div v-if="hasMessage(week.number)" class="mt-2 text-green-700 font-medium">DONE!</div>
