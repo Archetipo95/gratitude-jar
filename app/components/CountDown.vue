@@ -27,18 +27,17 @@ onMounted(() => {
   setInterval(updateCountdown, 1000)
 })
 
-const { remainingWeeks } = useWeek()
+const { totalWeeks, currentWeekNumber } = useWeek()
 </script>
 
 <template>
   <div class="flex flex-col md:flex-row justify-between md:items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md gap-4">
     <div class="text-gray-800 dark:text-gray-200">
-      <p class="text-lg font-semibold">Countdown to the end of the year:</p>
+      <p class="text-lg font-semibold">Countdown to the end of the year</p>
       <p class="text-xl">{{ countdown.days }} days, {{ countdown.hours }} hours, {{ countdown.minutes }} minutes, {{ countdown.seconds }} seconds</p>
     </div>
     <div class="text-gray-800 dark:text-gray-200 flex md:flex-col md:items-end gap-1">
-      <p class="text-lg font-semibold">Countdown in weeks:</p>
-      <p class="text-xl">{{ remainingWeeks }} weeks</p>
+      <p class="text-xl">{{ currentWeekNumber }}/{{ totalWeeks }} weeks</p>
     </div>
   </div>
 </template>
