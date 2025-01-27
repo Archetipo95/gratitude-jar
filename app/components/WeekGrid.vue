@@ -28,7 +28,7 @@ watch(selectedYear, () => {
       </select>
     </div>
 
-    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
       <WeekTile v-for="week in weeks" :key="week.number" :week="week" :selected-year="selectedYear" :current-year="currentYear" />
     </div>
   </div>
