@@ -9,7 +9,7 @@ const modal = useModal()
 
 const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
 
-defineEmits(['closeModal', 'submitMessage'])
+const emit = defineEmits(['messageSubmitted'])
 
 // Modal state management
 const isSubmitting = ref(false)
@@ -33,6 +33,7 @@ async function submitMessage() {
         console.error('Error inserting message:', error)
       } else {
         console.log('Message inserted successfully:', data)
+        emit('messageSubmitted')
         // Optionally, update the local messages state or refetch data
         modal.close()
       }

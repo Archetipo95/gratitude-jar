@@ -37,7 +37,7 @@ const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
 // Fetch messages from Supabase
-const { data: messages } = await useAsyncData(
+const { data: messages, refresh } = await useAsyncData(
   'messages',
   async () => {
     if (isSubmitting) return
@@ -54,9 +54,9 @@ function openModal() {
     weekNumber: week.number,
     selectedYear,
     isSubmitting,
-    // successSubmit() {
-    //   // TODO: add toast message
-    // },
+    onMessageSubmitted() {
+      refresh()
+    },
     // failedSubmit() {
     //   // TODO: add toast message
     // },
