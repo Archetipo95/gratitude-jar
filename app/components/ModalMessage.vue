@@ -9,7 +9,7 @@ const modal = useModal()
 
 const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
 
-const emit = defineEmits(['messageSubmitted'])
+const emit = defineEmits(['messageSubmitted', 'failedSubmit'])
 
 // Modal state management
 const isSubmitting = ref(false)
@@ -20,7 +20,7 @@ async function submitMessage() {
   if (weekNumber && newMessage.value) {
     isSubmitting.value = true
     try {
-      const { data, error } = await client.from('gratitude_messages').insert([
+      const { error } = await client.from('gratitude_messages').insert([
         {
           week: weekNumber,
           year: selectedYear,
@@ -30,21 +30,32 @@ async function submitMessage() {
       ])
 
       if (error) {
-        console.error('Error inserting message:', error)
+        onFailedSubmit()
       } else {
-        console.log('Message inserted successfully:', data)
+        toast.add({ title: 'Message submitted' })
+        newMessage.value = ''
         emit('messageSubmitted')
-        // Optionally, update the local messages state or refetch data
         modal.close()
       }
     } catch (err) {
-      console.error('Unexpected error:', err)
+      onFailedSubmit()
     } finally {
-      newMessage.value = ''
       isSubmitting.value = false
     }
   }
 }
+
+const onFailedSubmit = () => {
+  emit('failedSubmit')
+  toast.add({ title: 'Failed to submit message', color: 'error' })
+}
+
+const closeModal = () => {
+  newMessage.value = ''
+  modal.close()
+}
+
+const toast = useToast()
 </script>
 
 <template>
@@ -56,7 +67,7 @@ async function submitMessage() {
     </template>
     <template #footer>
       <div class="flex gap-2">
-        <UButton color="neutral" label="Close" @click="modal.close()" />
+        <UButton color="neutral" label="Close" @click="closeModal" />
         <UButton label="Submit" :disabled="isSubmitting" @click="submitMessage" />
       </div>
     </template>

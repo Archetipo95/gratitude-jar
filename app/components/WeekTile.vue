@@ -57,9 +57,6 @@ function openModal() {
     onMessageSubmitted() {
       refresh()
     },
-    // failedSubmit() {
-    //   // TODO: add toast message
-    // },
   })
 }
 
