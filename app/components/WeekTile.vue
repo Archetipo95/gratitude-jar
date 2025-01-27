@@ -103,9 +103,9 @@ const { currentWeekNumber } = useWeek()
 
       <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600 dark:text-gray-400">Loading...</div>
     </div>
-    <div class="font-medium">
-      <p v-if="week.isCurrentWeek && selectedYear === currentYear" class="text-yellow-600 font-bold">Current week</p>
-      <p v-else-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" class="text-red-600 font-bold">Missing message</p>
+    <div class="font-bold">
+      <p v-if="week.isCurrentWeek && selectedYear === currentYear" class="text-yellow-600">Current week</p>
+      <p v-else-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))" class="text-red-600">Missing message</p>
       <p v-else-if="hasMessage(week.number)" class="text-green-700">DONE!</p>
     </div>
   </div>
