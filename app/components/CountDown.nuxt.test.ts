@@ -1,3 +1,4 @@
+import type { VueWrapper } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import CountdownTimer from './CountDown.vue'
@@ -13,16 +14,19 @@ describe('CountdownTimer', () => {
     vi.useRealTimers()
   })
 
-  it('displays the correct initial countdown', async () => {
-    // Mock the current date to a known value
-    const mockDate = new Date('2023-12-31T23:59:55')
+  const mountComponentWithMockedTime = async (mockDate: Date) => {
     vi.setSystemTime(mockDate)
+    return await mountSuspended(CountdownTimer)
+  }
 
-    // Mount the component after setting the system time
-    const wrapper = await mountSuspended(CountdownTimer)
+  const getCountdownText = (wrapper: VueWrapper) => {
+    return wrapper.find('[data-test-id="countdown"]').text()
+  }
 
-    // Check initial countdown values
-    const countdownText = wrapper.find('[data-test-id="countdown"]').text()
+  it('displays the correct initial countdown at the end of the year', async () => {
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-12-31T23:59:55'))
+    const countdownText = getCountdownText(wrapper)
+
     expect(countdownText).toContain('0 days')
     expect(countdownText).toContain('0 hours')
     expect(countdownText).toContain('0 minutes')
@@ -30,26 +34,47 @@ describe('CountdownTimer', () => {
   })
 
   it('updates the countdown every second', async () => {
-    // Mock the current date to a known value
-    const mockDate = new Date('2023-12-31T23:59:55')
-    vi.setSystemTime(mockDate)
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-12-31T23:59:55'))
+    const countdownText = getCountdownText(wrapper)
 
-    // Mount the component after setting the system time
-    const wrapper = await mountSuspended(CountdownTimer)
-
-    // Check initial countdown values
-    const countdownText = wrapper.find('[data-test-id="countdown"]').text()
     expect(countdownText).toContain('0 days')
     expect(countdownText).toContain('0 hours')
     expect(countdownText).toContain('0 minutes')
     expect(countdownText).toContain('5 seconds')
 
-    // Advance time by 5 seconds
     vi.advanceTimersByTime(5000)
     await wrapper.vm.$nextTick()
 
-    // Check updated countdown values
-    const updatedCountdownText = wrapper.find('[data-test-id="countdown"]').text()
+    const updatedCountdownText = getCountdownText(wrapper)
+    expect(updatedCountdownText).toContain('0 days')
+    expect(updatedCountdownText).toContain('0 hours')
+    expect(updatedCountdownText).toContain('0 minutes')
+    expect(updatedCountdownText).toContain('0 seconds')
+  })
+
+  it('correctly calculates the countdown in the middle of the year', async () => {
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-12-30T12:40:50'))
+    const countdownText = getCountdownText(wrapper)
+
+    expect(countdownText).toContain('1 days')
+    expect(countdownText).toContain('11 hours')
+    expect(countdownText).toContain('19 minutes')
+    expect(countdownText).toContain('10 seconds')
+  })
+
+  it('handles the transition to a new year correctly', async () => {
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-12-31T23:59:59'))
+    const countdownText = getCountdownText(wrapper)
+
+    expect(countdownText).toContain('0 days')
+    expect(countdownText).toContain('0 hours')
+    expect(countdownText).toContain('0 minutes')
+    expect(countdownText).toContain('1 second')
+
+    vi.advanceTimersByTime(1000)
+    await wrapper.vm.$nextTick()
+
+    const updatedCountdownText = getCountdownText(wrapper)
     expect(updatedCountdownText).toContain('0 days')
     expect(updatedCountdownText).toContain('0 hours')
     expect(updatedCountdownText).toContain('0 minutes')
