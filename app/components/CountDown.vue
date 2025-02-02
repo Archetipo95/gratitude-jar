@@ -16,13 +16,21 @@ const updateCountdown = () => {
   const now = new Date()
   const diff = endOfYear.getTime() - now.getTime()
 
-  countdown.value.days = Math.floor(diff / (1000 * 60 * 60 * 24))
-  countdown.value.hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-  countdown.value.minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
-  countdown.value.seconds = Math.floor((diff % (1000 * 60)) / 1000)
+  const days = Math.floor(diff / (1000 * 60 * 60 * 24))
+  const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+  const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60))
+  const seconds = Math.floor((diff % (1000 * 60)) / 1000)
+
+  countdown.value.days = days
+  countdown.value.hours = hours
+  countdown.value.minutes = minutes
+  countdown.value.seconds = seconds
 }
 
 onMounted(() => {
+  // Call updateCountdown immediately to set the initial state
+  updateCountdown()
+
   // Update the countdown every second
   setInterval(updateCountdown, 1000)
 })
@@ -34,10 +42,10 @@ const { totalWeeks, currentWeekNumber } = useWeek()
   <div class="flex flex-col md:flex-row justify-between md:items-center p-4 bg-white dark:bg-gray-800 rounded-lg shadow-md gap-4">
     <div class="text-gray-800 dark:text-gray-200">
       <p class="text-lg font-semibold">Countdown to the end of the year</p>
-      <p class="text-xl">{{ countdown.days }} days, {{ countdown.hours }} hours, {{ countdown.minutes }} minutes, {{ countdown.seconds }} seconds</p>
+      <p class="text-xl" data-test-id="countdown">{{ countdown.days }} days, {{ countdown.hours }} hours, {{ countdown.minutes }} minutes, {{ countdown.seconds }} seconds</p>
     </div>
     <div class="text-gray-800 dark:text-gray-200 flex md:flex-col md:items-end gap-1">
-      <p class="text-xl">{{ currentWeekNumber }}/{{ totalWeeks }} weeks</p>
+      <p class="text-xl" data-test-id="weeks">{{ currentWeekNumber }}/{{ totalWeeks }} weeks</p>
     </div>
   </div>
 </template>
