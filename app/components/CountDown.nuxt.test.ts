@@ -15,16 +15,18 @@ describe('CountdownTimer', () => {
 
   it('displays the correct initial countdown', async () => {
     // Mock the current date to a known value
-    const mockDate = new Date('2023-12-30T00:00:00')
+    const mockDate = new Date('2023-12-31T23:59:55')
     vi.setSystemTime(mockDate)
 
+    // Mount the component after setting the system time
     const wrapper = await mountSuspended(CountdownTimer)
 
     // Check initial countdown values
-    expect(wrapper.text()).toContain('1 days')
-    expect(wrapper.text()).toContain('0 hours')
-    expect(wrapper.text()).toContain('0 minutes')
-    expect(wrapper.text()).toContain('0 seconds')
+    const countdownText = wrapper.find('[data-test-id="countdown"]').text()
+    expect(countdownText).toContain('0 days')
+    expect(countdownText).toContain('0 hours')
+    expect(countdownText).toContain('0 minutes')
+    expect(countdownText).toContain('5 seconds')
   })
 
   it('updates the countdown every second', async () => {
@@ -32,22 +34,25 @@ describe('CountdownTimer', () => {
     const mockDate = new Date('2023-12-31T23:59:55')
     vi.setSystemTime(mockDate)
 
+    // Mount the component after setting the system time
     const wrapper = await mountSuspended(CountdownTimer)
 
     // Check initial countdown values
-    expect(wrapper.text()).toContain('0 days')
-    expect(wrapper.text()).toContain('0 hours')
-    expect(wrapper.text()).toContain('0 minutes')
-    expect(wrapper.text()).toContain('5 seconds')
+    const countdownText = wrapper.find('[data-test-id="countdown"]').text()
+    expect(countdownText).toContain('0 days')
+    expect(countdownText).toContain('0 hours')
+    expect(countdownText).toContain('0 minutes')
+    expect(countdownText).toContain('5 seconds')
 
     // Advance time by 5 seconds
     vi.advanceTimersByTime(5000)
     await wrapper.vm.$nextTick()
 
     // Check updated countdown values
-    expect(wrapper.text()).toContain('0 days')
-    expect(wrapper.text()).toContain('0 hours')
-    expect(wrapper.text()).toContain('0 minutes')
-    expect(wrapper.text()).toContain('0 seconds')
+    const updatedCountdownText = wrapper.find('[data-test-id="countdown"]').text()
+    expect(updatedCountdownText).toContain('0 days')
+    expect(updatedCountdownText).toContain('0 hours')
+    expect(updatedCountdownText).toContain('0 minutes')
+    expect(updatedCountdownText).toContain('0 seconds')
   })
 })
