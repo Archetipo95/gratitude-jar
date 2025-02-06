@@ -1,6 +1,6 @@
 <template>
   <div class="space-y-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg">
-    <DisclamerMessage />
+    <DisclaimerMessage />
 
     <div>
       <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">TODO</h2>
