@@ -1,6 +1,5 @@
 import type { VueWrapper } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import CountdownTimer from './CountDown.vue'
 
 describe('CountdownTimer', () => {
