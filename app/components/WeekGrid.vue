@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import type { Database } from '~~/types/database.types'
+
 // Available years for selection
 const currentYear = new Date().getFullYear()
 // calculate availableYears from 2024 to currentYear
@@ -7,6 +9,24 @@ const availableYears = ref(Array.from({ length: currentYear - 2023 }, (_, i) => 
 const selectedYear = ref(currentYear)
 
 const { weeks, changeYear } = useWeek()
+
+const client = useSupabaseClient<Database>()
+const user = useSupabaseUser()
+
+const {
+  data: messages,
+  refresh,
+  status,
+} = await useAsyncData(
+  'messages',
+  async () => {
+    if (!user.value) return
+    return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
+  },
+  { transform: (result) => (result ? result.data : []), watch: [user] }
+)
+
+const isSubmitting = ref(false)
 
 watch(selectedYear, () => {
   changeYear(selectedYear.value)
@@ -29,7 +49,21 @@ watch(selectedYear, () => {
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
-      <WeekTile v-for="week in weeks" :key="week.number" :week="week" :selected-year="selectedYear" :current-year="currentYear" />
+      <template v-if="status === 'pending'">
+        <div v-for="week in weeks" :key="week.number" class="p-4 border rounded-lg text-base mb-4 shadow-sm min-h-48 animate-pulse bg-gray-200 dark:bg-gray-700" />
+      </template>
+      <template v-else>
+        <WeekTile
+          v-for="week in weeks"
+          :key="week.number"
+          :week="week"
+          :selected-year="selectedYear"
+          :current-year="currentYear"
+          :messages="messages"
+          :is-submitting="isSubmitting"
+          @refresh="refresh"
+        />
+      </template>
     </div>
   </div>
 </template>

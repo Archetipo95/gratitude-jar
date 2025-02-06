@@ -1,8 +1,14 @@
 import type { Week } from '~~/types/time.types'
 
-export type WeekTileProps = {
+export interface WeekTileProps {
   week: Week
   selectedYear: number
   currentYear: number
-  isSubmitting?: boolean
+  isSubmitting: boolean
+  messages?: Array<{
+    id: number
+    message: string
+    week: number
+    year: number
+  }> | null
 }

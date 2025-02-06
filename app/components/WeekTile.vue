@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import type { Database } from '~~/types/database.types'
 import { LazyModalMessage } from '#components'
 import type { WeekTileProps } from './WeekTile.props'
 
-const { selectedYear, currentYear, isSubmitting, week } = defineProps<WeekTileProps>()
+const props = defineProps<WeekTileProps>()
 
-defineEmits<{
+const emit = defineEmits<{
+  refresh: []
   openModal: [value: number]
 }>()
 
 // Check if there's a message for the given week
 function hasMessage(weekNumber: number) {
-  return messages.value?.some((message) => message.week === weekNumber && message.year === selectedYear)
+  return props.messages?.some((message) => message.week === weekNumber && message.year === props.selectedYear)
 }
 
 // Check if message is visible for a given week
@@ -29,33 +29,19 @@ const messageVisibility = ref<Record<number, boolean>>({})
 
 // Get the message for the given week
 function getMessage(weekNumber: number) {
-  const message = messages.value?.find((message) => message.week === weekNumber && message.year === selectedYear)
+  const message = props.messages?.find((message) => message.week === weekNumber && message.year === props.selectedYear)
   return message ? message.message : ''
 }
-
-const client = useSupabaseClient<Database>()
-const user = useSupabaseUser()
-
-// Fetch messages from Supabase
-const { data: messages, refresh } = await useAsyncData(
-  'messages',
-  async () => {
-    if (isSubmitting) return
-    if (!user.value) return
-    return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
-  },
-  { transform: (result) => (result ? result.data : []), watch: [user, () => isSubmitting] }
-)
 
 const modal = useModal()
 
 function openModal() {
   modal.open(LazyModalMessage, {
-    weekNumber: week.number,
-    selectedYear,
-    isSubmitting,
+    weekNumber: props.week.number,
+    selectedYear: props.selectedYear,
+    isSubmitting: props.isSubmitting,
     onMessageSubmitted() {
-      refresh()
+      emit('refresh')
     },
   })
 }
@@ -69,9 +55,9 @@ const { currentWeekNumber } = useWeek()
       'p-4 border rounded-lg text-base mb-4 shadow-sm transition-colors duration-300 min-h-48 flex flex-col justify-between',
       {
         '!bg-green-200': hasMessage(week.number),
-        'bg-yellow-100 ': week.isCurrentWeek && selectedYear === currentYear,
-        'bg-red-200 ': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)),
-        'bg-gray-400 opacity-40 ': selectedYear > currentYear || (week.number > currentWeekNumber && selectedYear === currentYear),
+        'bg-yellow-100': week.isCurrentWeek && selectedYear === currentYear,
+        'bg-red-200': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)),
+        'bg-gray-400 opacity-40': selectedYear > currentYear || (week.number > currentWeekNumber && selectedYear === currentYear),
       },
     ]"
   >
@@ -100,8 +86,6 @@ const { currentWeekNumber } = useWeek()
         :disabled="isSubmitting"
         class="mt-3"
       />
-
-      <div v-if="isSubmitting || !messages" class="mt-2 text-sm text-gray-600 dark:text-gray-400">Loading...</div>
     </div>
     <div class="font-bold">
       <p v-if="hasMessage(week.number)" class="text-green-700">DONE!</p>
