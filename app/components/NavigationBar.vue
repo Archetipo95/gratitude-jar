@@ -5,7 +5,7 @@ const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
 // Greeting message
-const greatingMessage = computed(() => {
+const greetingMessage = computed(() => {
   if (!user.value) return 'Hello Guest'
   return `Hello ${user.value.user_metadata.user_name}`
 })
@@ -20,7 +20,7 @@ const greatingMessage = computed(() => {
       </NuxtLink>
     </div>
     <div class="flex items-center space-x-4">
-      <h2 class="text-lg text-gray-600 dark:text-gray-300">{{ greatingMessage }}</h2>
+      <h2 class="text-lg text-gray-600 dark:text-gray-300">{{ greetingMessage }}</h2>
       <UButton
         v-if="!!user"
         @click="client.auth.signOut()"
