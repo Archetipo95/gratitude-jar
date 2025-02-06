@@ -5,7 +5,7 @@ export default defineVitestConfig({
     name: 'unit',
     globals: true,
     environment: 'node',
-    include: ['**/tests/unit/**/*.test.ts', '**/components/**/*.test.ts', '**/composables/**/*.test.ts'],
+    include: ['**/tests/unit/**/*.test.ts', '**/components/**/*.test.ts', '**/composables/**/*.test.ts', '**/utils/**/*.test.ts'],
     coverage: {
       provider: 'v8',
       include: ['**/components/**/*.vue', '**/composables/**/*.ts'],
