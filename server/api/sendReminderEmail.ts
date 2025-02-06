@@ -13,15 +13,11 @@ export default defineEventHandler(async (event) => {
     }
 
     const data = await resend.emails.send({
-      //from: 'Gratitude Jar <onboarding@resend.dev>',
-      from: 'Gratitude Jar <ciao@ciao.ciao>',
+      from: 'Gratitude Jar <onboarding@resend.dev>',
       to: [senderEmail],
       subject: 'Weekly Reminder',
       html: '<strong>Don’t forget to submit your gratitude message for this week!</strong>',
     })
-
-    // console log the data to see the response from the API
-    // console.log(senderEmail)
 
     return { success: true, data }
   } catch (error: any) {
