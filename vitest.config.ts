@@ -2,7 +2,7 @@ import { defineVitestConfig } from '@nuxt/test-utils/config'
 
 export default defineVitestConfig({
   test: {
-    include: ['**/tests/unit/**/*.test.ts', '**/components/**/*.test.ts', '**/composables/**/*.test.ts'],
+    include: ['**/tests/unit/**/*.test.ts', '**/components/**/*.test.ts', '**/composables/**/*.test.ts', '**/server/api/**/*.test.ts'],
     name: 'unit',
     environment: 'node',
     coverage: {
