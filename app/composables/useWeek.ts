@@ -2,7 +2,7 @@ export function useWeek() {
   const yearRef = ref(new Date().getFullYear())
   const weeks = computed(() => calculateWeeks(yearRef.value))
 
-  const currentWeekNumber = computed(() => getCurrentWeekNumber(weeks.value))
+  const currentWeekNumber = computed(() => weeks.value.find((week) => week.isCurrentWeek)?.number ?? 0)
 
   const totalWeeks = computed(() => weeks.value.length)
 
