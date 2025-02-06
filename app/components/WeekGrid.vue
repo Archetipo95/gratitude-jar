@@ -34,23 +34,29 @@ watch(selectedYear, () => {
 </script>
 
 <template>
-  <div class="space-y-4">
-    <div class="year-select-container flex items-center space-x-2">
-      <label for="year-select" class="text-lg font-medium text-gray-700 dark:text-gray-300">Select Year:</label>
-      <select
-        id="year-select"
-        v-model="selectedYear"
-        class="p-2 border rounded-md text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border-gray-300 dark:border-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400"
-      >
-        <option v-for="year in availableYears" :key="year" :value="year">
-          {{ year }}
-        </option>
-      </select>
+  <div class="space-y-6 max-w-7xl mx-auto">
+    <div class="flex items-center justify-between flex-wrap gap-4 p-4 rounded-lg shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
+      <label for="year-select" class="text-lg font-medium text-gray-700 dark:text-gray-300">Year Overview</label>
+      <div class="flex items-center gap-3">
+        <select
+          id="year-select"
+          v-model="selectedYear"
+          class="px-4 py-2 rounded-lg text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200 hover:border-gray-400 dark:hover:border-gray-500"
+        >
+          <option v-for="year in availableYears" :key="year" :value="year">
+            {{ year }}
+          </option>
+        </select>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-4 p-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
       <template v-if="status === 'pending'">
-        <div v-for="week in weeks" :key="week.number" class="p-4 border rounded-lg text-base mb-4 shadow-sm min-h-48 animate-pulse bg-gray-200 dark:bg-gray-700" />
+        <div
+          v-for="week in weeks"
+          :key="week.number"
+          class="p-4 rounded-lg text-base shadow-sm min-h-[200px] animate-pulse bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border border-gray-200 dark:border-gray-700"
+        />
       </template>
       <template v-else>
         <WeekTile
