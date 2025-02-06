@@ -10,3 +10,4 @@ dist
 
 
 test-results/.last-run.json
+coverage
