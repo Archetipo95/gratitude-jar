@@ -59,17 +59,48 @@ const toast = useToast()
 </script>
 
 <template>
-  <UModal :title="`Add New Message for Week ${weekNumber}`">
+  <UModal
+    class="border-4 dark:border-gray-600 rounded-none shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)]"
+    :ui="{
+      overlay: 'bg-gray-950/50 dark:bg-gray-950/75',
+      content: 'overflow-visible',
+      header: 'p-6 border-b-4 dark:border-gray-600',
+      body: 'p-6',
+      footer: 'p-6 border-t-4 dark:border-gray-600 flex justify-end gap-4',
+      title: 'text-xl font-black uppercase text-gray-900 dark:text-gray-100',
+      close: 'hover:-translate-y-0.5 transition-transform',
+    }"
+    :title="`Add Message - Week ${weekNumber}`"
+  >
     <template #body>
-      <UTextarea class="w-full" v-model="newMessage" placeholder="Enter your message here" />
-      <br />
-      <small class="disclaimer">Your message is not editable and not viewable until the end of the year</small>
+      <UTextarea
+        v-model="newMessage"
+        class="w-full rounded-none border-4 dark:border-gray-600 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:ring-0 focus:border-current transition-transform hover:-translate-y-0.5"
+        placeholder="What are you grateful for this week?"
+        :rows="6"
+      />
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">Your message will be sealed until the end of the year</p>
     </template>
+
     <template #footer>
-      <div class="flex gap-2">
-        <UButton color="neutral" label="Close" @click="closeModal" />
-        <UButton label="Submit" :disabled="isSubmitting" @click="submitMessage" />
-      </div>
+      <UButton
+        label="Cancel"
+        color="neutral"
+        variant="solid"
+        size="lg"
+        class="uppercase tracking-wider font-bold rounded-none px-6 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] border-2 border-current hover:-translate-y-0.5 transition-transform"
+        @click="closeModal"
+      />
+      <UButton
+        label="Submit"
+        color="primary"
+        variant="solid"
+        size="lg"
+        :loading="isSubmitting"
+        :disabled="isSubmitting"
+        class="uppercase tracking-wider font-bold rounded-none px-6 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] border-2 border-current hover:-translate-y-0.5 transition-transform"
+        @click="submitMessage"
+      />
     </template>
   </UModal>
 </template>

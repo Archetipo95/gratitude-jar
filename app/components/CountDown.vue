@@ -39,19 +39,19 @@ const { totalWeeks, currentWeekNumber } = useWeek()
 </script>
 
 <template>
-  <div class="flex flex-col md:flex-row justify-between md:items-center p-6 bg-white dark:bg-gray-800 rounded-xl shadow-lg gap-6">
+  <div class="flex flex-col md:flex-row justify-between md:items-center p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600 gap-6">
     <div class="text-gray-800 dark:text-gray-200">
-      <h2 class="text-lg font-semibold mb-2 text-gray-700 dark:text-gray-300">Countdown to the end of the year</h2>
-      <p class="text-2xl font-medium tracking-wide" data-test-id="countdown">
-        <span class="tabular-nums">{{ countdown.days }}</span> days, <span class="tabular-nums">{{ countdown.hours }}</span> hours, <span class="tabular-nums">{{ countdown.minutes }}</span> minutes,
+      <h2 class="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100 uppercase">Time Until New Year</h2>
+      <p class="text-xl md:text-2xl font-bold tracking-wide" data-test-id="countdown">
+        <span class="tabular-nums">{{ countdown.days }}</span> days <span class="tabular-nums">{{ countdown.hours }}</span> hours <span class="tabular-nums">{{ countdown.minutes }}</span> minutes
         <span class="tabular-nums">{{ countdown.seconds }}</span> seconds
       </p>
     </div>
     <div class="text-gray-800 dark:text-gray-200 flex md:flex-col md:items-end gap-1">
-      <div class="text-xl font-medium" data-test-id="weeks">
-        <span class="text-yellow-600 dark:text-yellow-400 font-semibold">Week {{ currentWeekNumber }}</span>
-        <span class="text-gray-600 dark:text-gray-400"> of {{ totalWeeks }}</span>
-        <div class="text-base text-gray-500 dark:text-gray-400">({{ totalWeeks - currentWeekNumber }} weeks remaining)</div>
+      <div class="text-lg md:text-xl font-bold uppercase" data-test-id="weeks">
+        <span class="text-yellow-700 dark:text-yellow-400">Week {{ currentWeekNumber }}</span>
+        <span class="text-gray-700 dark:text-gray-300"> of {{ totalWeeks }}</span>
+        <div class="text-base text-gray-600 dark:text-gray-400">({{ totalWeeks - currentWeekNumber }} weeks remaining)</div>
       </div>
     </div>
   </div>

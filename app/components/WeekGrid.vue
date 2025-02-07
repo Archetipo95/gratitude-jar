@@ -35,28 +35,22 @@ watch(selectedYear, () => {
 
 <template>
   <div class="space-y-6 max-w-7xl mx-auto">
-    <div class="flex items-center justify-between flex-wrap gap-4 p-4 rounded-lg shadow-sm bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700">
-      <label for="year-select" class="text-lg font-medium text-gray-700 dark:text-gray-300">Year Overview</label>
-      <div class="flex items-center gap-3">
-        <select
-          id="year-select"
-          v-model="selectedYear"
-          class="px-4 py-2 rounded-lg text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:border-transparent transition-colors duration-200 hover:border-gray-400 dark:hover:border-gray-500"
-        >
-          <option v-for="year in availableYears" :key="year" :value="year">
-            {{ year }}
-          </option>
-        </select>
-      </div>
+    <div class="flex items-center justify-between flex-wrap gap-4 p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600">
+      <label for="year-select" class="text-xl font-bold text-gray-800 dark:text-gray-200 uppercase">Year Overview</label>
+      <select
+        id="year-select"
+        v-model="selectedYear"
+        class="px-4 py-2 text-lg font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border-2 dark:border-gray-600 focus:outline-none focus:ring-0 hover:-translate-y-0.5 transition-transform uppercase"
+      >
+        <option v-for="year in availableYears" :key="year" :value="year">
+          {{ year }}
+        </option>
+      </select>
     </div>
 
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4 sm:gap-6">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
       <template v-if="status === 'pending'">
-        <div
-          v-for="week in weeks"
-          :key="week.number"
-          class="p-4 rounded-lg text-base shadow-sm min-h-[200px] animate-pulse bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-700 dark:to-gray-800 border border-gray-200 dark:border-gray-700"
-        />
+        <div v-for="week in weeks" :key="week.number" class="p-6 min-h-[200px] animate-pulse bg-white dark:bg-gray-800 border-4 dark:border-gray-600" />
       </template>
       <template v-else>
         <WeekTile
