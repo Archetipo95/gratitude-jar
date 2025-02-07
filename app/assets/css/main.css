@@ -5,6 +5,16 @@
   --font-sans: 'Space Mono', monospace;
 }
 
+:root {
+  --background-color: white;
+  --text-color: black;
+}
+
+[data-theme='dark'] {
+  --background-color: black;
+  --text-color: white;
+}
+
 /*
 Set the default cursor for buttons.
 */
