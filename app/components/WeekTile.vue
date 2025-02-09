@@ -78,7 +78,10 @@ const { currentWeekNumber } = useWeek()
     </div>
 
     <UButton
-      v-if="!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear))"
+      v-if="
+        (week.number === currentWeekNumber && selectedYear === currentYear) ||
+        (!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)))
+      "
       :label="isSubmitting ? 'SUBMITTING...' : 'ADD NEW MESSAGE'"
       :ui="{
         base: ' uppercase tracking-wider',
