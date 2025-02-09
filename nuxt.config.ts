@@ -26,16 +26,6 @@ export default defineNuxtConfig({
     defaultLocale: 'en', // not needed if you have @nuxtjs/i18n installed
   },
   fonts: {
-    defaults: {
-      weights: ['400', '700', '900'],
-      styles: ['normal'],
-    },
-    families: [
-      {
-        name: 'Space Mono',
-        provider: 'google',
-      },
-    ],
     experimental: {
       processCSSVariables: true, // Enable if using CSS variables for Tailwind CSS v4
     },
