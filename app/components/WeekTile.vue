@@ -47,22 +47,33 @@ function openModal() {
 }
 
 const { currentWeekNumber } = useWeek()
+
+const weekTileConditions = computed(() => {
+  return {
+    hasMessage: hasMessage(props.week.number),
+    isCurrentWeek: props.week.isCurrentWeek && props.selectedYear === props.currentYear,
+    isPastWeek: !hasMessage(props.week.number) && (props.selectedYear < props.currentYear || (props.week.number <= currentWeekNumber.value && props.selectedYear === props.currentYear)),
+    isFutureWeek: props.selectedYear > props.currentYear || (props.week.number > currentWeekNumber.value && props.selectedYear === props.currentYear),
+  }
+})
+
+const weekTileClasses = computed(() => {
+  return [
+    'p-4 md:p-6 border-4 rounded-none text-base mb-6 transition-transform duration-200 hover:-translate-y-1 min-h-48 md:min-h-52 flex flex-col gap-4 justify-between relative',
+    'dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]',
+    {
+      'border-green-600 bg-green-100 dark:bg-green-950 dark:border-green-400': weekTileConditions.value.hasMessage,
+      'border-yellow-600 bg-yellow-100 dark:bg-yellow-950 dark:border-yellow-400': weekTileConditions.value.isCurrentWeek && !weekTileConditions.value.hasMessage,
+      'border-red-600 bg-red-100 dark:bg-red-950 dark:border-red-400': weekTileConditions.value.isPastWeek,
+      'border-gray-600 bg-gray-100 dark:bg-gray-900 dark:border-gray-500': weekTileConditions.value.isFutureWeek,
+      'opacity-75 dark:opacity-50': weekTileConditions.value.isFutureWeek,
+    },
+  ]
+})
 </script>
 
 <template>
-  <div
-    :class="[
-      'p-4 md:p-6 border-4 rounded-none text-base mb-6 transition-transform duration-200 hover:-translate-y-1 min-h-48 md:min-h-52 flex flex-col gap-4 justify-between relative',
-      'dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.1)] shadow-[4px_4px_0px_0px_rgba(0,0,0,0.2)]',
-      {
-        'border-green-600 bg-green-100 dark:bg-green-950 dark:border-green-400': hasMessage(week.number),
-        'border-yellow-600 bg-yellow-100 dark:bg-yellow-950 dark:border-yellow-400': week.isCurrentWeek && selectedYear === currentYear,
-        'border-red-600 bg-red-100 dark:bg-red-950 dark:border-red-400': !hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)),
-        'border-gray-600 bg-gray-100 dark:bg-gray-900 dark:border-gray-500': selectedYear > currentYear || (week.number > currentWeekNumber && selectedYear === currentYear),
-        'opacity-75 dark:opacity-50': selectedYear > currentYear || (week.number > currentWeekNumber && selectedYear === currentYear),
-      },
-    ]"
-  >
+  <div :class="weekTileClasses">
     <div>
       <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2">
         <div class="text-xl md:text-2xl font-black text-gray-900 dark:text-gray-100">WEEK {{ week.number }}</div>
