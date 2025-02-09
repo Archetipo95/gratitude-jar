@@ -19,4 +19,10 @@ export default defineNuxtConfig({
     pageTransition: false,
     layoutTransition: false,
   },
+  site: {
+    url: 'https://jar-of-gratitude.netlify.app',
+    name: 'Gratitude Jar',
+    description: 'A simple gratitude journal app built with Nuxt.js and Supabase',
+    defaultLocale: 'en', // not needed if you have @nuxtjs/i18n installed
+  },
 })
