@@ -11,4 +11,12 @@ export default defineNuxtConfig({
     redirect: false,
   },
   css: ['~/assets/css/main.css'],
+  app: {
+    head: {
+      htmlAttrs: { lang: 'en' },
+      title: 'Gratitude Jar',
+    },
+    pageTransition: false,
+    layoutTransition: false,
+  },
 })
