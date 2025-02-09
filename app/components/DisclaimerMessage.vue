@@ -7,10 +7,13 @@
 
     <div class="text-gray-800 dark:text-gray-200">
       <strong class="font-black text-gray-900 dark:text-gray-100 uppercase block mb-2">Instructions:</strong>
+      <br />
       <p class="leading-relaxed">
         You need to login first. Select a year from the dropdown above, and click on the "Add New Message" button for each week to add a message. Your messages are private and will only be visible to
         you at the end of the year.
       </p>
+
+      <p class="leading-relaxed text-yellow-700 dark:text-yellow-400">Only for the current week you can add more messages.</p>
 
       <em class="block mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4"
         >Disclaimer: This app is for demonstration purposes only. Currently, the messages are stored in plain text and are NOT encrypted. Please do NOT store sensitive information.</em
