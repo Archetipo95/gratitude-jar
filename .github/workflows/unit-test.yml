@@ -9,8 +9,8 @@ on:
 
 jobs:
   build:
-    # if in the last commit there is --no-test this github action should not run
-    if: ${{ !contains(github.event.head_commit.message, '--no-test') }}
+    # if in the last commit there is skip-ci this github action should not run
+    if: ${{ !contains(github.event.head_commit.message, 'skip-ci') }}
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     strategy:
