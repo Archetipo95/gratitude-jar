@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { on } from 'events'
-
 // This component is a countdown timer for the end of the year.
 // It will display the number of days, hours, minutes, and seconds until the end of the year.
 // It also displays the number of weeks remaining in the year.
