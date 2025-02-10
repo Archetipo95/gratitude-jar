@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { on } from 'events'
+
 // This component is a countdown timer for the end of the year.
 // It will display the number of days, hours, minutes, and seconds until the end of the year.
 // It also displays the number of weeks remaining in the year.
@@ -27,12 +29,19 @@ const updateCountdown = () => {
   countdown.value.seconds = seconds
 }
 
+let intervalId: NodeJS.Timeout
+
 onMounted(() => {
   // Call updateCountdown immediately to set the initial state
   updateCountdown()
 
   // Update the countdown every second
-  setInterval(updateCountdown, 1000)
+  intervalId = setInterval(updateCountdown, 1000)
+})
+
+onUnmounted(() => {
+  // Clear the interval when the component is unmounted
+  clearInterval(intervalId)
 })
 
 const { totalWeeks, currentWeekNumber } = useWeek()

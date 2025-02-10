@@ -4,12 +4,10 @@ import CountdownTimer from './CountDown.vue'
 
 describe('CountdownTimer', () => {
   beforeEach(() => {
-    // Use fake timers for each test
     vi.useFakeTimers()
   })
 
   afterEach(() => {
-    // Restore real timers after each test
     vi.useRealTimers()
   })
 
@@ -83,5 +81,26 @@ describe('CountdownTimer', () => {
     expect(updatedCountdownValues.hours).toBe('0')
     expect(updatedCountdownValues.minutes).toBe('0')
     expect(updatedCountdownValues.seconds).toBe('0')
+  })
+
+  it('handles leap year correctly', async () => {
+    const wrapper = await mountComponentWithMockedTime(new Date('2024-02-28T23:59:59'))
+    const countdownValues = getCountdownValues(wrapper)
+
+    expect(countdownValues.days).toBe('307') // Leap year has 366 days, so from Feb 28 to Dec 31 is 307 days
+  })
+
+  it('initial state is correct when mounted in the middle of the year', async () => {
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-06-15T00:00:00'))
+    const countdownValues = getCountdownValues(wrapper)
+
+    expect(parseInt(countdownValues.days)).toBeGreaterThan(0)
+  })
+
+  it('cleans up interval on unmount', async () => {
+    const clearIntervalSpy = vi.spyOn(global, 'clearInterval')
+    const wrapper = await mountComponentWithMockedTime(new Date('2025-12-31T23:59:55'))
+    wrapper.unmount()
+    expect(clearIntervalSpy).toHaveBeenCalled()
   })
 })
