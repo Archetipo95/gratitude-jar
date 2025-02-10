@@ -2,46 +2,49 @@ name: Unit Test
 
 on:
   push:
-    branches: [main]
+    branches: [main] # Trigger the workflow on push events to the main branch
   pull_request:
-    branches: [main]
-  workflow_dispatch:
+    branches: [main] # Trigger the workflow on pull request events targeting the main branch
+  workflow_dispatch: # Allow manual triggering of the workflow
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # if in the last commit there is --no-test this github action should not run
+    if: ${{ !contains(github.event.head_commit.message, '--no-test') }}
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
     strategy:
-      fail-fast: true
+      fail-fast: true # Stop all jobs if any job fails
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v4 # Check out the repository code
 
       - name: Set up Bun
-        uses: oven-sh/setup-bun@v2
+        uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
         with:
-          bun-version: latest
+          bun-version: latest # Use the latest version of Bun
 
       - name: Cache Bun dependencies
         id: cache-bun
-        uses: actions/cache@v4
+        uses: actions/cache@v4 # Cache Bun dependencies to speed up workflow runs
         with:
-          path: ~/.bun
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }}
+          path: ~/.bun # Cache the Bun directory
+          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }} # Use a unique key based on the OS and bun.lock file
           restore-keys: |
-            ${{ runner.os }}-bun-
+            ${{ runner.os }}-bun- # Restore cache if the exact key is not found
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        run: bun install --frozen-lockfile # Install dependencies using Bun with a frozen lockfile
 
       - name: Run tests
-        run: bun run test:unit
+        run: bun run test:unit # Run unit tests using Bun
+
 
       # TODO
       # - name: Lint project
-      #   run: bun run lint
+      #   run: bun run lint # Lint the project
 
       # TODO
       # - name: Typecheck project
-      #   run: bun run typecheck
+      #   run: bun run typecheck # Typecheck the project
