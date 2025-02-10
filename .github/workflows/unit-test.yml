@@ -39,12 +39,3 @@ jobs:
 
       - name: Run tests
         run: bun run test:unit # Run unit tests using Bun
-
-
-      # TODO
-      # - name: Lint project
-      #   run: bun run lint # Lint the project
-
-      # TODO
-      # - name: Typecheck project
-      #   run: bun run typecheck # Typecheck the project

@@ -47,6 +47,7 @@ cd gratitude-jar
 # Install dependencies
 bun install
 ```
+
 ### Development Server
 
 Start the development server on `http://localhost:3000`:
@@ -85,6 +86,8 @@ bun run preview
 - **Storybook**: Integrate Storybook for component testing.
 - **Internationalization**: Support multiple languages.
 - **Account Deletion**: Allow users to delete their accounts.
+- **Lint Project**: Add ESLint and Prettier for code quality.
+- **Typecheck**: Add TypeScript for type safety.
 
 ## License
 
