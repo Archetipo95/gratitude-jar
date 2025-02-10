@@ -1,20 +1,46 @@
+import type { VueWrapper } from '@vue/test-utils'
 import { mountSuspended } from '@nuxt/test-utils/runtime'
-import FooterBar from './FooterBar.vue'
+import Footer from './FooterBar.vue'
 
-describe('FooterBar', () => {
-  it('renders correctly', async () => {
-    const wrapper = await mountSuspended(FooterBar)
+describe('Footer', () => {
+  let wrapper: VueWrapper
 
-    // Check if the component renders
-    expect(wrapper.exists()).toBe(true)
+  beforeEach(async () => {
+    wrapper = await mountSuspended(Footer)
+  })
 
-    // Check if the text content is correct by finding elements directly
-    expect(wrapper.find('[data-test="footer-made-by"]').exists()).toBe(true)
-    expect(wrapper.find('[data-test="footer-made-by"] .font-bold').text()).toBe('Martin')
-    expect(wrapper.find('[data-test="info-link"]').exists()).toBe(true)
+  // Helper functions to get elements by data-test attributes
+  const findFooterText = (wrapper: VueWrapper) => wrapper.find('[data-test="footer-made-by"]')
+  const findHeartIcon = (wrapper: VueWrapper) => wrapper.find('[data-test="heart-icon"]')
+  const findGithubLink = (wrapper: VueWrapper) => wrapper.find('[data-test="github-link"]')
+  const findInfoLink = (wrapper: VueWrapper) => wrapper.find('[data-test="info-link"]')
 
-    // Check if links are present and have correct href
-    expect(wrapper.findComponent('[data-test="footer-made-by"] .font-bold').attributes('href')).toBe('https://github.com/Archetipo95')
-    expect(wrapper.findComponent('[data-test="info-link"]').attributes('href')).toBe('/info')
+  it('renders "Made by" text correctly', () => {
+    const footerText = findFooterText(wrapper)
+
+    expect(footerText.exists()).toBe(true)
+    expect(footerText.text()).toContain('Made with')
+  })
+
+  it('renders heart icon correctly', () => {
+    const heartIcon = findHeartIcon(wrapper)
+
+    expect(heartIcon.exists()).toBe(true)
+    expect(heartIcon.classes()).toContain('text-red-600')
+  })
+
+  it('renders GitHub link correctly', () => {
+    const githubLink = findGithubLink(wrapper)
+
+    expect(githubLink.exists()).toBe(true)
+    expect(githubLink.attributes('href')).toBe('https://github.com/Archetipo95')
+    expect(githubLink.text()).toBe('Martin')
+  })
+
+  it('renders Info link correctly', () => {
+    const infoLink = findInfoLink(wrapper)
+
+    expect(infoLink.exists()).toBe(true)
+    expect(infoLink.text()).toContain('Info & Disclaimers')
   })
 })
