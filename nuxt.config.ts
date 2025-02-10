@@ -17,20 +17,8 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  app: {
-    head: {
-      htmlAttrs: { lang: 'en' },
-      title: 'Gratitude Jar',
-    },
-    pageTransition: false,
-    layoutTransition: false,
-  },
-
   site: {
     url: 'https://jar-of-gratitude.netlify.app',
-    name: 'Gratitude Jar',
-    description: 'A simple gratitude journal app built with Nuxt.js and Supabase',
-    defaultLocale: 'en', // not needed if you have @nuxtjs/i18n installed
   },
 
   fonts: {
@@ -45,4 +33,45 @@ export default defineNuxtConfig({
       pathPrefix: false,
     },
   ],
+
+  app: {
+    head: {
+      htmlAttrs: { lang: 'en' },
+      title: 'Gratitude Jar',
+      meta: [
+        { charset: 'utf-8' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+        { hid: 'description', name: 'description', content: 'A simple gratitude journal app built with Nuxt.js and Supabase' },
+        { name: 'apple-mobile-web-app-title', content: 'Gratitude Jar' },
+      ],
+      link: [
+        {
+          rel: 'icon',
+          type: 'image/png',
+          sizes: '96x96',
+          href: '/favicon-96x96.png',
+        },
+        {
+          rel: 'apple-touch-icon',
+          sizes: '180x180',
+          href: '/apple-touch-icon.png',
+        },
+        {
+          rel: 'icon',
+          type: 'image/x-icon',
+          href: '/favicon.ico',
+        },
+        {
+          rel: 'shortcut icon',
+          href: '/favicon.ico',
+        },
+        {
+          rel: 'manifest',
+          href: '/site.webmanifest',
+        },
+      ],
+    },
+    pageTransition: false,
+    layoutTransition: false,
+  },
 })
