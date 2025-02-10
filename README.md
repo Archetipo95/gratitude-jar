@@ -1,4 +1,4 @@
-# ![Gratitude Jar Logo](https://raw.githubusercontent.com/Archetipo95/gratitude-jar/refs/heads/main/public/favicon.svg) Gratitude Jar
+# Gratitude Jar
 
 Welcome to **Gratitude Jar**, a delightful web application built with Nuxt.js that allows you to capture and reflect on moments of gratitude throughout the year. Whether you're looking to embrace mindfulness or simply want a space to record weekly reflections, this app is your perfect companion.
 
@@ -21,9 +21,9 @@ The project is organized as follows:
 │   ├── composables
 │   ├── layouts
 │   ├── pages
-│   ├── public
 │   └── utils
 ├── server
+├── public
 └── types
 ```
 
