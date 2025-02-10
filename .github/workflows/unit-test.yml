@@ -17,15 +17,15 @@ jobs:
       fail-fast: true # Stop all jobs if any job fails
 
     steps:
-      - name: Checkout code
+      - name: 🛠️ Checkout code
         uses: actions/checkout@v4 # Check out the repository code
 
-      - name: Set up Bun
+      - name: 🔧 Set up Bun
         uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
         with:
           bun-version: latest # Use the latest version of Bun
 
-      - name: Cache Bun dependencies
+      - name: 📦 Cache Bun dependencies
         id: cache-bun
         uses: actions/cache@v4 # Cache Bun dependencies to speed up workflow runs
         with:
@@ -34,8 +34,8 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-bun- # Restore cache if the exact key is not found
 
-      - name: Install dependencies
+      - name: 📦 Install dependencies
         run: bun install --frozen-lockfile # Install dependencies using Bun with a frozen lockfile
 
-      - name: Run tests
+      - name: 🧪 Run tests
         run: bun run test:unit # Run unit tests using Bun
