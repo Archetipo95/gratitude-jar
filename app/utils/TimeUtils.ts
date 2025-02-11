@@ -53,3 +53,7 @@ export function formatDate(date: Date): string {
 export function getMonthName(date: Date): string {
   return date.toLocaleString('default', { month: 'short' })
 }
+
+export function getCurrentYear(): number {
+  return new Date().getFullYear()
+}

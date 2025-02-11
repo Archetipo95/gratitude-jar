@@ -1,4 +1,4 @@
-import { calculateWeeks, formatDate, getMonthName } from './TimeUtils'
+import { calculateWeeks, formatDate, getMonthName, getCurrentYear } from './TimeUtils'
 
 describe('TimeUtils', () => {
   beforeEach(() => {
@@ -76,6 +76,14 @@ describe('TimeUtils', () => {
 
       expect(getMonthName(january)).toBe('Jan')
       expect(getMonthName(december)).toBe('Dec')
+    })
+  })
+
+  describe('getCurrentYear', () => {
+    it('returns current year', () => {
+      const currentYear = getCurrentYear()
+
+      expect(currentYear).toBe(2024)
     })
   })
 })
