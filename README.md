@@ -1,15 +1,15 @@
-# Gratitude Jar
+# ✨ Gratitude Jar ✨
 
 Welcome to **Gratitude Jar**, a delightful web application built with Nuxt.js that allows you to capture and reflect on moments of gratitude throughout the year. Whether you're looking to embrace mindfulness or simply want a space to record weekly reflections, this app is your perfect companion.
 
-## Features
+## 🌟 Features
 
 - **Weekly Reflections**: Add a message each week to capture what you're grateful for.
 - **Countdown Timer**: Keep track of the time remaining until the end of the year.
 - **Dark Mode**: Switch between light and dark themes for a comfortable viewing experience.
 - **Authentication**: Log in with GitHub or Google to secure your messages.
 
-## Project Structure
+## 📂 Project Structure
 
 The project is organized as follows:
 
@@ -27,7 +27,7 @@ The project is organized as follows:
 └── types
 ```
 
-## Getting Started
+## 🚀 Getting Started
 
 ### Prerequisites
 
@@ -70,26 +70,26 @@ Locally preview production build:
 bun run preview
 ```
 
-## Tech Stack
+## 🛠️ Tech Stack
 
 - **Nuxt.js**: A powerful Vue.js framework.
 - **Nuxt UI 3**: Tailwind CSS 4, Nuxt Fonts, Nuxt Icons for a sleek UI.
 - **Supabase**: Backend as a Service for authentication and database.
 
-## Roadmap
+## 🗺️ Roadmap
 
-- **Encryption**: Implement end-to-end encryption for messages.
-- **Reminders**: Send weekly summary emails.
-- **Cheer Me Up**: Add motivational content.
-- **Groups**: Enable shared lists for group gratitude.
-- **Testing**: Comprehensive tests for all features.
-- **Storybook**: Integrate Storybook for component testing.
-- **Internationalization**: Support multiple languages.
-- **Account Deletion**: Allow users to delete their accounts.
-- **Lint Project**: Add ESLint and Prettier for code quality.
-- **Typecheck**: Add TypeScript for type safety.
+- **🔒 Encryption**: Implement end-to-end encryption for messages.
+- **📧 Reminders**: Send weekly summary emails.
+- **✨ Cheer Me Up**: Add motivational content.
+- **👥 Groups**: Enable shared lists for group gratitude.
+- **🧪 Testing**: Comprehensive tests for all features.
+- **📚 Storybook**: Integrate Storybook for component testing.
+- **🌐 Internationalization**: Support multiple languages.
+- **🗑️ Account Deletion**: Allow users to delete their accounts.
+- **🧹 Lint Project**: Add ESLint and Prettier for code quality.
+- **🔍 Typecheck**: Add TypeScript for type safety.
 
-## License
+## 📜 License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
 
