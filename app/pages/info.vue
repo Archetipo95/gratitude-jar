@@ -1,3 +1,15 @@
+<script setup>
+useHead({
+  title: 'Info',
+  meta: [
+    {
+      name: 'description',
+      content: 'Information about the app and its future development.'
+    }
+  ]
+})
+</script>
+
 <template>
   <div class="space-y-8 p-6 bg-gray-50 dark:bg-gray-900 rounded-lg shadow-lg">
     <DisclaimerMessage />
