@@ -1,12 +1,12 @@
 <script setup>
 useHead({
-  title: 'Info',
+  title: 'Info & Disclaimers',
   meta: [
     {
       name: 'description',
-      content: 'Information about the app and its future development.'
-    }
-  ]
+      content: 'Information about the app and its future development.',
+    },
+  ],
 })
 </script>
 

@@ -9,5 +9,5 @@ dist
 .idea
 
 
-test-results/.last-run.json
-coverage
+test-results/
+coverage/
