@@ -50,7 +50,12 @@ jobs:
 
       - name: 🔎 Get installed Playwright version
         id: playwright-version
-        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./bun.lock').workspaces.devDependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+        run: |
+          PLAYWRIGHT_VERSION=$(node -e "
+            const packageJson = require('./package.json');
+            console.log(packageJson.devDependencies['@playwright/test']);
+          ")
+          echo "PLAYWRIGHT_VERSION=$PLAYWRIGHT_VERSION" >> $GITHUB_ENV
 
       - name: 🌍 Cache Playwright browsers
         id: cache-playwright
