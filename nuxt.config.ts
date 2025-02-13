@@ -21,6 +21,10 @@ export default defineNuxtConfig({
     url: 'https://jar-of-gratitude.netlify.app',
   },
 
+  ogImage: {
+    enabled: false,
+  },
+
   fonts: {
     experimental: {
       processCSSVariables: true, // Enable if using CSS variables for Tailwind CSS v4
