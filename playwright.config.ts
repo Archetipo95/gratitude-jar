@@ -21,40 +21,40 @@ export default defineConfig<ConfigOptions>({
         deviceName: 'desktop-chrome',
       },
     },
-    {
-      name: 'Safari',
-      use: {
-        ...devices['Desktop Safari'],
-        browserName: 'webkit',
-        isMobile: false,
-      },
-      metadata: {
-        deviceName: 'desktop-safari',
-      },
-    },
-    {
-      name: 'Mobile Chrome',
-      use: {
-        ...devices['Samsung Galaxy S20'],
-        browserName: 'chromium',
-        isMobile: true,
-        viewport: { width: 412, height: 915 },
-      },
-      metadata: {
-        deviceName: 'Samsung-Galaxy-20',
-      },
-    },
-    {
-      name: 'Mobile Safari',
-      use: {
-        ...devices['iPhone 14'],
-        isMobile: true,
-        browserName: 'webkit',
-        viewport: { width: 412, height: 915 },
-      },
-      metadata: {
-        deviceName: 'Iphone-14',
-      },
-    },
+    // {
+    //   name: 'Safari',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     browserName: 'webkit',
+    //     isMobile: false,
+    //   },
+    //   metadata: {
+    //     deviceName: 'desktop-safari',
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Samsung Galaxy S20'],
+    //     browserName: 'chromium',
+    //     isMobile: true,
+    //     viewport: { width: 412, height: 915 },
+    //   },
+    //   metadata: {
+    //     deviceName: 'Samsung-Galaxy-20',
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {
+    //     ...devices['iPhone 14'],
+    //     isMobile: true,
+    //     browserName: 'webkit',
+    //     viewport: { width: 412, height: 915 },
+    //   },
+    //   metadata: {
+    //     deviceName: 'Iphone-14',
+    //   },
+    // },
   ],
 })
