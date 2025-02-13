@@ -21,17 +21,17 @@ export default defineConfig<ConfigOptions>({
         deviceName: 'desktop-chrome',
       },
     },
-    // {
-    //   name: 'Safari',
-    //   use: {
-    //     ...devices['Desktop Safari'],
-    //     browserName: 'webkit',
-    //     isMobile: false,
-    //   },
-    //   metadata: {
-    //     deviceName: 'desktop-safari',
-    //   },
-    // },
+    {
+      name: 'Safari',
+      use: {
+        ...devices['Desktop Safari'],
+        browserName: 'webkit',
+        isMobile: false,
+      },
+      metadata: {
+        deviceName: 'desktop-safari',
+      },
+    },
     // {
     //   name: 'Mobile Chrome',
     //   use: {
