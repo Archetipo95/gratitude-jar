@@ -23,7 +23,7 @@ jobs:
       - name: 🔧 Set up Bun
         uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
         with:
-          bun-version: latest # Use the latest version of Bun
+          bun-version: latest
 
       - name: 📦 Cache node module
         id: cache-node-modules
@@ -34,7 +34,7 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
-      - name: 📦 Install dependencies
+      - name: 📦 Install dependencies # Install dependencies only if they are not cached
         run: |
           if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" != "true" ]; then
             bun install --frozen-lockfile
@@ -43,4 +43,4 @@ jobs:
           fi
 
       - name: 🧪 Run tests
-        run: bun run test:unit # Run unit tests using Bun
+        run: bun run test:unit
