@@ -25,15 +25,6 @@ jobs:
         with:
           bun-version: latest # Use the latest version of Bun
 
-      # - name: 📦 Cache Bun
-      #   id: cache-bun
-      #   uses: actions/cache@v4 # Cache Bun dependencies to speed up workflow runs
-      #   with:
-      #     path: ~/.bun # Cache the Bun directory
-      #     key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }} # Use a unique key based on the OS and bun.lock file
-      #     restore-keys: |
-      #       ${{ runner.os }}-bun- # Restore cache if the exact key is not found
-
       - name: 📦 Cache node module
         id: cache-node-modules
         uses: actions/cache@v4
