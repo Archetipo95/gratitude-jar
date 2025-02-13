@@ -9,8 +9,8 @@ on:
 
 jobs:
   tests-unit:
-    # If the workflow is manually triggered or the last commit message does not contain 'skip-ci-unit', this GitHub Action should run
-    if: ${{ github.event_name == 'workflow_dispatch' || !contains(github.event.head_commit.message, 'skip-ci-unit') }}
+    # If the last commit message contains 'run-ci-unit' or the workflow is manually triggered, this GitHub Action should run
+    if: ${{ contains(github.event.head_commit.message, 'run-ci-unit') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     timeout-minutes: 2 # Set a hard timeout of 2 minutes for the entire job
 
