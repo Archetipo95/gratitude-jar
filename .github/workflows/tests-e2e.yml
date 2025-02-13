@@ -9,8 +9,8 @@ on:
 
 jobs:
   tests-e2e:
-    # If the last commit message contains 'run-ci-e2e', this GitHub Action should run
-    if: ${{ contains(github.event.head_commit.message, 'run-ci-e2e') }}
+    # If the last commit message contains 'run-ci-e2e' or the workflow is manually triggered, this GitHub Action should run
+    if: ${{ contains(github.event.head_commit.message, 'run-ci-e2e') || github.event_name == 'workflow_dispatch' }}
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
     timeout-minutes: 10 # Set a hard timeout of 10 minutes for the entire job
 
