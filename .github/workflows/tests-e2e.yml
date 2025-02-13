@@ -17,6 +17,10 @@ jobs:
     strategy:
       fail-fast: true # Stop all jobs if any job fails
 
+    env:
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+
     steps:
       - name: 📥 Checkout code
         uses: actions/checkout@v4 # Check out the repository code
