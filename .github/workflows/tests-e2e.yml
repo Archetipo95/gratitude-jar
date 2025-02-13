@@ -42,9 +42,10 @@ jobs:
       - name: ⬇️ Install dependencies
         run: |
           if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" != "true" ]; then
-            bun install --frozen-lockfile # Install dependencies if not cached
+          bun install --frozen-lockfile # Install dependencies if not cached
           else
-            echo "✅ Dependencies are already cached"
+          echo "✅ Dependencies are already cached"
+          bun run prepare
           fi
 
       - name: 🌍 Cache Playwright browsers

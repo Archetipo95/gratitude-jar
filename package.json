@@ -7,6 +7,7 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
+    "prepare": "nuxt prepare",
     "postinstall": "nuxt prepare",
     "test:codegen": "bunx playwright codegen http://localhost:3000/",
     "test:unit": "vitest",
