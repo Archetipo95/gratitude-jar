@@ -9,33 +9,39 @@ on:
 
 jobs:
   tests-e2e:
-    # if in the last commit there is skip-ci-e2e this github action should not run
-    if: ${{ !contains(github.event.head_commit.message, 'skip-ci-e2e') }}
+    # If the last commit message contains 'run-ci-e2e', this GitHub Action should run
+    if: ${{ contains(github.event.head_commit.message, 'run-ci-e2e') }}
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    timeout-minutes: 10 # Set a hard timeout of 10 minutes for the entire job
 
     strategy:
       fail-fast: true # Stop all jobs if any job fails
 
     steps:
-      - name: 🛠️ Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v4 # Check out the repository code
 
-      - name: 🔧 Set up Bun
+      - name: 🔧 Set up Bun environment
         uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
         with:
-          bun-version: latest # Use the latest version of Bun
+          bun-version: latest
 
-      - name: 📦 Cache Bun dependencies
-        id: cache-bun
-        uses: actions/cache@v4 # Cache Bun dependencies to speed up workflow runs
+      - name: 📦 Cache node modules
+        id: cache-node-modules
+        uses: actions/cache@v4
         with:
-          path: ~/.bun # Cache the Bun directory
-          key: ${{ runner.os }}-bun-${{ hashFiles('**/bun.lock') }} # Use a unique key based on the OS and bun.lock file
+          path: node_modules
+          key: ${{ runner.os }}-node-modules-${{ hashFiles('**/bun.lock') }}
           restore-keys: |
-            ${{ runner.os }}-bun- # Restore cache if the exact key is not found
+            ${{ runner.os }}-node-modules-
 
-      - name: 📦 Install dependencies
-        run: bun install --frozen-lockfile # Install dependencies using Bun with a frozen lockfile
+      - name: ⬇️ Install dependencies
+        run: |
+          if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" != "true" ]; then
+            bun install --frozen-lockfile # Install dependencies if not cached
+          else
+            echo "✅ Dependencies are already cached"
+          fi
 
       - name: 🌍 Cache Playwright browsers
         id: cache-playwright
@@ -47,7 +53,12 @@ jobs:
             ${{ runner.os }}-playwright-
 
       - name: 🌍 Install Playwright Browsers
-        run: bunx playwright install --with-deps
+        run: |
+          if [ "${{ steps.cache-playwright.outputs.cache-hit }}" != "true" ]; then
+            bunx playwright install --with-deps
+          else
+            echo "✅ Playwright Browsers are already cached"
+          fi
 
       - name: 🎭 Run Playwright tests
         run: bunx playwright test

@@ -40,7 +40,7 @@ jobs:
           if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" != "true" ]; then
             bun install --frozen-lockfile # Install dependencies if not cached
           else
-            echo "Dependencies are already cached"
+            echo "✅ Dependencies are already cached"
           fi
 
       - name: 🧪 Run unit tests
