@@ -9,7 +9,7 @@ on:
 
 jobs:
   tests-unit:
-    # if in the last commit there is skip-ci this github action should not run
+    # If the last commit message contains 'skip-ci-unit', this GitHub Action should not run
     if: ${{ !contains(github.event.head_commit.message, 'skip-ci-unit') }}
     runs-on: ubuntu-latest # Use the latest Ubuntu runner
 
@@ -17,15 +17,15 @@ jobs:
       fail-fast: true # Stop all jobs if any job fails
 
     steps:
-      - name: 🛠️ Checkout code
+      - name: 📥 Checkout code
         uses: actions/checkout@v4 # Check out the repository code
 
-      - name: 🔧 Set up Bun
+      - name: 🔧 Set up Bun environment
         uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
         with:
           bun-version: latest
 
-      - name: 📦 Cache node module
+      - name: 📦 Cache node modules
         id: cache-node-modules
         uses: actions/cache@v4
         with:
@@ -34,13 +34,13 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-modules-
 
-      - name: 📦 Install dependencies # Install dependencies only if they are not cached
+      - name: ⬇️ Install dependencies
         run: |
           if [ "${{ steps.cache-node-modules.outputs.cache-hit }}" != "true" ]; then
-            bun install --frozen-lockfile
+            bun install --frozen-lockfile # Install dependencies if not cached
           else
             echo "Dependencies are already cached"
           fi
 
-      - name: 🧪 Run tests
-        run: bun run test:unit
+      - name: 🧪 Run unit tests
+        run: bun run test:unit # Execute unit tests
