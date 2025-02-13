@@ -1,10 +1,10 @@
 import { expect, test } from '@nuxt/test-utils/playwright'
 
-test.describe('Gratitude Jar Home Page', () => {
-  test.beforeEach(async ({ page }) => {
-    await page.goto('')
-  })
+test.beforeEach(async ({ page }) => {
+  await page.goto('')
+})
 
+test.describe('Gratitude Jar Home Page', () => {
   test('should display the correct page title and header', async ({ page }) => {
     // Check the page title
     await expect(page).toHaveTitle(/Gratitude Jar/)

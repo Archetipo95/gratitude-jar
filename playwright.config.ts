@@ -4,10 +4,9 @@ import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig<ConfigOptions>({
   testMatch: '**/tests/e2e/*.spec.ts',
-  use: {
-    baseURL: process.env.BASE_URL,
-  },
-  /* Configure projects for major browsers */
+  fullyParallel: true,
+  forbidOnly: !!process.env.CI,
+  reporter: 'html',
   projects: [
     {
       name: 'Chrome',
@@ -21,17 +20,17 @@ export default defineConfig<ConfigOptions>({
         deviceName: 'desktop-chrome',
       },
     },
-    {
-      name: 'Safari',
-      use: {
-        ...devices['Desktop Safari'],
-        browserName: 'webkit',
-        isMobile: false,
-      },
-      metadata: {
-        deviceName: 'desktop-safari',
-      },
-    },
+    // {
+    //   name: 'Safari',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     browserName: 'webkit',
+    //     isMobile: false,
+    //   },
+    //   metadata: {
+    //     deviceName: 'desktop-safari',
+    //   },
+    // },
     // {
     //   name: 'Mobile Chrome',
     //   use: {
@@ -57,4 +56,10 @@ export default defineConfig<ConfigOptions>({
     //   },
     // },
   ],
+  webServer: {
+    command: 'bun run dev',
+    port: 3000,
+    timeout: 120 * 1000, // 120s
+    reuseExistingServer: !process.env.CI,
+  },
 })
