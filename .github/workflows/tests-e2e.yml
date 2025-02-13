@@ -48,12 +48,16 @@ jobs:
           bun run prepare
           fi
 
+      - name: 🔎 Get installed Playwright version
+        id: playwright-version
+        run: echo "PLAYWRIGHT_VERSION=$(node -e "console.log(require('./package.json').dependencies['@playwright/test'].version)")" >> $GITHUB_ENV
+
       - name: 🌍 Cache Playwright browsers
         id: cache-playwright
         uses: actions/cache@v4
         with:
           path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/bun.lock') }}
+          key: ${{ runner.os }}-playwright-${{ env.PLAYWRIGHT_VERSION }}
           restore-keys: |
             ${{ runner.os }}-playwright-
 
