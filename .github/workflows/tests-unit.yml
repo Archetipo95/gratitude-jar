@@ -37,7 +37,7 @@ jobs:
       - name: 📦 Install dependencies
         run: |
           if [ "${{ steps.cache-bun.outputs.cache-hit }}" != "true" ] || [ "${{ steps.cache-bun.outputs.cache-hit }}" != "true" ]; then
-            bin install --frozen-lockfile
+            bun install --frozen-lockfile
           else
             echo "Dependencies are already cached"
           fi
