@@ -1,9 +1,7 @@
 import { expect, test } from '@nuxt/test-utils/playwright'
 
-test.beforeEach(async ({ page }) => {
-  console.log('Running before each test')
-  await page.goto('')
-  console.log('Navigated to the home page')
+test.beforeEach(async ({ goto }) => {
+  await goto('/', { waitUntil: 'hydration' })
 })
 
 test.describe('Gratitude Jar Home Page', () => {
