@@ -43,19 +43,25 @@ export default defineConfig<ConfigOptions>({
     //     deviceName: 'Samsung-Galaxy-20',
     //   },
     // },
-    // {
-    //   name: 'Mobile Safari',
-    //   use: {
-    //     ...devices['iPhone 14'],
-    //     isMobile: true,
-    //     browserName: 'webkit',
-    //     viewport: { width: 412, height: 915 },
-    //   },
-    //   metadata: {
-    //     deviceName: 'Iphone-14',
-    //   },
-    // },
+    {
+      name: 'Mobile Safari',
+      use: {
+        ...devices['iPhone 14'],
+        isMobile: true,
+        browserName: 'webkit',
+        viewport: { width: 412, height: 915 },
+      },
+      metadata: {
+        deviceName: 'Iphone-14',
+      },
+    },
   ],
+  use: {
+    /* Base URL to use in actions like `await page.goto('/')`. */
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:3000',
+    /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
+    trace: 'on-first-retry',
+  },
   webServer: {
     command: 'bun run dev',
     port: 3000,
