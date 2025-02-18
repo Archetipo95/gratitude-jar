@@ -34,10 +34,6 @@ export default defineConfig<ConfigOptions>({
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    /* Nuxt configuration options */
-    nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url)),
-    },
   },
   projects: devicesToTest.map((p) => (typeof p === 'string' ? { name: p, use: devices[p] } : p)),
 })
