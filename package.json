@@ -9,7 +9,7 @@
     "preview": "nuxt preview",
     "prepare": "nuxt prepare",
     "postinstall": "nuxt prepare",
-    "test:codegen": "bunx playwright codegen http://localhost:3000/",
+    "test:codegen": "playwright codegen http://localhost:3000/",
     "test:unit": "vitest",
     "test:unit-coverage": "vitest --coverage",
     "test:unit-web": "vitest --coverage --ui",
