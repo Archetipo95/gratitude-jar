@@ -18,7 +18,7 @@ const devicesToTest = [
 
 /* See https://playwright.dev/docs/test-configuration. */
 export default defineConfig<ConfigOptions>({
-  testDir: './tests/e2e',
+  testMatch: '**/tests/e2e/*.spec.ts',
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
