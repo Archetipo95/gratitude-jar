@@ -4,7 +4,6 @@ import { defineConfig, devices } from '@playwright/test'
 
 export default defineConfig<ConfigOptions>({
   testMatch: '**/tests/e2e/*.spec.ts',
-  fullyParallel: true,
   forbidOnly: !!process.env.CI,
   reporter: 'github',
   projects: [
