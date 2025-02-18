@@ -45,7 +45,6 @@ jobs:
           bun install --frozen-lockfile # Install dependencies if not cached
           else
           echo "✅ Dependencies are already cached"
-          bun run prepare
           fi
 
       - name: 🔎 Get installed Playwright version
