@@ -9,12 +9,12 @@
     "preview": "nuxt preview",
     "prepare": "nuxt prepare",
     "postinstall": "nuxt prepare",
-    "test:codegen": "playwright codegen http://localhost:3000/",
     "test:unit": "vitest",
     "test:unit-coverage": "vitest --coverage",
-    "test:unit-web": "vitest --coverage --ui",
+    "test:unit-ui": "vitest --coverage --ui",
     "test:e2e": "playwright test",
-    "test:e2e-ui": "playwright test --ui"
+    "test:e2e-ui": "playwright test --ui",
+    "test:codegen": "playwright codegen http://localhost:3000/"
   },
   "dependencies": {
     "@nuxt/devtools":"2.1.0",
