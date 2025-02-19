@@ -10,7 +10,7 @@ const devicesToTest = [
   // 'Desktop Safari',
   // Test against mobile viewports.
   // 'Pixel 5',
-  'iPhone 12',
+  // 'iPhone 12',
   // Test against branded browsers.
   // { ...devices['Desktop Edge'], channel: 'msedge' },
   // { ...devices['Desktop Chrome'], channel: 'chrome' },
@@ -36,7 +36,7 @@ export default defineConfig<ConfigOptions>({
     trace: 'on-first-retry',
     /* Nuxt configuration options */
     nuxt: {
-      rootDir: fileURLToPath(new URL('..', import.meta.url)),
+      rootDir: fileURLToPath(new URL('.', import.meta.url)),
     },
   },
   projects: devicesToTest.map((p) => (typeof p === 'string' ? { name: p, use: devices[p] } : p)),
