@@ -1,43 +1,71 @@
-import { fileURLToPath } from 'node:url'
-import { defineConfig, devices } from '@playwright/test'
 import type { ConfigOptions } from '@nuxt/test-utils/playwright'
-import { isCI, isWindows } from 'std-env'
+import process from 'node:process'
+import { defineConfig, devices } from '@playwright/test'
 
-const devicesToTest = [
-  'Desktop Chrome',
-  // Test against other common browser engines.
-  // 'Desktop Firefox',
-  // 'Desktop Safari',
-  // Test against mobile viewports.
-  // 'Pixel 5',
-  // 'iPhone 12',
-  // Test against branded browsers.
-  // { ...devices['Desktop Edge'], channel: 'msedge' },
-  // { ...devices['Desktop Chrome'], channel: 'chrome' },
-] satisfies Array<string | (typeof devices)[string]>
-
-/* See https://playwright.dev/docs/test-configuration. */
 export default defineConfig<ConfigOptions>({
   testMatch: '**/tests/e2e/*.spec.ts',
-  /* Run tests in files in parallel */
   fullyParallel: true,
-  /* Fail the build on CI if you accidentally left test.only in the source code. */
-  forbidOnly: !!isCI,
-  /* Retry on CI only */
-  retries: isCI ? 0 : 0, // Set to 2 in CI
-  /* Opt out of parallel tests on CI. */
-  workers: isCI ? 1 : undefined,
-  timeout: isWindows ? 60000 : undefined,
-  /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
-  /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
+  forbidOnly: !!process.env.CI,
+  reporter: 'github',
+  projects: [
+    {
+      name: 'Chrome',
+      use: {
+        ...devices['Desktop Chrome'],
+        browserName: 'chromium',
+        channel: 'chrome',
+        isMobile: false,
+      },
+      metadata: {
+        deviceName: 'desktop-chrome',
+      },
+    },
+    // {
+    //   name: 'Safari',
+    //   use: {
+    //     ...devices['Desktop Safari'],
+    //     browserName: 'webkit',
+    //     isMobile: false,
+    //   },
+    //   metadata: {
+    //     deviceName: 'desktop-safari',
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Chrome',
+    //   use: {
+    //     ...devices['Samsung Galaxy S20'],
+    //     browserName: 'chromium',
+    //     isMobile: true,
+    //     viewport: { width: 412, height: 915 },
+    //   },
+    //   metadata: {
+    //     deviceName: 'Samsung-Galaxy-20',
+    //   },
+    // },
+    // {
+    //   name: 'Mobile Safari',
+    //   use: {
+    //     ...devices['iPhone 14'],
+    //     isMobile: true,
+    //     browserName: 'webkit',
+    //     viewport: { width: 412, height: 915 },
+    //   },
+    //   metadata: {
+    //     deviceName: 'Iphone-14',
+    //   },
+    // },
+  ],
   use: {
+    /* Base URL to use in actions like `await page.goto('/')`. */
+    baseURL: process.env.PLAYWRIGHT_TEST_BASE_URL || 'http://127.0.0.1:3000',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
-    /* Nuxt configuration options */
-    nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url)),
-    },
   },
-  projects: devicesToTest.map((p) => (typeof p === 'string' ? { name: p, use: devices[p] } : p)),
+  webServer: {
+    command: 'bun run dev',
+    port: 3000,
+    timeout: 120 * 1000, // 120s
+    reuseExistingServer: !process.env.CI,
+  },
 })
