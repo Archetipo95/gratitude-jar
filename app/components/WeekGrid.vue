@@ -33,12 +33,19 @@ watch(selectedYear, () => {
 })
 
 const showAllWeeks = ref(false)
+const isNewestFirst = ref(true)
 
 const filteredWeeks = computed(() => {
+  let weeks_array
+  
   if (getCurrentYear() !== selectedYear.value || showAllWeeks.value) {
-    return [...weeks.value].reverse()
+    weeks_array = [...weeks.value]
+  } else {
+    weeks_array = [...weeks.value].filter((week) => week.number <= currentWeekNumber.value)
   }
-  return [...weeks.value].filter((week) => week.number <= currentWeekNumber.value).reverse()
+  
+  // Apply ordering based on toggle
+  return isNewestFirst.value ? weeks_array.reverse() : weeks_array
 })
 </script>
 
@@ -54,16 +61,31 @@ const filteredWeeks = computed(() => {
         />
         <span class="text-xl font-bold text-gray-800 dark:text-gray-200 uppercase">Year Overview</span>
       </label>
-      <UCheckbox
-        v-if="getCurrentYear() === selectedYear"
-        v-model="showAllWeeks"
-        label="Show All Weeks"
-        size="xl"
-        class="text-lg font-bold"
-        :ui="{
-          base: 'ring-2 dark:ring-gray-600',
-        }"
-      />
+      
+      <div class="flex items-center gap-4 flex-wrap">
+        <!-- Reorder Checkbox -->
+        <UCheckbox
+          v-model="isNewestFirst"
+          label="Newest First"
+          size="xl"
+          class="text-lg font-bold"
+          :ui="{
+            base: 'ring-2 dark:ring-gray-600',
+          }"
+        />
+        
+        <!-- Show All Weeks Checkbox -->
+        <UCheckbox
+          v-if="getCurrentYear() === selectedYear"
+          v-model="showAllWeeks"
+          label="Show All Weeks"
+          size="xl"
+          class="text-lg font-bold"
+          :ui="{
+            base: 'ring-2 dark:ring-gray-600',
+          }"
+        />
+      </div>
     </div>
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
