@@ -36,9 +36,9 @@ const showAllWeeks = ref(false)
 
 const filteredWeeks = computed(() => {
   if (getCurrentYear() !== selectedYear.value || showAllWeeks.value) {
-    return weeks.value
+    return [...weeks.value].reverse()
   }
-  return weeks.value.filter((week) => week.number <= currentWeekNumber.value)
+  return [...weeks.value].filter((week) => week.number <= currentWeekNumber.value).reverse()
 })
 </script>
 
