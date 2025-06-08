@@ -5,5 +5,8 @@
       <slot />
     </div>
     <FooterBar />
+    
+    <!-- Scroll Navigation -->
+    <ScrollNavigator />
   </UContainer>
 </template>
