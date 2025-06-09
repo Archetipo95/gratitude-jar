@@ -15,9 +15,11 @@ function scrollToBottom() {
 
 // Show/hide based on scroll position
 const isVisible = ref(false)
+const isOnBottom = ref(false)
 
 function checkScrollPosition() {
   isVisible.value = window.scrollY > 100
+  isOnBottom.value = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight
 }
 
 onMounted(() => {
@@ -60,6 +62,7 @@ onUnmounted(() => {
         base: 'font-bold',
       }"
       aria-label="Scroll to bottom"
+      :disabled="isOnBottom"
       @click="scrollToBottom"
     >
       <UIcon name="lucide-lab:escalator-arrow-down-left" class="size-5" />
