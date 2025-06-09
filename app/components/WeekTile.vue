@@ -34,17 +34,21 @@ function getMessage(weekNumber: number) {
   return message ? message.message : ""
 }
 
-const modal = useModal()
+const overlay = useOverlay()
 
-function openModal() {
-  modal.open(LazyModalMessage, {
+const modal = overlay.create(LazyModalMessage, {
+  props: {
     weekNumber: props.week.number,
     selectedYear: props.selectedYear,
     isSubmitting: props.isSubmitting,
     onMessageSubmitted() {
       emit("refresh")
     },
-  })
+  },
+})
+
+function openModal() {
+  modal.open()
 }
 
 const { currentWeekNumber } = useWeek()

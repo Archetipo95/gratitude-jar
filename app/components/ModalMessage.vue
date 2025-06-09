@@ -4,11 +4,9 @@ import type { Database } from "~~/types/database.types"
 import type { ModalMessageProps } from "./ModalMessage.props"
 
 const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
-const emit = defineEmits(["messageSubmitted", "failedSubmit"])
+const emit = defineEmits(["messageSubmitted", "failedSubmit", "close"])
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
-
-const modal = useModal()
 
 // Modal state management
 const isSubmitting = ref(false)
@@ -37,7 +35,7 @@ async function submitMessage() {
         toast.add({ title: "Message submitted" })
         newMessage.value = ""
         emit("messageSubmitted")
-        modal.close()
+        emit("close")
       }
     }
     catch (error) {
@@ -57,7 +55,7 @@ function onFailedSubmit() {
 
 function closeModal() {
   newMessage.value = ""
-  modal.close()
+  emit("close")
 }
 </script>
 
@@ -74,6 +72,7 @@ function closeModal() {
       close: 'hover:-translate-y-0.5 transition-transform',
     }"
     :title="`Add Message - Week ${weekNumber}`"
+    :close="{ onClick: () => emit('close', false) }"
   >
     <template #body>
       <UTextarea
