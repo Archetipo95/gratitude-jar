@@ -46,6 +46,7 @@ export default defineNuxtConfig({
     },
   ],
 
+
   app: {
     head: {
       htmlAttrs: { lang: "en" },
@@ -91,4 +92,9 @@ export default defineNuxtConfig({
     pageTransition: false,
     layoutTransition: false,
   },
-})
+
+  typescript: {
+    typeCheck: true
+  }
+}
+)
