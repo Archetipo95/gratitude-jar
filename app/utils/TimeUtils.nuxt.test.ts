@@ -1,18 +1,18 @@
-import { calculateWeeks, formatDate, getMonthName, getCurrentYear } from './TimeUtils'
+import { calculateWeeks, formatDate, getCurrentYear, getMonthName } from "./TimeUtils"
 
-describe('TimeUtils', () => {
+describe("timeUtils", () => {
   beforeEach(() => {
     // Set fixed date for consistent testing
     vi.useFakeTimers()
-    vi.setSystemTime(new Date('2024-03-14T12:00:00.000Z'))
+    vi.setSystemTime(new Date("2024-03-14T12:00:00.000Z"))
   })
 
   afterEach(() => {
     vi.useRealTimers()
   })
 
-  describe('calculateWeeks', () => {
-    it('calculates correct number of weeks for a year', () => {
+  describe("calculateWeeks", () => {
+    it("calculates correct number of weeks for a year", () => {
       // Test a regular year (2023)
       const weeks2023 = calculateWeeks(2023)
       expect(weeks2023.length).toBe(53)
@@ -22,7 +22,7 @@ describe('TimeUtils', () => {
       expect(weeks2024.length).toBe(53)
     })
 
-    it('sets correct start and end dates for weeks', () => {
+    it("sets correct start and end dates for weeks", () => {
       const weeks = calculateWeeks(2024)
       const firstWeek = weeks[0]
       const lastWeek = weeks[weeks.length - 1]
@@ -37,50 +37,50 @@ describe('TimeUtils', () => {
       expect(lastWeek?.weekEnd.getDate()).toBe(31) // 31st
     })
 
-    it('marks current week correctly', () => {
+    it("marks current week correctly", () => {
       const weeks = calculateWeeks(2024)
-      const currentWeek = weeks.find((week) => week.isCurrentWeek)
+      const currentWeek = weeks.find(week => week.isCurrentWeek)
 
       expect(currentWeek).toBeDefined()
       expect(currentWeek?.number).toBe(11) // March 14, 2024 is in week 11
     })
   })
 
-  describe('formatDate', () => {
-    it('formats date correctly', () => {
-      const date = new Date('2024-03-14')
+  describe("formatDate", () => {
+    it("formats date correctly", () => {
+      const date = new Date("2024-03-14")
       const formatted = formatDate(date)
 
-      expect(formatted).toBe('14/03/2024')
+      expect(formatted).toBe("14/03/2024")
     })
 
-    it('pads single digits with zeros', () => {
-      const date = new Date('2024-01-05')
+    it("pads single digits with zeros", () => {
+      const date = new Date("2024-01-05")
       const formatted = formatDate(date)
 
-      expect(formatted).toBe('05/01/2024')
+      expect(formatted).toBe("05/01/2024")
     })
   })
 
-  describe('getMonthName', () => {
-    it('returns correct month abbreviation', () => {
-      const date = new Date('2024-03-14')
+  describe("getMonthName", () => {
+    it("returns correct month abbreviation", () => {
+      const date = new Date("2024-03-14")
       const monthName = getMonthName(date)
 
-      expect(monthName).toBe('Mar')
+      expect(monthName).toBe("Mar")
     })
 
-    it('handles different months correctly', () => {
-      const january = new Date('2024-01-01')
-      const december = new Date('2024-12-31')
+    it("handles different months correctly", () => {
+      const january = new Date("2024-01-01")
+      const december = new Date("2024-12-31")
 
-      expect(getMonthName(january)).toBe('Jan')
-      expect(getMonthName(december)).toBe('Dec')
+      expect(getMonthName(january)).toBe("Jan")
+      expect(getMonthName(december)).toBe("Dec")
     })
   })
 
-  describe('getCurrentYear', () => {
-    it('returns current year', () => {
+  describe("getCurrentYear", () => {
+    it("returns current year", () => {
       const currentYear = getCurrentYear()
 
       expect(currentYear).toBe(2024)

@@ -1,38 +1,38 @@
-import { expect, test } from '@nuxt/test-utils/playwright'
+import { expect, test } from "@nuxt/test-utils/playwright"
 
 test.beforeEach(async ({ goto }) => {
-  await goto('/', { waitUntil: 'hydration' })
+  await goto("/", { waitUntil: "hydration" })
 })
 
-test.describe('Gratitude Jar Home Page', () => {
-  test('should display the correct page title and header', async ({ page }) => {
+test.describe("Gratitude Jar Home Page", () => {
+  test("should display the correct page title and header", async ({ page }) => {
     // Check the page title
     await expect(page).toHaveTitle(/Gratitude Jar/)
 
     // Check the header text
-    const header = page.locator('h1')
-    await expect(header).toHaveText('Gratitude Jar')
+    const header = page.locator("h1")
+    await expect(header).toHaveText("Gratitude Jar")
   })
 
-  test('should display login buttons', async ({ page }) => {
+  test("should display login buttons", async ({ page }) => {
     // Check if GitHub login button is visible
-    const githubLoginButton = page.locator('button', { hasText: 'GitHub Login' })
+    const githubLoginButton = page.locator("button", { hasText: "GitHub Login" })
     await expect(githubLoginButton).toBeVisible()
 
     // Check if Google login button is visible
-    const googleLoginButton = page.locator('button', { hasText: 'Google Login' })
+    const googleLoginButton = page.locator("button", { hasText: "Google Login" })
     await expect(googleLoginButton).toBeVisible()
   })
 
-  test('should display welcome message', async ({ page }) => {
+  test("should display welcome message", async ({ page }) => {
     // Check the welcome message text
-    const welcomeMessage = page.locator('p', { hasText: 'Welcome to the Gratitude Jar!' })
+    const welcomeMessage = page.locator("p", { hasText: "Welcome to the Gratitude Jar!" })
     await expect(welcomeMessage).toBeVisible()
   })
 
-  test('should navigate to Info & Disclaimers page', async ({ page }) => {
+  test("should navigate to Info & Disclaimers page", async ({ page }) => {
     // Click on the Info & Disclaimers link
-    const infoLink = page.locator('a[data-test="info-link"]')
+    const infoLink = page.locator("a[data-test=\"info-link\"]")
     await infoLink.click()
 
     // Verify navigation to the correct URL
@@ -42,13 +42,13 @@ test.describe('Gratitude Jar Home Page', () => {
     await expect(page).toHaveTitle(/Info & Disclaimers/)
   })
 
-  test('should display footer content', async ({ page }) => {
+  test("should display footer content", async ({ page }) => {
     // Check the footer content
-    const footerText = page.locator('p[data-test="footer-made-by"]')
-    await expect(footerText).toContainText('Made with')
+    const footerText = page.locator("p[data-test=\"footer-made-by\"]")
+    await expect(footerText).toContainText("Made with")
 
     // Check the GitHub link in the footer
-    const githubLink = page.locator('a[data-test="github-link"]')
-    await expect(githubLink).toHaveAttribute('href', 'https://github.com/Archetipo95')
+    const githubLink = page.locator("a[data-test=\"github-link\"]")
+    await expect(githubLink).toHaveAttribute("href", "https://github.com/Archetipo95")
   })
 })

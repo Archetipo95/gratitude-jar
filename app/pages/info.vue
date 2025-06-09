@@ -1,10 +1,10 @@
 <script setup>
 useHead({
-  title: 'Info & Disclaimers',
+  title: "Info & Disclaimers",
   meta: [
     {
-      name: 'description',
-      content: 'Information about the app and its future development.',
+      name: "description",
+      content: "Information about the app and its future development.",
     },
   ],
 })
@@ -15,7 +15,9 @@ useHead({
     <DisclaimerMessage />
 
     <div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">TODO</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+        TODO
+      </h2>
       <pre class="bg-white dark:bg-gray-800 p-4 rounded-md shadow-inner text-gray-700 dark:text-gray-300">
 - Implement encrypted messages:
   - End-to-End (E2E) encryption using a user password.
@@ -41,7 +43,9 @@ useHead({
     </div>
 
     <div>
-      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">Stack</h2>
+      <h2 class="text-2xl font-bold text-gray-800 dark:text-gray-100 mb-4">
+        Stack
+      </h2>
       <pre class="bg-white dark:bg-gray-800 p-4 rounded-md shadow-inner text-gray-700 dark:text-gray-300">
 - Nuxt
 - Nuxt UI 3 (Tailwind CSS 4, Nuxt Fonts, Nuxt Icons)

@@ -1,4 +1,4 @@
-import type { Week } from '~~/types/time.types'
+import type { Week } from "~~/types/time.types"
 
 // Function to calculate weeks with start and end dates
 // This function calculates all weeks for a given year and returns an array of Week objects
@@ -12,7 +12,7 @@ export function calculateWeeks(year: number): Week[] {
   const weeks: Week[] = []
 
   // Start from January 1st of the selected year
-  let date = new Date(year, 0, 1)
+  const date = new Date(year, 0, 1)
 
   // Calculate weeks by iterating through the year
   let weekNumber = 1
@@ -25,8 +25,8 @@ export function calculateWeeks(year: number): Week[] {
     date.setDate(date.getDate() + ((7 - date.getDay()) % 7))
 
     // Handle edge case for year boundary
-    const weekEnd =
-      date.getFullYear() !== year
+    const weekEnd
+      = date.getFullYear() !== year
         ? new Date(year, 11, 31, 23, 59, 59) // December 31st 23:59:59
         : new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 59, 59)
 
@@ -46,12 +46,12 @@ export function calculateWeeks(year: number): Week[] {
 
 // Function to format dates in the format dd/mm/yyyy
 export function formatDate(date: Date): string {
-  return date.toLocaleDateString('en-GB')
+  return date.toLocaleDateString("en-GB")
 }
 
 // Get first 3 letters of the month
 export function getMonthName(date: Date): string {
-  return date.toLocaleString('default', { month: 'short' })
+  return date.toLocaleString("default", { month: "short" })
 }
 
 export function getCurrentYear(): number {

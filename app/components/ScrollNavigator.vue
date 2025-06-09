@@ -1,43 +1,42 @@
 <script setup lang="ts">
-const scrollToTop = () => {
+function scrollToTop() {
   window.scrollTo({
     top: 0,
-    behavior: 'smooth'
+    behavior: "smooth",
   })
 }
 
-const scrollToBottom = () => {
+function scrollToBottom() {
   window.scrollTo({
     top: document.documentElement.scrollHeight,
-    behavior: 'smooth'
+    behavior: "smooth",
   })
 }
 
 // Show/hide based on scroll position
 const isVisible = ref(false)
 
-const checkScrollPosition = () => {
+function checkScrollPosition() {
   isVisible.value = window.scrollY > 100
 }
 
 onMounted(() => {
-  window.addEventListener('scroll', checkScrollPosition)
+  window.addEventListener("scroll", checkScrollPosition)
   checkScrollPosition()
 })
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', checkScrollPosition)
+  window.removeEventListener("scroll", checkScrollPosition)
 })
 </script>
 
 <template>
-  <div 
+  <div
     v-if="isVisible"
     class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"
   >
     <!-- Scroll to Top -->
     <UButton
-      @click="scrollToTop"
       color="neutral"
       variant="solid"
       size="lg"
@@ -46,13 +45,13 @@ onUnmounted(() => {
         base: 'font-bold',
       }"
       aria-label="Scroll to top"
+      @click="scrollToTop"
     >
       <UIcon name="lucide-lab:escalator-arrow-up-right" class="size-5" />
     </UButton>
 
     <!-- Scroll to Bottom -->
     <UButton
-      @click="scrollToBottom"
       color="neutral"
       variant="solid"
       size="lg"
@@ -61,8 +60,9 @@ onUnmounted(() => {
         base: 'font-bold',
       }"
       aria-label="Scroll to bottom"
+      @click="scrollToBottom"
     >
       <UIcon name="lucide-lab:escalator-arrow-down-left" class="size-5" />
     </UButton>
   </div>
-</template> 
+</template>

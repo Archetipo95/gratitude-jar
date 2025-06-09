@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Database } from '~~/types/database.types'
+import type { Database } from "~~/types/database.types"
 
 // Available years for selection
 const currentYear = new Date().getFullYear()
@@ -18,12 +18,13 @@ const {
   refresh,
   status,
 } = await useAsyncData(
-  'messages',
+  "messages",
   async () => {
-    if (!user.value) return
-    return await client.from('gratitude_messages').select('id, message, week, year').eq('user_id', user.value.id).order('week', { ascending: true })
+    if (!user.value)
+      return
+    return await client.from("gratitude_messages").select("id, message, week, year").eq("user_id", user.value.id).order("week", { ascending: true })
   },
-  { transform: (result) => (result ? result.data : []), watch: [user] }
+  { transform: result => (result ? result.data : []), watch: [user] },
 )
 
 const isSubmitting = ref(false)
@@ -37,13 +38,14 @@ const isNewestFirst = ref(true)
 
 const filteredWeeks = computed(() => {
   let weeks_array
-  
+
   if (getCurrentYear() !== selectedYear.value || showAllWeeks.value) {
     weeks_array = [...weeks.value]
-  } else {
-    weeks_array = [...weeks.value].filter((week) => week.number <= currentWeekNumber.value)
   }
-  
+  else {
+    weeks_array = [...weeks.value].filter(week => week.number <= currentWeekNumber.value)
+  }
+
   // Apply ordering based on toggle
   return isNewestFirst.value ? weeks_array.reverse() : weeks_array
 })
@@ -54,14 +56,14 @@ const filteredWeeks = computed(() => {
     <div class="flex items-center justify-between flex-wrap gap-4 p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600">
       <label class="flex items-center space-x-2">
         <USelect
-          aria-label="Select year"
           v-model="selectedYear"
+          aria-label="Select year"
           class="px-4 py-2 text-lg font-bold text-gray-800 dark:text-gray-200 bg-white dark:bg-gray-800 border-2 dark:border-gray-600 focus:outline-none focus:ring-0 hover:-translate-y-0.5 transition-transform uppercase"
           :items="availableYears"
         />
         <span class="text-xl font-bold text-gray-800 dark:text-gray-200 uppercase">Year Overview</span>
       </label>
-      
+
       <div class="flex items-center gap-4 flex-wrap">
         <!-- Reorder Checkbox -->
         <UCheckbox
@@ -73,7 +75,7 @@ const filteredWeeks = computed(() => {
             base: 'ring-2 dark:ring-gray-600',
           }"
         />
-        
+
         <!-- Show All Weeks Checkbox -->
         <UCheckbox
           v-if="getCurrentYear() === selectedYear"
@@ -90,7 +92,11 @@ const filteredWeeks = computed(() => {
 
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-6">
       <template v-if="status === 'pending'">
-        <div v-for="week in filteredWeeks" :key="week.number" class="p-6 min-h-[200px] animate-pulse bg-white dark:bg-gray-800 border-4 dark:border-gray-600" />
+        <div
+          v-for="week in filteredWeeks"
+          :key="week.number"
+          class="p-6 min-h-[200px] animate-pulse bg-white dark:bg-gray-800 border-4 dark:border-gray-600"
+        />
       </template>
       <template v-else>
         <WeekTile

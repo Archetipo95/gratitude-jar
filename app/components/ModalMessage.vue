@@ -1,26 +1,25 @@
 <script setup lang="ts">
-import type { Database } from '~~/types/database.types'
-import type { ModalMessageProps } from './ModalMessage.props'
+import type { Database } from "~~/types/database.types"
 
+import type { ModalMessageProps } from "./ModalMessage.props"
+
+const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
+const emit = defineEmits(["messageSubmitted", "failedSubmit"])
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
 
 const modal = useModal()
 
-const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
-
-const emit = defineEmits(['messageSubmitted', 'failedSubmit'])
-
 // Modal state management
 const isSubmitting = ref(false)
-const newMessage = ref<string>('')
+const newMessage = ref<string>("")
 
 // Submit new message
 async function submitMessage() {
   if (weekNumber && newMessage.value) {
     isSubmitting.value = true
     try {
-      const { error } = await client.from('gratitude_messages').insert([
+      const { error } = await client.from("gratitude_messages").insert([
         {
           week: weekNumber,
           year: selectedYear,
@@ -31,27 +30,30 @@ async function submitMessage() {
 
       if (error) {
         onFailedSubmit()
-      } else {
-        toast.add({ title: 'Message submitted' })
-        newMessage.value = ''
-        emit('messageSubmitted')
+      }
+      else {
+        toast.add({ title: "Message submitted" })
+        newMessage.value = ""
+        emit("messageSubmitted")
         modal.close()
       }
-    } catch (err) {
+    }
+    catch (err) {
       onFailedSubmit()
-    } finally {
+    }
+    finally {
       isSubmitting.value = false
     }
   }
 }
 
-const onFailedSubmit = () => {
-  emit('failedSubmit')
-  toast.add({ title: 'Failed to submit message', color: 'error' })
+function onFailedSubmit() {
+  emit("failedSubmit")
+  toast.add({ title: "Failed to submit message", color: "error" })
 }
 
-const closeModal = () => {
-  newMessage.value = ''
+function closeModal() {
+  newMessage.value = ""
   modal.close()
 }
 
@@ -79,7 +81,9 @@ const toast = useToast()
         placeholder="What are you grateful for this week?"
         :rows="6"
       />
-      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">Your message will be sealed until the end of the year</p>
+      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">
+        Your message will be sealed until the end of the year
+      </p>
     </template>
 
     <template #footer>

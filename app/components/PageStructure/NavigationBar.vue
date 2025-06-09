@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center p-4 md:p-6">
       <!-- Logo Section -->
       <NavLogo />
-      
+
       <!-- Desktop Navigation & Mobile Menu Toggle -->
       <div class="flex items-center gap-4">
         <!-- Desktop Only Navigation -->
@@ -11,10 +11,10 @@
           <NavGreeting />
           <NavAuthButtons />
         </div>
-        
+
         <!-- Color Mode Button (Always Visible) -->
         <ColorModeButton />
-        
+
         <!-- Mobile Menu (CSS-only) -->
         <NavMobileMenu />
       </div>

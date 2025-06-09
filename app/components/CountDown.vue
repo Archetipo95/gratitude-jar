@@ -12,7 +12,7 @@ const countdown = ref({
 
 const endOfYear = new Date(new Date().getFullYear() + 1, 0, 1)
 
-const updateCountdown = () => {
+function updateCountdown() {
   const now = new Date()
   const diff = endOfYear.getTime() - now.getTime()
 
@@ -48,7 +48,9 @@ const { totalWeeks, currentWeekNumber } = useWeek()
 <template>
   <div class="flex flex-col md:flex-row justify-between md:items-center p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600 gap-y-6 gap-x-16" data-test-id="countdown-timer">
     <div class="text-gray-800 dark:text-gray-200">
-      <h2 class="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100 uppercase">Time Until New Year</h2>
+      <h2 class="text-lg font-bold mb-2 text-gray-900 dark:text-gray-100 uppercase">
+        Time Until New Year
+      </h2>
       <p class="text-xl md:text-2xl font-bold tracking-wide flex flex-wrap gap-2" data-test-id="countdown">
         <span class="whitespace-nowrap">
           <span class="tabular-nums" data-test-id="countdown-days">{{ countdown.days }}</span> days,
@@ -70,7 +72,9 @@ const { totalWeeks, currentWeekNumber } = useWeek()
           <span class="text-yellow-700 dark:text-yellow-400" data-test-id="current-week">Week {{ currentWeekNumber }}</span>
           <span class="text-gray-700 dark:text-gray-300" data-test-id="total-weeks"> of {{ totalWeeks }}</span>
         </div>
-        <div class="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap" data-test-id="weeks-remaining">({{ totalWeeks - currentWeekNumber }} weeks remaining)</div>
+        <div class="text-base text-gray-600 dark:text-gray-400 whitespace-nowrap" data-test-id="weeks-remaining">
+          ({{ totalWeeks - currentWeekNumber }} weeks remaining)
+        </div>
       </div>
     </div>
   </div>

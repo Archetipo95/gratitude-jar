@@ -2,15 +2,15 @@
 const user = useSupabaseUser()
 
 const title = computed(() => {
-  return user.value ? 'Weekly Planner' : 'Welcome'
+  return user.value ? "Weekly Planner" : "Welcome"
 })
 
 useHead({
   title: title.value,
   meta: [
     {
-      name: 'description',
-      content: 'Weekly planner to help you organize your week.',
+      name: "description",
+      content: "Weekly planner to help you organize your week.",
     },
   ],
 })

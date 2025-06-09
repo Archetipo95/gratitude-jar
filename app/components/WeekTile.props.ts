@@ -1,6 +1,6 @@
-import type { Week } from '~~/types/time.types'
+import type { Week } from "~~/types/time.types"
 
-export interface WeekTileProps {
+export type WeekTileProps = {
   week: Week
   selectedYear: number
   currentYear: number

@@ -1,8 +1,8 @@
-@import 'tailwindcss';
-@import '@nuxt/ui';
+@import "tailwindcss";
+@import "@nuxt/ui";
 
 @theme {
-  --font-sans: 'Fira Code', monospace;
+  --font-sans: "Fira Code", monospace;
 }
 
 :root {
@@ -10,7 +10,7 @@
   --text-color: black;
 }
 
-[data-theme='dark'] {
+[data-theme="dark"] {
   --background-color: black;
   --text-color: white;
 }
@@ -19,7 +19,7 @@
 Set the default cursor for buttons.
 */
 button,
-[role='button'] {
+[role="button"] {
   cursor: pointer;
 }
 /*

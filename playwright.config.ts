@@ -1,10 +1,11 @@
-import { fileURLToPath } from 'node:url'
-import { defineConfig, devices } from '@playwright/test'
-import type { ConfigOptions } from '@nuxt/test-utils/playwright'
-import { isCI, isWindows } from 'std-env'
+import type { ConfigOptions } from "@nuxt/test-utils/playwright"
+
+import { defineConfig, devices } from "@playwright/test"
+import { fileURLToPath } from "node:url"
+import { isCI, isWindows } from "std-env"
 
 const devicesToTest = [
-  'Desktop Chrome',
+  "Desktop Chrome",
   // Test against other common browser engines.
   // 'Desktop Firefox',
   // 'Desktop Safari',
@@ -18,7 +19,7 @@ const devicesToTest = [
 
 /* See https://playwright.dev/docs/test-configuration. */
 export default defineConfig<ConfigOptions>({
-  testDir: './tests',
+  testDir: "./tests",
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -29,15 +30,15 @@ export default defineConfig<ConfigOptions>({
   workers: isCI ? 1 : undefined,
   timeout: isWindows ? 60000 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: 'html',
+  reporter: "html",
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
-    trace: 'on-first-retry',
+    trace: "on-first-retry",
     /* Nuxt configuration options */
     nuxt: {
-      rootDir: fileURLToPath(new URL('.', import.meta.url)),
+      rootDir: fileURLToPath(new URL(".", import.meta.url)),
     },
   },
-  projects: devicesToTest.map((p) => (typeof p === 'string' ? { name: p, use: devices[p] } : p)),
+  projects: devicesToTest.map(p => (typeof p === "string" ? { name: p, use: devices[p] } : p)),
 })

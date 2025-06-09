@@ -7,4 +7,4 @@
       </h1>
     </NuxtLink>
   </div>
-</template> 
+</template>
