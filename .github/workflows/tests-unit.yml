@@ -1,32 +1,51 @@
-name: Tests unit
+name: Unit Test
 
 on:
   push:
-    branches: [main] # Trigger the workflow on push events to the main branch
+    # Trigger the workflow on push events to the main branch
+    branches: [main]
   pull_request:
-    branches: [main] # Trigger the workflow on pull request events targeting the main branch
-  workflow_dispatch: # Allow manual triggering of the workflow
+    # Trigger the workflow on pull request events targeting the main branch
+    branches: [main]
+    types:
+      - opened
+      - reopened
+      - synchronize
+      - ready_for_review
+  # Allow manual triggering of the workflow
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   tests-unit:
-    # If the last commit message contains 'run-ci-unit' or the workflow is manually triggered, this GitHub Action should run
-    if: ${{ contains(github.event.head_commit.message, 'run-ci-unit') || github.event_name == 'workflow_dispatch' }}
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
-    timeout-minutes: 2 # Set a hard timeout of 2 minutes for the entire job
+    # This condition checks if the pull request is not in draft state or if the workflow was manually triggered.
+    # The workflow will proceed if either of these conditions is true.
+    if: ${{ github.event.pull_request.draft == false || github.event_name == 'workflow_dispatch' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
 
     strategy:
-      fail-fast: true # Stop all jobs if any job fails
-
+      # Continue jobs even if any of the jobs fail
+      fail-fast: false
     env:
+      NODE_ENV: development
       SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
-
     steps:
-      - name: 📥 Checkout code
-        uses: actions/checkout@v4 # Check out the repository code
+      - name: 📥 Check out the repository code
+        uses: actions/checkout@v4
 
-      - name: 🔧 Set up Bun environment
-        uses: oven-sh/setup-bun@v2 # Set up the Bun runtime
+      # OPTIONAL STEP IF YOU WANT TO USE NODE AS RUNTIME
+      #   - name: Use Node.js ${{ matrix.node-version }}
+      #     uses: actions/setup-node@v4
+      #     with:
+      #       node-version: ${{ matrix.node-version }}
+
+      - name: 🥟 Set up Bun environment
+        uses: oven-sh/setup-bun@v2
         with:
           bun-version: latest
 
@@ -48,5 +67,5 @@ jobs:
             bun run prepare
           fi
 
-      - name: 🧪 Run unit tests
-        run: bun run test:unit # Execute unit tests
+      - name: 🧪 Run unit test
+        run: bun run test:unit
