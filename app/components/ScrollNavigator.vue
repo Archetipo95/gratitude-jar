@@ -14,11 +14,11 @@ function scrollToBottom() {
 }
 
 // Show/hide based on scroll position
-const isVisible = ref(false)
+const isOnTop = ref(false)
 const isOnBottom = ref(false)
 
 function checkScrollPosition() {
-  isVisible.value = window.scrollY > 100
+  isOnTop.value = window.scrollY === 0
   isOnBottom.value = window.scrollY + window.innerHeight >= document.documentElement.scrollHeight
 }
 
@@ -34,7 +34,6 @@ onUnmounted(() => {
 
 <template>
   <div
-    v-if="isVisible"
     data-test-id="scroll-navigator"
     class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"
   >
@@ -49,6 +48,7 @@ onUnmounted(() => {
         base: 'font-bold',
       }"
       aria-label="Scroll to top"
+      :disabled="isOnTop"
       @click="scrollToTop"
     >
       <UIcon name="lucide-lab:escalator-arrow-up-right" class="size-5" />

@@ -69,18 +69,6 @@ describe("scrollNavigator", () => {
     await wrapper.vm.$nextTick()
   }
 
-  describe("visibility", () => {
-    it("is hidden when scroll position is less than 100", async () => {
-      await triggerScrollPosition(50)
-      expect(getScrollNavigator().exists()).toBe(false)
-    })
-
-    it("is visible when scroll position is greater than 100", async () => {
-      await triggerScrollPosition(150)
-      expect(getScrollNavigator().exists()).toBe(true)
-    })
-  })
-
   describe("scroll buttons", () => {
     beforeEach(async () => {
       // Make navigator visible for button tests
@@ -110,6 +98,20 @@ describe("scrollNavigator", () => {
         top: 2000, // document.documentElement.scrollHeight
         behavior: "smooth",
       })
+    })
+  })
+
+  describe("top button state", () => {
+    it("is disabled when at top of page", async () => {
+      await triggerScrollPosition(0)
+      const topButton = getScrollToTopButton()
+      expect(topButton.attributes("disabled")).toBeDefined()
+    })
+
+    it("is enabled when not at top of page, after 100px", async () => {
+      await triggerScrollPosition(100)
+      const topButton = getScrollToTopButton()
+      expect(topButton.attributes("disabled")).toBeUndefined()
     })
   })
 
