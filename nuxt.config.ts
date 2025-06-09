@@ -53,7 +53,7 @@ export default defineNuxtConfig({
       meta: [
         { charset: "utf-8" },
         { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { hid: "description", name: "description", content: "A simple gratitude journal app built with Nuxt.js and Supabase" },
+        { name: "description", content: "A simple gratitude journal app built with Nuxt.js and Supabase" },
         { name: "apple-mobile-web-app-title", content: "Gratitude Jar" },
       ],
       link: [
