@@ -46,16 +46,24 @@ export default defineNuxtConfig({
     },
   ],
 
-
   app: {
     head: {
       htmlAttrs: { lang: "en" },
       titleTemplate: "%s | Gratitude Jar",
       meta: [
         { charset: "utf-8" },
-        { name: "viewport", content: "width=device-width, initial-scale=1" },
-        { name: "description", content: "A simple gratitude journal app built with Nuxt.js and Supabase" },
-        { name: "apple-mobile-web-app-title", content: "Gratitude Jar" },
+        {
+          name: "viewport",
+          content: "width=device-width, initial-scale=1",
+        },
+        {
+          name: "description",
+          content: "A simple gratitude journal app built with Nuxt.js and Supabase",
+        },
+        {
+          name: "apple-mobile-web-app-title",
+          content: "Gratitude Jar",
+        },
       ],
       link: [
         {
@@ -94,7 +102,7 @@ export default defineNuxtConfig({
   },
 
   typescript: {
-    typeCheck: true
-  }
-}
+    typeCheck: true,
+  },
+},
 )

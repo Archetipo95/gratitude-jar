@@ -60,7 +60,10 @@ describe("scrollNavigator", () => {
   const getScrollToBottomButton = () => wrapper.find("[data-test-id=\"scroll-to-bottom-button\"]")
 
   const triggerScrollPosition = async (scrollY: number) => {
-    Object.defineProperty(window, "scrollY", { value: scrollY, writable: true })
+    Object.defineProperty(window, "scrollY", {
+      value: scrollY,
+      writable: true,
+    })
     const component = wrapper.vm as any
     component.checkScrollPosition()
     await wrapper.vm.$nextTick()

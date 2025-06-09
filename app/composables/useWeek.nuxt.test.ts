@@ -12,7 +12,11 @@ describe("useWeek", () => {
   })
 
   it("initializes with current year", () => {
-    const { weeks, currentWeekNumber, totalWeeks } = useWeek()
+    const {
+      weeks,
+      currentWeekNumber,
+      totalWeeks,
+    } = useWeek()
 
     expect(weeks.value.length).toBeGreaterThan(0)
     expect(currentWeekNumber.value).toBe(11) // Week 11 in March 14, 2024
@@ -20,13 +24,21 @@ describe("useWeek", () => {
   })
 
   it("calculates remaining weeks correctly", () => {
-    const { remainingWeeks, currentWeekNumber, totalWeeks } = useWeek()
+    const {
+      remainingWeeks,
+      currentWeekNumber,
+      totalWeeks,
+    } = useWeek()
 
     expect(remainingWeeks.value).toBe(totalWeeks.value - currentWeekNumber.value)
   })
 
   it("changes year correctly", () => {
-    const { changeYear, weeks, currentWeekNumber } = useWeek()
+    const {
+      changeYear,
+      weeks,
+      currentWeekNumber,
+    } = useWeek()
 
     // Change to previous year
     changeYear(2023)
@@ -36,7 +48,10 @@ describe("useWeek", () => {
   })
 
   it("handles leap years correctly", () => {
-    const { changeYear, weeks } = useWeek()
+    const {
+      changeYear,
+      weeks,
+    } = useWeek()
 
     // 2024 is a leap year
     changeYear(2024)

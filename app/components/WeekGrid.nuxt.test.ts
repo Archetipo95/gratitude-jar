@@ -6,10 +6,22 @@ import WeekGrid from "./WeekGrid.vue"
 
 // Mock dependencies
 const mockWeeks = [
-  { number: 1, isCurrentWeek: false },
-  { number: 2, isCurrentWeek: false },
-  { number: 25, isCurrentWeek: true },
-  { number: 26, isCurrentWeek: false },
+  {
+    number: 1,
+    isCurrentWeek: false,
+  },
+  {
+    number: 2,
+    isCurrentWeek: false,
+  },
+  {
+    number: 25,
+    isCurrentWeek: true,
+  },
+  {
+    number: 26,
+    isCurrentWeek: false,
+  },
 ]
 
 const mockUseWeek = {
@@ -19,7 +31,12 @@ const mockUseWeek = {
 }
 
 const mockMessages = [
-  { id: 1, message: "Test message", week: 1, year: 2024 },
+  {
+    id: 1,
+    message: "Test message",
+    week: 1,
+    year: 2024,
+  },
 ]
 
 const mockSupabaseClient = {

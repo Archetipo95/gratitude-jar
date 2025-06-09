@@ -62,7 +62,10 @@ describe("modalMessage", () => {
     })
 
     it("updates props when changed", async () => {
-      await wrapper.setProps({ weekNumber: 10, selectedYear: 2025 })
+      await wrapper.setProps({
+        weekNumber: 10,
+        selectedYear: 2025,
+      })
 
       const vm = wrapper.vm as any
       expect(vm.weekNumber).toBe(10)

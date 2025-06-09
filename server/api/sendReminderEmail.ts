@@ -21,11 +21,17 @@ export default defineEventHandler(async (event) => {
       html: "<strong>Don’t forget to submit your gratitude message for this week!</strong>",
     })
 
-    return { success: true, data }
+    return {
+      success: true,
+      data,
+    }
   }
   catch (error: any) {
     console.error("Failed to send email:", error)
-    return { success: false, error: error.message }
+    return {
+      success: false,
+      error: error.message,
+    }
   }
 })
 

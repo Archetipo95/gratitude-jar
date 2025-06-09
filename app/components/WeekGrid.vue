@@ -8,7 +8,11 @@ const availableYears = ref(Array.from({ length: currentYear - 2023 }, (_, i) => 
 
 const selectedYear = ref(currentYear)
 
-const { weeks, changeYear, currentWeekNumber } = useWeek()
+const {
+  weeks,
+  changeYear,
+  currentWeekNumber,
+} = useWeek()
 
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
@@ -24,7 +28,10 @@ const {
       return
     return await client.from("gratitude_messages").select("id, message, week, year").eq("user_id", user.value.id).order("week", { ascending: true })
   },
-  { transform: result => (result ? result.data : []), watch: [user] },
+  {
+    transform: result => (result ? result.data : []),
+    watch: [user],
+  },
 )
 
 const isSubmitting = ref(false)

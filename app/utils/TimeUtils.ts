@@ -34,7 +34,12 @@ export function calculateWeeks(year: number): Week[] {
     const isCurrentWeek = today >= weekStart && today <= weekEnd
 
     // Add the week to our array
-    weeks.push({ number: weekNumber, weekStart, weekEnd, isCurrentWeek })
+    weeks.push({
+      number: weekNumber,
+      weekStart,
+      weekEnd,
+      isCurrentWeek,
+    })
 
     // Move to start of next week
     date.setDate(date.getDate() + 1)

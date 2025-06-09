@@ -42,7 +42,10 @@ onUnmounted(() => {
   clearInterval(intervalId)
 })
 
-const { totalWeeks, currentWeekNumber } = useWeek()
+const {
+  totalWeeks,
+  currentWeekNumber,
+} = useWeek()
 </script>
 
 <template>

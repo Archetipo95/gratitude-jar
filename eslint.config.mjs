@@ -49,6 +49,24 @@ export default withNuxt(antfu(
         },
         ignore: ["README.md"],
       }],
+      "object-curly-newline": ["error", {
+        ObjectExpression: {
+          minProperties: 2,
+          multiline: true,
+          consistent: true,
+        },
+        ObjectPattern: {
+          minProperties: 2,
+          multiline: true,
+          consistent: true,
+        },
+        ImportDeclaration: "never",
+        ExportDeclaration: {
+          minProperties: 2,
+          multiline: true,
+          consistent: true,
+        },
+      }],
     },
   },
   // Add the Storybook plugin configuration

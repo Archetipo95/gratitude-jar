@@ -3,7 +3,10 @@ import type { Database } from "~~/types/database.types"
 
 import type { ModalMessageProps } from "./ModalMessage.props"
 
-const { weekNumber, selectedYear } = defineProps<ModalMessageProps>()
+const {
+  weekNumber,
+  selectedYear,
+} = defineProps<ModalMessageProps>()
 const emit = defineEmits(["messageSubmitted", "failedSubmit", "close"])
 const client = useSupabaseClient<Database>()
 const user = useSupabaseUser()
@@ -50,7 +53,10 @@ async function submitMessage() {
 
 function onFailedSubmit() {
   emit("failedSubmit")
-  toast.add({ title: "Failed to submit message", color: "error" })
+  toast.add({
+    title: "Failed to submit message",
+    color: "error",
+  })
 }
 
 function closeModal() {
