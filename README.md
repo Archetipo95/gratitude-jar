@@ -84,7 +84,7 @@ bun run preview
 
 ## 🗺️ Roadmap
 
-- **🔒 Encryption**: Implement end-to-end encryption for messages.
+- **✅ Encryption**: End-to-end encryption for messages implemented using WebAuthn/device-based key derivation.
 - **📧 Reminders**: Send weekly summary emails.
 - **✨ Cheer Me Up**: Add motivational content.
 - **🗑️ Account Deletion**: Allow users to delete their accounts.

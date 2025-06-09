@@ -17,16 +17,25 @@ const newMessage = ref<string>("")
 
 const toast = useToast()
 
+// Use encryption
+const {
+  encryptMessage,
+  isEncryptionReady,
+} = useEncryption()
+
 // Submit new message
 async function submitMessage() {
   if (weekNumber && newMessage.value) {
     isSubmitting.value = true
     try {
+      // Encrypt the message before storing
+      const messageToStore = await encryptMessage(newMessage.value)
+
       const { error } = await client.from("gratitude_messages").insert([
         {
           week: weekNumber,
           year: selectedYear,
-          message: newMessage.value,
+          message: messageToStore,
           user_id: user.value?.id,
         },
       ])
@@ -35,7 +44,10 @@ async function submitMessage() {
         onFailedSubmit()
       }
       else {
-        toast.add({ title: "Message submitted" })
+        const successMessage = isEncryptionReady.value
+          ? "Message submitted and encrypted securely"
+          : "Message submitted"
+        toast.add({ title: successMessage })
         newMessage.value = ""
         emit("messageSubmitted")
         emit("close")
@@ -87,9 +99,25 @@ function closeModal() {
         placeholder="What are you grateful for this week?"
         :rows="6"
       />
-      <p class="mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">
-        Your message will be sealed until the end of the year
-      </p>
+      <div class="mt-4 space-y-2">
+        <p class="text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">
+          Your message will be sealed until the end of the year
+        </p>
+        <div
+          v-if="isEncryptionReady"
+          class="flex items-center gap-2 text-xs text-green-600 dark:text-green-400 bg-green-50 dark:bg-green-900/20 px-3 py-2 border border-green-200 dark:border-green-800"
+        >
+          <UIcon name="lucide:shield-check" class="size-4" />
+          <span>End-to-end encryption enabled</span>
+        </div>
+        <div
+          v-else
+          class="flex items-center gap-2 text-xs text-amber-600 dark:text-amber-400 bg-amber-50 dark:bg-amber-900/20 px-3 py-2 border border-amber-200 dark:border-amber-800"
+        >
+          <UIcon name="lucide:shield-off" class="size-4" />
+          <span>Encryption not available - message stored as plain text</span>
+        </div>
+      </div>
     </template>
 
     <template #footer>

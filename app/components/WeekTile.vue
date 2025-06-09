@@ -28,10 +28,41 @@ function isMessageVisible(weekNumber: number) {
 //   messageVisibility.value[weekNumber] = !messageVisibility.value[weekNumber]
 // }
 
+// Use encryption for decrypting messages
+const { decryptMessage } = useEncryption()
+
+// Store decrypted messages
+const decryptedMessages = ref<Record<string, string>>({})
+
 // Get the message for the given week
 function getMessage(weekNumber: number) {
   const message = props.messages?.find(message => message.week === weekNumber && message.year === props.selectedYear)
-  return message ? message.message : ""
+
+  if (!message)
+    return ""
+
+  const messageKey = `${message.id}_${weekNumber}_${props.selectedYear}`
+
+  // Return decrypted message if already cached
+  if (decryptedMessages.value[messageKey]) {
+    return decryptedMessages.value[messageKey]
+  }
+
+  // Start decryption process and return placeholder
+  decryptMessageAsync(message.message, messageKey)
+  return "Decrypting message..."
+}
+
+// Asynchronously decrypt message and cache result
+async function decryptMessageAsync(encryptedMessage: string, messageKey: string) {
+  try {
+    const decrypted = await decryptMessage(encryptedMessage)
+    decryptedMessages.value[messageKey] = decrypted
+  }
+  catch (error) {
+    console.error("Failed to decrypt message:", error)
+    decryptedMessages.value[messageKey] = "[Unable to decrypt message]"
+  }
 }
 
 const overlay = useOverlay()

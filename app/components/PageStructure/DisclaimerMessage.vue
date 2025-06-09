@@ -17,7 +17,7 @@
         Only for the current week you can add more messages.
       </p>
 
-      <em class="block mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">Disclaimer: This app is for demonstration purposes only. Currently, the messages are stored in plain text and are NOT encrypted. Please do NOT store sensitive information.</em>
+      <em class="block mt-4 text-sm text-gray-600 dark:text-gray-400 border-l-4 border-current pl-4">Disclaimer: This app now features end-to-end encryption for your privacy. Your messages are encrypted on your device before being stored. However, as this is still a demonstration app, please use discretion when storing highly sensitive information.</em>
     </div>
   </div>
 </template>
