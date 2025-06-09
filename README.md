@@ -80,17 +80,17 @@ bun run preview
 
 - **🧪 Testing**: Comprehensive tests for all features.
 - **🧹 Lint Project**: Add ESLint and Prettier for code quality.
+- **🔍 Typecheck**: Add TypeScript for type safety.
 
 ## 🗺️ Roadmap
 
 - **🔒 Encryption**: Implement end-to-end encryption for messages.
 - **📧 Reminders**: Send weekly summary emails.
 - **✨ Cheer Me Up**: Add motivational content.
-- **👥 Groups**: Enable shared lists for group gratitude.
-- **📚 Storybook**: Integrate Storybook for component testing.
-- **🌐 Internationalization**: Support multiple languages.
 - **🗑️ Account Deletion**: Allow users to delete their accounts.
-- **🔍 Typecheck**: Add TypeScript for type safety.
+- **👥 Groups**: Enable shared lists for group gratitude.
+- **🌐 Internationalization**: Support multiple languages.
+- **📚 Storybook**: Integrate Storybook for component testing.
 
 ## 📜 License
 
