@@ -1,3 +1,5 @@
+/* eslint-disable node/no-process-env */
+
 import { defineEventHandler, readBody } from "h3"
 import { Resend } from "resend"
 

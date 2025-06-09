@@ -100,7 +100,7 @@ describe("countdownTimer", () => {
   })
 
   it("cleans up interval on unmount", async () => {
-    const clearIntervalSpy = vi.spyOn(global, "clearInterval")
+    const clearIntervalSpy = vi.spyOn(globalThis, "clearInterval")
     const wrapper = await mountComponentWithMockedTime(new Date("2025-12-31T23:59:55"))
     wrapper.unmount()
     expect(clearIntervalSpy).toHaveBeenCalled()

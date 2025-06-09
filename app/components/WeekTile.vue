@@ -15,13 +15,13 @@ function hasMessage(weekNumber: number) {
   return props.messages?.some(message => message.week === weekNumber && message.year === props.selectedYear)
 }
 
+// Reactive map to track visibility of messages
+const messageVisibility = ref<Record<number, boolean>>({})
+
 // Check if message is visible for a given week
 function isMessageVisible(weekNumber: number) {
   return messageVisibility.value[weekNumber] || false
 }
-
-// Reactive map to track visibility of messages
-const messageVisibility = ref<Record<number, boolean>>({})
 
 // Toggle message visibility for a given week
 // function toggleMessage(weekNumber: number) {

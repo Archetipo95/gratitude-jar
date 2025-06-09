@@ -1,3 +1,5 @@
+/* eslint-disable node/no-process-env */
+
 export default defineNuxtConfig({
   compatibilityDate: "2025-01-10",
 

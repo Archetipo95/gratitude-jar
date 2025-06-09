@@ -14,6 +14,8 @@ const modal = useModal()
 const isSubmitting = ref(false)
 const newMessage = ref<string>("")
 
+const toast = useToast()
+
 // Submit new message
 async function submitMessage() {
   if (weekNumber && newMessage.value) {
@@ -38,7 +40,8 @@ async function submitMessage() {
         modal.close()
       }
     }
-    catch (err) {
+    catch (error) {
+      console.error(error)
       onFailedSubmit()
     }
     finally {
@@ -56,8 +59,6 @@ function closeModal() {
   newMessage.value = ""
   modal.close()
 }
-
-const toast = useToast()
 </script>
 
 <template>
