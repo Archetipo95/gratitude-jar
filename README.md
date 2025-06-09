@@ -76,17 +76,20 @@ bun run preview
 - **Nuxt UI 3**: Tailwind CSS 4, Nuxt Fonts, Nuxt Icons for a sleek UI.
 - **Supabase**: Backend as a Service for authentication and database.
 
+## 🌺 Features
+
+- **🧪 Testing**: Comprehensive tests for all features.
+- **🧹 Lint Project**: Add ESLint and Prettier for code quality.
+
 ## 🗺️ Roadmap
 
 - **🔒 Encryption**: Implement end-to-end encryption for messages.
 - **📧 Reminders**: Send weekly summary emails.
 - **✨ Cheer Me Up**: Add motivational content.
 - **👥 Groups**: Enable shared lists for group gratitude.
-- **🧪 Testing**: Comprehensive tests for all features.
 - **📚 Storybook**: Integrate Storybook for component testing.
 - **🌐 Internationalization**: Support multiple languages.
 - **🗑️ Account Deletion**: Allow users to delete their accounts.
-- **🧹 Lint Project**: Add ESLint and Prettier for code quality.
 - **🔍 Typecheck**: Add TypeScript for type safety.
 
 ## 📜 License
