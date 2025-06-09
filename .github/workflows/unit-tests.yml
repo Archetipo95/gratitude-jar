@@ -26,6 +26,8 @@ jobs:
       fail-fast: false # Continue jobs even if any of the jobs fail
     env:
       NODE_ENV: development
+      SUPABASE_KEY: ${{ secrets.SUPABASE_KEY }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
 
     steps:
       - name: 📥 Check out the repository code
