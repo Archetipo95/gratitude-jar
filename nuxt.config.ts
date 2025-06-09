@@ -1,5 +1,5 @@
 export default defineNuxtConfig({
-  compatibilityDate: '2025-01-10',
+  compatibilityDate: "2025-01-10",
 
   future: {
     compatibilityVersion: 4,
@@ -7,7 +7,13 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  modules: ['@nuxtjs/supabase', '@nuxt/ui', '@nuxt/test-utils/module', '@nuxtjs/seo'],
+  modules: ["@nuxtjs/supabase", "@nuxt/ui", "@nuxt/test-utils/module", "@nuxtjs/seo", "@nuxt/eslint"],
+
+  eslint: {
+    config: {
+      standalone: false,
+    },
+  },
 
   supabase: {
     url: process.env.SUPABASE_URL,
@@ -15,10 +21,10 @@ export default defineNuxtConfig({
     redirect: false,
   },
 
-  css: ['~/assets/css/main.css'],
+  css: ["~/assets/css/main.css"],
 
   site: {
-    url: 'https://jar-of-gratitude.netlify.app',
+    url: "https://jar-of-gratitude.netlify.app",
   },
 
   ogImage: {
@@ -33,50 +39,50 @@ export default defineNuxtConfig({
 
   components: [
     {
-      path: '~/components',
+      path: "~/components",
       pathPrefix: false,
     },
   ],
 
   app: {
     head: {
-      htmlAttrs: { lang: 'en' },
-      titleTemplate: '%s | Gratitude Jar',
+      htmlAttrs: { lang: "en" },
+      titleTemplate: "%s | Gratitude Jar",
       meta: [
-        { charset: 'utf-8' },
-        { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { hid: 'description', name: 'description', content: 'A simple gratitude journal app built with Nuxt.js and Supabase' },
-        { name: 'apple-mobile-web-app-title', content: 'Gratitude Jar' },
+        { charset: "utf-8" },
+        { name: "viewport", content: "width=device-width, initial-scale=1" },
+        { hid: "description", name: "description", content: "A simple gratitude journal app built with Nuxt.js and Supabase" },
+        { name: "apple-mobile-web-app-title", content: "Gratitude Jar" },
       ],
       link: [
         {
-          rel: 'icon',
-          type: 'image/x-icon',
-          href: '/favicon.ico',
+          rel: "icon",
+          type: "image/x-icon",
+          href: "/favicon.ico",
         },
         {
-          rel: 'icon',
-          type: 'image/svg+xml',
-          href: '/favicon.svg',
+          rel: "icon",
+          type: "image/svg+xml",
+          href: "/favicon.svg",
         },
         {
-          rel: 'icon',
-          type: 'image/png',
-          sizes: '96x96',
-          href: '/favicon-96x96.png',
+          rel: "icon",
+          type: "image/png",
+          sizes: "96x96",
+          href: "/favicon-96x96.png",
         },
         {
-          rel: 'apple-touch-icon',
-          sizes: '180x180',
-          href: '/apple-touch-icon.png',
+          rel: "apple-touch-icon",
+          sizes: "180x180",
+          href: "/apple-touch-icon.png",
         },
         {
-          rel: 'shortcut icon',
-          href: '/favicon.ico',
+          rel: "shortcut icon",
+          href: "/favicon.ico",
         },
         {
-          rel: 'manifest',
-          href: '/site.webmanifest',
+          rel: "manifest",
+          href: "/site.webmanifest",
         },
       ],
     },
