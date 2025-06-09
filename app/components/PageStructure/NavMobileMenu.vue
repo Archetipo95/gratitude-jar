@@ -1,8 +1,9 @@
 <template>
-  <div class="md:hidden">
+  <div class="md:hidden" data-test-id="nav-mobile-menu">
     <!-- CSS-only hamburger menu using checkbox hack -->
     <input
       id="mobile-menu-toggle"
+      data-test-id="mobile-menu-toggle"
       type="checkbox"
       class="sr-only peer"
     >
@@ -10,19 +11,24 @@
     <!-- Hamburger Button -->
     <label
       for="mobile-menu-toggle"
+      data-test-id="hamburger-button"
       class="flex items-center justify-center p-2 cursor-pointer hover:-translate-y-0.5 transition-transform border-2 border-transparent focus-within:border-current"
       aria-label="Toggle mobile menu"
     >
-      <UIcon name="lucide-lab:burger" class="size-6" />
+      <UIcon
+        name="lucide-lab:burger"
+        class="size-6"
+        data-test-id="hamburger-icon"
+      />
     </label>
 
     <!-- Mobile Menu Content -->
-    <div class="hidden peer-checked:block absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border-t-2 dark:border-gray-600 z-50">
-      <div class="p-4 space-y-4">
-        <div class="text-center">
+    <div class="hidden peer-checked:block absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border-t-2 dark:border-gray-600 z-50" data-test-id="mobile-menu-content">
+      <div class="p-4 space-y-4" data-test-id="mobile-menu-inner">
+        <div class="text-center" data-test-id="mobile-greeting-container">
           <NavGreeting />
         </div>
-        <div class="flex flex-col gap-2">
+        <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
           <NavAuthButtons />
         </div>
       </div>

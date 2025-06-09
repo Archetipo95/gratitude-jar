@@ -8,6 +8,7 @@ const user = useSupabaseUser()
 <template>
   <UButton
     v-if="!!user"
+    data-test-id="logout-button"
     color="error"
     variant="solid"
     size="lg"
@@ -20,8 +21,13 @@ const user = useSupabaseUser()
     <UIcon name="lucide:log-out" />
     Log Out
   </UButton>
-  <div v-else class="flex gap-2 flex-wrap">
+  <div
+    v-else
+    class="flex gap-2 flex-wrap"
+    data-test-id="login-buttons-container"
+  >
     <UButton
+      data-test-id="github-login-button"
       color="neutral"
       variant="solid"
       size="lg"
@@ -35,6 +41,7 @@ const user = useSupabaseUser()
       GitHub Login
     </UButton>
     <UButton
+      data-test-id="google-login-button"
       color="neutral"
       variant="solid"
       size="lg"

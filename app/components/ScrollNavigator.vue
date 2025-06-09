@@ -35,10 +35,12 @@ onUnmounted(() => {
 <template>
   <div
     v-if="isVisible"
+    data-test-id="scroll-navigator"
     class="fixed bottom-6 right-6 z-50 flex flex-col gap-2"
   >
     <!-- Scroll to Top -->
     <UButton
+      data-test-id="scroll-to-top-button"
       color="neutral"
       variant="solid"
       size="lg"
@@ -54,6 +56,7 @@ onUnmounted(() => {
 
     <!-- Scroll to Bottom -->
     <UButton
+      data-test-id="scroll-to-bottom-button"
       color="neutral"
       variant="solid"
       size="lg"

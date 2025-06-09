@@ -108,6 +108,7 @@ const weekTileClasses = computed(() => {
       variant="solid"
       :disabled="isSubmitting"
       class="uppercase tracking-wider font-bold rounded-none px-2 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] border-2 border-current hover:-translate-y-0.5 transition-transform"
+      data-test-id="add-message-button"
       @click="openModal"
     />
 
