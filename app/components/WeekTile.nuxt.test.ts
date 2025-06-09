@@ -1,7 +1,6 @@
 import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
-import { ref } from "vue"
 
 import type { WeekTileProps } from "./WeekTile.props"
 
