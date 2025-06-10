@@ -55,7 +55,6 @@ describe("scrollNavigator", () => {
   })
 
   // Helper functions using data-test-ids
-  const getScrollNavigator = () => wrapper.find("[data-test-id=\"scroll-navigator\"]")
   const getScrollToTopButton = () => wrapper.find("[data-test-id=\"scroll-to-top-button\"]")
   const getScrollToBottomButton = () => wrapper.find("[data-test-id=\"scroll-to-bottom-button\"]")
 
