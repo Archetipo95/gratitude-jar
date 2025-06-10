@@ -20,7 +20,13 @@
     "test:codegen": "playwright codegen http://localhost:3000/",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
-    "typecheck": "nuxt typecheck"
+    "typecheck": "nuxt typecheck",
+    "db:start": "supabase start",
+    "db:stop": "supabase stop",
+    "db:restart": "supabase stop && supabase start",
+    "db:reset": "supabase db reset",
+    "db:status": "supabase status",
+    "db:dump": "supabase db dump --local > backup.sql"
   },
   "dependencies": {
     "@nuxt/devtools": "2.5.0",
