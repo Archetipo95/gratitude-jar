@@ -17,7 +17,7 @@ describe("navigationBar", () => {
   const getLogoSection = () => wrapper.find("[data-test-id=\"nav-logo-section\"]")
   const getRightSection = () => wrapper.find("[data-test-id=\"nav-right-section\"]")
   const getDesktopSection = () => wrapper.find("[data-test-id=\"nav-desktop-section\"]")
-  const getColorModeSection = () => wrapper.find("[data-test-id=\"nav-color-mode-section\"]")
+  // ColorModeButton is now inside desktop section, no longer has its own section
   const getMobileSection = () => wrapper.find("[data-test-id=\"nav-mobile-section\"]")
 
   describe("component structure", () => {
@@ -48,10 +48,7 @@ describe("navigationBar", () => {
       expect(desktopSection.classes()).toContain("md:flex")
     })
 
-    it("renders color mode section", () => {
-      const colorModeSection = getColorModeSection()
-      expect(colorModeSection.exists()).toBe(true)
-    })
+    // ColorModeButton is now inside desktop section - no separate section test needed
 
     it("renders mobile section", () => {
       const mobileSection = getMobileSection()
@@ -78,9 +75,9 @@ describe("navigationBar", () => {
       expect(navAuthButtons.exists()).toBe(true)
     })
 
-    it("renders ColorModeButton in color mode section", () => {
-      const colorModeSection = getColorModeSection()
-      const colorModeButton = colorModeSection.findComponent({ name: "ColorModeButton" })
+    it("renders ColorModeButton in desktop section", () => {
+      const desktopSection = getDesktopSection()
+      const colorModeButton = desktopSection.findComponent({ name: "ColorModeButton" })
       expect(colorModeButton.exists()).toBe(true)
     })
 
