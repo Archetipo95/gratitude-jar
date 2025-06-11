@@ -80,6 +80,14 @@ function closeModal() {
     :title="`Add Message - Week ${weekNumber}`"
     :close="{ onClick: () => emit('close', false) }"
   >
+    <template #close>
+      <AppButton
+        icon="lucide:x"
+        variant="outline"
+        class="py-2 ml-auto"
+        @click="closeModal"
+      />
+    </template>
     <template #body>
       <UTextarea
         v-model="newMessage"
@@ -93,22 +101,20 @@ function closeModal() {
     </template>
 
     <template #footer>
-      <UButton
+      <AppButton
         label="Cancel"
-        color="neutral"
-        variant="solid"
+        variant="secondary"
         size="lg"
-        class="uppercase tracking-wider font-bold rounded-none px-6 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] border-2 border-current hover:-translate-y-0.5 transition-transform"
+        class="px-6 py-2"
         @click="closeModal"
       />
-      <UButton
+      <AppButton
         label="Submit"
-        color="primary"
-        variant="solid"
+        variant="primary"
         size="lg"
         :loading="isSubmitting"
-        :disabled="isSubmitting"
-        class="uppercase tracking-wider font-bold rounded-none px-6 py-2 shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] border-2 border-current hover:-translate-y-0.5 transition-transform"
+        :disabled="isSubmitting || !newMessage"
+        class="px-6 py-2"
         @click="submitMessage"
       />
     </template>

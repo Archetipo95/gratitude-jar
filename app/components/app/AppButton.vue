@@ -59,7 +59,7 @@ const baseClasses = [
 ]
 
 // Interactive classes (only when NOT disabled)
-const interactiveClasses = props.disabled || props.loading
+const interactiveClasses = computed(() => props.disabled || props.loading
   ? []
   : [
       // Hover states
@@ -67,10 +67,10 @@ const interactiveClasses = props.disabled || props.loading
 
       // Active states (pressed effect)
       "active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
-    ]
+    ])
 
 // Ghost variant handling
-const ghostClasses = props.variant === "ghost"
+const ghostClasses = computed(() => props.variant === "ghost"
   ? [
       "border-transparent shadow-none",
       ...(props.disabled || props.loading
@@ -81,12 +81,12 @@ const ghostClasses = props.variant === "ghost"
             "dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]",
           ]),
     ]
-  : []
+  : [])
 
 const buttonClasses = computed(() => [
   ...baseClasses,
-  ...interactiveClasses,
-  ...ghostClasses,
+  ...interactiveClasses.value,
+  ...ghostClasses.value,
   props.class,
 ].join(" "))
 

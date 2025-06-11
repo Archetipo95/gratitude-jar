@@ -9,15 +9,11 @@ function toggleMenu() {
 <template>
   <div class="md:hidden" data-test-id="nav-mobile-menu">
     <!-- Hamburger Button -->
-    <UButton
+    <AppButton
       icon="lucide-lab:burger"
-      color="neutral"
       variant="outline"
       size="md"
-      class="p-2 border-2 border-current hover:-translate-y-0.5 transition-transform rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none bg-transparent"
-      :ui="{
-        base: 'font-bold',
-      }"
+      class="p-2"
       aria-label="Toggle mobile menu"
       data-test-id="hamburger-button"
       @click="toggleMenu"

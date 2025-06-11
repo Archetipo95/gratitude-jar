@@ -6,53 +6,35 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-  <UButton
+  <AppButton
     v-if="!!user"
     data-test-id="logout-button"
-    color="error"
-    variant="solid"
+    variant="error"
     size="lg"
-    class="border-2 border-current hover:-translate-y-0.5 transition-transform rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]"
-    :ui="{
-      base: 'uppercase tracking-wider font-bold px-4 py-2',
-    }"
+    icon="lucide:log-out"
+    label="Log Out"
     @click="client.auth.signOut()"
-  >
-    <UIcon name="lucide:log-out" />
-    Log Out
-  </UButton>
+  />
   <div
     v-else
     class="flex gap-2 flex-wrap"
     data-test-id="login-buttons-container"
   >
-    <UButton
+    <AppButton
       data-test-id="github-login-button"
-      color="neutral"
-      variant="solid"
+      variant="secondary"
       size="lg"
-      :ui="{
-        base: 'uppercase tracking-wider font-bold px-4 py-2',
-      }"
-      class="border-2 border-current hover:-translate-y-0.5 transition-transform rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+      icon="lucide:github"
+      label="GitHub Login"
       @click="client.auth.signInWithOAuth({ provider: 'github' })"
-    >
-      <UIcon name="lucide:github" />
-      GitHub Login
-    </UButton>
-    <UButton
+    />
+    <AppButton
       data-test-id="google-login-button"
-      color="neutral"
-      variant="solid"
+      variant="secondary"
       size="lg"
-      :ui="{
-        base: 'uppercase tracking-wider font-bold px-4 py-2',
-      }"
-      class="border-2 border-current hover:-translate-y-0.5 transition-transform rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] dark:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)] active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+      icon="simple-icons:google"
+      label="Google Login"
       @click="client.auth.signInWithOAuth({ provider: 'google' })"
-    >
-      <UIcon name="simple-icons:google" />
-      Google Login
-    </UButton>
+    />
   </div>
 </template>
