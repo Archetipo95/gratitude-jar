@@ -45,6 +45,8 @@
     "@nuxt/test-utils": "^3.19.1",
     "@nuxtjs/seo": "^3.0.3",
     "@playwright/test": "^1.52.0",
+    "@stagewise-plugins/vue": "^0.4.4",
+    "@stagewise/toolbar-vue": "^0.4.6",
     "@types/node": "^22.15.30",
     "@vitest/coverage-v8": "3.2.3",
     "@vitest/ui": "^3.2.3",

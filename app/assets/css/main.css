@@ -6,13 +6,17 @@
 }
 
 :root {
-  --background-color: white;
-  --text-color: black;
+  --background-color: #f8f9fa;
 }
 
-[data-theme="dark"] {
-  --background-color: black;
-  --text-color: white;
+body {
+  background-color: var(--background-color);
+  color: black;
+}
+
+.dark body {
+  background-color: var(--color-gray-900);
+  color: white;
 }
 
 /*
