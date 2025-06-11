@@ -24,19 +24,28 @@ function toggleMenu() {
     />
 
     <!-- Mobile Menu Content -->
-    <div
-      :class="{ hidden: !isMenuOpen, block: isMenuOpen }"
-      class="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border-t-2 dark:border-gray-600 z-50"
-      data-test-id="mobile-menu-content"
+    <Transition
+      enter-active-class="transition-all duration-300 ease-out"
+      enter-from-class="opacity-0 translate-x-4"
+      enter-to-class="opacity-100 translate-x-0"
+      leave-active-class="transition-all duration-200 ease-in"
+      leave-from-class="opacity-100 translate-x-0"
+      leave-to-class="opacity-0 translate-x-4"
     >
-      <div class="p-4 space-y-4" data-test-id="mobile-menu-inner">
-        <div class="text-center" data-test-id="mobile-greeting-container">
-          <NavGreeting />
-        </div>
-        <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
-          <NavAuthButtons />
+      <div
+        v-if="isMenuOpen"
+        class="absolute top-full left-0 right-0 bg-white dark:bg-gray-800 border-2 border-current shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] dark:shadow-[4px_4px_0px_0px_rgba(255,255,255,0.5)] z-50"
+        data-test-id="mobile-menu-content"
+      >
+        <div class="p-6 space-y-4 border-t-2 border-current" data-test-id="mobile-menu-inner">
+          <div class="text-center" data-test-id="mobile-greeting-container">
+            <NavGreeting />
+          </div>
+          <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
+            <NavAuthButtons />
+          </div>
         </div>
       </div>
-    </div>
+    </Transition>
   </div>
 </template>
