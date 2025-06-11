@@ -38,8 +38,9 @@ function toggleMenu() {
         data-test-id="mobile-menu-content"
       >
         <div class="p-6 space-y-4 border-t-2 border-current" data-test-id="mobile-menu-inner">
-          <div class="text-center" data-test-id="mobile-greeting-container">
+          <div class="flex gap-2 justify-between items-center">
             <NavGreeting />
+            <ColorModeButton />
           </div>
           <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
             <NavAuthButtons />
