@@ -45,8 +45,8 @@ const uButtonVariantMap = {
   error: "solid",
 } as const
 
-// Our design system classes that get applied to all buttons
-const designSystemClasses = [
+// Base design system classes (always applied)
+const baseClasses = [
   // Shape & borders
   "rounded-none border-2 border-current",
 
@@ -56,29 +56,36 @@ const designSystemClasses = [
 
   // Transitions
   "transition-transform duration-150 ease-out",
-
-  // Hover states
-  "hover:-translate-y-0.5",
-
-  // Active states (pressed effect)
-  "active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
-
-  // Disabled states
-  "disabled:hover:translate-y-0 disabled:active:translate-x-0 disabled:active:translate-y-0",
 ]
 
-// Ghost variant needs special handling for shadows
+// Interactive classes (only when NOT disabled)
+const interactiveClasses = props.disabled || props.loading
+  ? []
+  : [
+      // Hover states
+      "hover:-translate-y-0.5",
+
+      // Active states (pressed effect)
+      "active:translate-x-[2px] active:translate-y-[2px] active:shadow-none",
+    ]
+
+// Ghost variant handling
 const ghostClasses = props.variant === "ghost"
   ? [
       "border-transparent shadow-none",
-      "hover:border-current",
-      "hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]",
-      "dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]",
+      ...(props.disabled || props.loading
+        ? []
+        : [
+            "hover:border-current",
+            "hover:shadow-[2px_2px_0px_0px_rgba(0,0,0,1)]",
+            "dark:hover:shadow-[2px_2px_0px_0px_rgba(255,255,255,0.5)]",
+          ]),
     ]
   : []
 
 const buttonClasses = computed(() => [
-  ...designSystemClasses,
+  ...baseClasses,
+  ...interactiveClasses,
   ...ghostClasses,
   props.class,
 ].join(" "))
