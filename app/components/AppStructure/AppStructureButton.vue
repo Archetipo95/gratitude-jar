@@ -62,7 +62,7 @@ const baseClasses = [
 const interactiveClasses = computed(() => props.disabled || props.loading
   ? []
   : [
-    // Hover states
+      // Hover states
       "hover:-translate-y-0.5",
 
       // Active states (pressed effect)
