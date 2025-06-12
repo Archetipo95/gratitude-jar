@@ -13,7 +13,7 @@ const isDark = computed({
 
 <template>
   <ClientOnly v-if="!colorMode?.forced">
-    <AppButton
+    <AppStructureButton
       :icon="isDark ? 'i-lucide-moon' : 'i-lucide-sun'"
       variant="outline"
       size="md"

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type AppButtonProps = {
+type AppStructureButtonProps = {
   // Button content
   label?: string
   icon?: string
@@ -17,7 +17,7 @@ type AppButtonProps = {
   class?: string
 }
 
-const props = withDefaults(defineProps<AppButtonProps>(), {
+const props = withDefaults(defineProps<AppStructureButtonProps>(), {
   variant: "secondary",
   size: "md",
   iconPosition: "left",
@@ -62,7 +62,7 @@ const baseClasses = [
 const interactiveClasses = computed(() => props.disabled || props.loading
   ? []
   : [
-      // Hover states
+    // Hover states
       "hover:-translate-y-0.5",
 
       // Active states (pressed effect)

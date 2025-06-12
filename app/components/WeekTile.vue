@@ -87,15 +87,21 @@ const weekTileClasses = computed(() => {
       </div>
 
       <div class="mt-2 text-gray-700 dark:text-gray-300 text-xs md:text-base">
-        <p>{{ week.weekStart.getDate() }} {{ getMonthName(week.weekStart) }} - {{ week.weekEnd.getDate() }} {{ getMonthName(week.weekEnd) }}</p>
+        <p>
+          {{ week.weekStart.getDate() }} {{ getMonthName(week.weekStart) }} - {{ week.weekEnd.getDate() }} {{
+            getMonthName(week.weekEnd) }}
+        </p>
       </div>
 
-      <div v-if="isMessageVisible(week.number) && hasMessage(week.number)" class="mt-4 text-gray-800 dark:text-gray-200 p-3 bg-white dark:bg-gray-800 border-2 border-current">
+      <div
+        v-if="isMessageVisible(week.number) && hasMessage(week.number)"
+        class="mt-4 text-gray-800 dark:text-gray-200 p-3 bg-white dark:bg-gray-800 border-2 border-current"
+      >
         {{ getMessage(week.number) }}
       </div>
     </div>
 
-    <AppButton
+    <AppStructureButton
       v-if="
         (week.number === currentWeekNumber && selectedYear === currentYear)
           || (!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)))
@@ -113,7 +119,10 @@ const weekTileClasses = computed(() => {
       <p v-if="hasMessage(week.number)" class="text-green-700 dark:text-green-400 flex items-center gap-2">
         <span class="i-heroicons-check-circle-20-solid" /> Done!
       </p>
-      <p v-else-if="week.isCurrentWeek && selectedYear === currentYear" class="text-yellow-700 dark:text-yellow-400 flex items-center gap-2">
+      <p
+        v-else-if="week.isCurrentWeek && selectedYear === currentYear"
+        class="text-yellow-700 dark:text-yellow-400 flex items-center gap-2"
+      >
         <span class="i-heroicons-clock-20-solid" /> Current
       </p>
       <p

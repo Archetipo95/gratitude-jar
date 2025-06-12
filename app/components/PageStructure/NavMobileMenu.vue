@@ -9,7 +9,7 @@ function toggleMenu() {
 <template>
   <div class="md:hidden" data-test-id="nav-mobile-menu">
     <!-- Hamburger Button -->
-    <AppButton
+    <AppStructureButton
       icon="lucide-lab:burger"
       variant="outline"
       size="md"
