@@ -89,7 +89,7 @@ const textColorClasses = computed(() => {
     return ["text-[#232323]"]
   }
   else if (props.variant === "error") {
-    return ["text-[#181818]"]
+    return ["text-[#181818]", "dark:text-[#040404]"]
   }
   return []
 })
