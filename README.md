@@ -1,6 +1,6 @@
 # ✨ Gratitude Jar ✨
 
-Welcome to **Gratitude Jar**, a delightful web application built with Nuxt.js that allows you to capture and reflect on moments of gratitude throughout the year. Whether you're looking to embrace mindfulness or simply want a space to record weekly reflections, this app is your perfect companion.
+Welcome to **Gratitude Jar**, a simple web application built with Nuxt.js that allows you to capture and reflect on moments of gratitude throughout the year. Whether you're looking to embrace mindfulness or simply want a space to record weekly reflections, this app is your perfect companion.
 
 ## 🌟 Features
 
@@ -76,7 +76,7 @@ bun run preview
 - **Nuxt UI 3**: Tailwind CSS 4, Nuxt Fonts, Nuxt Icons for a sleek UI.
 - **Supabase**: Backend as a Service for authentication and database.
 
-## 🌺 Features
+## ✨ Features
 
 - **🧪 Testing**: Comprehensive tests for all features.
 - **🧹 Lint Project**: Add ESLint and Prettier for code quality.

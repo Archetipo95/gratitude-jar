@@ -67,12 +67,20 @@ vi.mock("#imports", async () => {
   }
 })
 
+// Mock global Date constructor to ensure consistent year
+const mockDate = new Date(2024, 5, 20) // June 20, 2024 (week 25)
+vi.setSystemTime(mockDate)
+
 describe("weekGrid", () => {
   let wrapper: VueWrapper
 
   beforeEach(async () => {
     vi.clearAllMocks()
     wrapper = await mountSuspended(WeekGrid)
+  })
+
+  afterAll(() => {
+    vi.useRealTimers()
   })
 
   it("renders year selection dropdown", () => {
@@ -141,8 +149,10 @@ describe("weekGrid", () => {
     const weekTiles = wrapper.findAllComponents({ name: "WeekTile" })
     const weekNumbers = weekTiles.map(tile => tile.props("week").number)
 
-    // Should not include week 26 since current week is 25
-    expect(weekNumbers).not.toContain(26)
+    // Should only include weeks up to current week (25)
+    expect(weekNumbers).toEqual(expect.not.arrayContaining([26]))
+    // Also verify that week 25 is included
+    expect(weekNumbers).toContain(25)
   })
 
   it("has show all weeks functionality", () => {
