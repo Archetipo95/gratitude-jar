@@ -1,6 +1,5 @@
 import type { Preview } from "@storybook-vue/nuxt"
 
-import { themes } from "storybook/theming"
 import { h, Suspense } from "vue"
 
 const preview: Preview = {
