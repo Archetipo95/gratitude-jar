@@ -112,6 +112,7 @@ const weekTileClasses = computed(() => {
       :disabled="isSubmitting"
       class="px-2 py-2"
       data-test-id="add-message-button"
+      :aria-label="`Add gratitude message for week ${week.number}`"
       @click="openModal"
     />
 

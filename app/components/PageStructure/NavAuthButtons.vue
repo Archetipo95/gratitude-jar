@@ -13,6 +13,7 @@ const user = useSupabaseUser()
     size="lg"
     icon="lucide:log-out"
     label="Log Out"
+    aria-label="Log out of your account"
     @click="client.auth.signOut()"
   />
   <div
@@ -26,6 +27,7 @@ const user = useSupabaseUser()
       size="lg"
       icon="lucide:github"
       label="GitHub Login"
+      aria-label="Sign in or login with GitHub"
       @click="client.auth.signInWithOAuth({ provider: 'github' })"
     />
     <AppButton
@@ -34,6 +36,7 @@ const user = useSupabaseUser()
       size="lg"
       icon="simple-icons:google"
       label="Google Login"
+      aria-label="Sign in or login with Google"
       @click="client.auth.signInWithOAuth({ provider: 'google' })"
     />
   </div>

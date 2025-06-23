@@ -185,11 +185,11 @@ export const IconOnly: Story = {
     components: { AppButton },
     template: `
       <div class="flex flex-wrap gap-4 items-center">
-        <AppButton icon="lucide:heart" variant="primary" />
-        <AppButton icon="lucide:star" variant="secondary" />
-        <AppButton icon="lucide:bookmark" variant="outline" />
-        <AppButton icon="lucide:share" variant="ghost" />
-        <AppButton icon="lucide:trash" variant="error" />
+        <AppButton icon="lucide:heart" variant="primary" aria-label="Like" />
+        <AppButton icon="lucide:star" variant="secondary" aria-label="Add to favorites" />
+        <AppButton icon="lucide:bookmark" variant="outline" aria-label="Bookmark" />
+        <AppButton icon="lucide:share" variant="ghost" aria-label="Share" />
+        <AppButton icon="lucide:trash" variant="error" aria-label="Delete" />
       </div>
     `,
   }),
@@ -280,10 +280,10 @@ export const CommonPatterns: Story = {
         <div>
           <h3 class="mb-3 text-lg font-semibold">Social Actions</h3>
           <div class="flex gap-3">
-            <AppButton icon="lucide:heart" variant="ghost" />
-            <AppButton icon="lucide:share" variant="ghost" />
-            <AppButton icon="lucide:bookmark" variant="ghost" />
-            <AppButton icon="lucide:message-circle" variant="ghost" />
+            <AppButton icon="lucide:heart" variant="ghost" aria-label="Like" />
+            <AppButton icon="lucide:share" variant="ghost" aria-label="Share" />
+            <AppButton icon="lucide:bookmark" variant="ghost" aria-label="Bookmark" />
+            <AppButton icon="lucide:message-circle" variant="ghost" aria-label="Comment" />
           </div>
         </div>
         

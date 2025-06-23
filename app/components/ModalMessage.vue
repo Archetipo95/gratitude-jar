@@ -85,6 +85,7 @@ function closeModal() {
         icon="lucide:x"
         variant="outline"
         class="py-2 ml-auto"
+        aria-label="Close modal"
         @click="closeModal"
       />
     </template>
@@ -106,6 +107,7 @@ function closeModal() {
         variant="secondary"
         size="lg"
         class="px-6 py-2"
+        aria-label="Cancel and close modal"
         @click="closeModal"
       />
       <AppButton
@@ -115,6 +117,7 @@ function closeModal() {
         :loading="isSubmitting"
         :disabled="isSubmitting || !newMessage"
         class="px-6 py-2"
+        aria-label="Submit gratitude message"
         @click="submitMessage"
       />
     </template>
