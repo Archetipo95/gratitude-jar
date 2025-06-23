@@ -12,3 +12,6 @@ dist
 test-results/
 coverage/
 playwright-report/
+
+*storybook.log
+storybook-static

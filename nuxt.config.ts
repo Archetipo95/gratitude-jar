@@ -9,7 +9,14 @@ export default defineNuxtConfig({
 
   devtools: { enabled: true },
 
-  modules: ["@nuxtjs/supabase", "@nuxt/ui", "@nuxt/test-utils/module", "@nuxtjs/seo", "@nuxt/eslint"],
+  modules: [
+    "@nuxtjs/supabase",
+    "@nuxt/ui",
+    "@nuxt/test-utils/module",
+    "@nuxtjs/seo",
+    "@nuxt/eslint",
+    "@nuxtjs/storybook",
+  ],
 
   eslint: {
     config: {
@@ -104,5 +111,10 @@ export default defineNuxtConfig({
   typescript: {
     typeCheck: true,
   },
-},
-)
+
+  storybook: {
+    // Turned off for now, as it's not working with Nuxt
+    // You can launch it manually with `bun storybook`
+    // enabled: false,
+  },
+})

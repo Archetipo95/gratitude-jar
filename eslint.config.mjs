@@ -1,5 +1,5 @@
 import antfu from "@antfu/eslint-config"
-// import storybook from "eslint-plugin-storybook"
+import storybook from "eslint-plugin-storybook"
 
 // @ts-check
 import withNuxt from "./.nuxt/eslint.config.mjs"
@@ -70,14 +70,13 @@ export default withNuxt(antfu(
     },
   },
   // Add the Storybook plugin configuration
-  // ...storybook.configs["flat/recommended"],
-  // {
-  //   files: ["**/components/**/*.stories.ts",
-  //   ],
-  //   rules: {
-  //     // 👇 Disable this rule
-  //     "storybook/no-renderer-packages": "off",
-  //   },
-  // },
-),
-)
+  ...storybook.configs["flat/recommended"],
+  {
+    files: ["**/components/**/*.stories.ts",
+    ],
+    rules: {
+      // 👇 Disable this rule
+      "storybook/no-renderer-packages": "off",
+    },
+  },
+))
