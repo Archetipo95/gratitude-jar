@@ -83,10 +83,22 @@ const ghostClasses = computed(() => props.variant === "ghost"
     ]
   : [])
 
+// Text color overrides for accessibility
+const textColorClasses = computed(() => {
+  if (props.variant === "primary") {
+    return ["text-[#232323]"]
+  }
+  else if (props.variant === "error") {
+    return ["text-[#181818]"]
+  }
+  return []
+})
+
 const buttonClasses = computed(() => [
   ...baseClasses,
   ...interactiveClasses.value,
   ...ghostClasses.value,
+  ...textColorClasses.value,
   props.class,
 ].join(" "))
 
