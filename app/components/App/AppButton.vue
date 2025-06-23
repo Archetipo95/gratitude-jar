@@ -102,9 +102,9 @@ const buttonClasses = computed(() => [
   props.class,
 ].join(" "))
 
-// UButton UI overrides for typography
+// UButton UI overrides for typography and focus ring
 const uiOverrides = {
-  base: "font-bold uppercase tracking-wider",
+  base: "font-bold uppercase tracking-wider focus:outline-none focus-visible:ring-2 focus-visible:ring-blue-600 focus-visible:ring-offset-1",
 }
 
 function handleClick(event: MouseEvent) {
