@@ -10,6 +10,7 @@ const config: StorybookConfig = {
   addons: [
     "@storybook/addon-docs",
     "@storybook/addon-a11y",
+    "@vueless/storybook-dark-mode",
     // TODO: enable tests
     // "@storybook/addon-vitest",
   ],

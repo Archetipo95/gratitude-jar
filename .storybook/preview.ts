@@ -1,9 +1,14 @@
 import type { Preview } from "@storybook-vue/nuxt"
 
+import { themes } from "storybook/theming"
 import { h, Suspense } from "vue"
 
 const preview: Preview = {
   parameters: {
+    darkMode: {
+      stylePreview: true,
+      classTarget: "html",
+    },
     controls: {
       matchers: {
         color: /(background|color)$/i,
