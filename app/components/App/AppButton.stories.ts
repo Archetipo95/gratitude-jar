@@ -288,7 +288,7 @@ export const CommonPatterns: Story = {
         </div>
         
         <div>
-          <h3 class="mb-3 text-lg font-semibled">File Operations</h3>
+          <h3 class="mb-3 text-lg font-semibold">File Operations</h3>
           <div class="flex gap-3">
             <AppButton label="Upload" variant="primary" icon="lucide:upload" />
             <AppButton label="Download" variant="outline" icon="lucide:download" />
