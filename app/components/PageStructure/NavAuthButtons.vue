@@ -6,7 +6,7 @@ const user = useSupabaseUser()
 </script>
 
 <template>
-  <AppStructureButton
+  <AppButton
     v-if="!!user"
     data-test-id="logout-button"
     variant="error"
@@ -20,7 +20,7 @@ const user = useSupabaseUser()
     class="flex gap-2 flex-wrap"
     data-test-id="login-buttons-container"
   >
-    <AppStructureButton
+    <AppButton
       data-test-id="github-login-button"
       variant="secondary"
       size="lg"
@@ -28,7 +28,7 @@ const user = useSupabaseUser()
       label="GitHub Login"
       @click="client.auth.signInWithOAuth({ provider: 'github' })"
     />
-    <AppStructureButton
+    <AppButton
       data-test-id="google-login-button"
       variant="secondary"
       size="lg"

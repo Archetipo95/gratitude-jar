@@ -101,7 +101,7 @@ const weekTileClasses = computed(() => {
       </div>
     </div>
 
-    <AppStructureButton
+    <AppButton
       v-if="
         (week.number === currentWeekNumber && selectedYear === currentYear)
           || (!hasMessage(week.number) && (selectedYear < currentYear || (week.number <= currentWeekNumber && selectedYear === currentYear)))

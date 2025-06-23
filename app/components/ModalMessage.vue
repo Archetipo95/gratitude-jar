@@ -81,7 +81,7 @@ function closeModal() {
     :close="{ onClick: () => emit('close', false) }"
   >
     <template #close>
-      <AppStructureButton
+      <AppButton
         icon="lucide:x"
         variant="outline"
         class="py-2 ml-auto"
@@ -101,14 +101,14 @@ function closeModal() {
     </template>
 
     <template #footer>
-      <AppStructureButton
+      <AppButton
         label="Cancel"
         variant="secondary"
         size="lg"
         class="px-6 py-2"
         @click="closeModal"
       />
-      <AppStructureButton
+      <AppButton
         label="Submit"
         variant="primary"
         size="lg"

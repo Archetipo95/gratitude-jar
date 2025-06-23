@@ -1,22 +1,22 @@
 import type { Meta, StoryObj } from "@storybook/vue3"
 
-import AppStructureButton from "./AppStructureButton.vue"
+import AppButton from "./AppButton.vue"
 
 const meta = {
-  title: "AppStructure/Button",
-  component: AppStructureButton,
-} as Meta<typeof AppStructureButton>
+  title: "App/Button",
+  component: AppButton,
+} as Meta<typeof AppButton>
 
 export default meta
 type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   render: args => ({
-    components: { AppStructureButton },
+    components: { AppButton },
     setup() {
       return { args }
     },
-    template: "<AppStructureButton v-bind='args' />",
+    template: "<AppButton v-bind='args' />",
   }),
   args: {
     label: "Button",

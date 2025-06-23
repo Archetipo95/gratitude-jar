@@ -1,5 +1,5 @@
 <script setup lang="ts">
-type AppStructureButtonProps = {
+type AppButtonProps = {
   // Button content
   label?: string
   icon?: string
@@ -17,7 +17,7 @@ type AppStructureButtonProps = {
   class?: string
 }
 
-const props = withDefaults(defineProps<AppStructureButtonProps>(), {
+const props = withDefaults(defineProps<AppButtonProps>(), {
   variant: "secondary",
   size: "md",
   iconPosition: "left",
