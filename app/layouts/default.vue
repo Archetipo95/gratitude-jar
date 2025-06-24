@@ -7,6 +7,6 @@
     <AppFooter />
 
     <!-- Scroll Navigation -->
-    <ScrollNavigator />
+    <AppScrollTopBottom />
   </UContainer>
 </template>

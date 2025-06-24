@@ -2,9 +2,9 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import ScrollNavigator from "./ScrollNavigator.vue"
+import AppScrollTopBottom from "./AppScrollTopBottom.vue"
 
-describe("scrollNavigator", () => {
+describe("appScrollTopBottom", () => {
   let wrapper: VueWrapper
   let mockScrollTo: ReturnType<typeof vi.fn>
   let mockAddEventListener: ReturnType<typeof vi.fn>
@@ -47,7 +47,7 @@ describe("scrollNavigator", () => {
       writable: true,
     })
 
-    wrapper = await mountSuspended(ScrollNavigator)
+    wrapper = await mountSuspended(AppScrollTopBottom)
   })
 
   afterEach(() => {
