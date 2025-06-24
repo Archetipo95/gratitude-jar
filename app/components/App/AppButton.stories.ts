@@ -200,20 +200,27 @@ export const LoadingStates: Story = {
   render: () => ({
     components: { AppButton },
     template: `
-      <div class="space-y-4">
-        <div class="flex flex-wrap gap-4 items-center">
-          <AppButton label="Primary" variant="primary" :loading="true" />
-          <AppButton label="Secondary" variant="secondary" :loading="true" />
-          <AppButton label="Outline" variant="outline" :loading="true" />
-          <AppButton label="Ghost" variant="ghost" :loading="true" />
-          <AppButton label="Error" variant="error" :loading="true" />
+      <div class="space-y-6">
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">Loading States - With Labels</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            <AppButton label="Primary" variant="primary" :loading="true" />
+            <AppButton label="Secondary" variant="secondary" :loading="true" />
+            <AppButton label="Outline" variant="outline" :loading="true" />
+            <AppButton label="Ghost" variant="ghost" :loading="true" />
+            <AppButton label="Error" variant="error" :loading="true" />
+          </div>
         </div>
-        <div class="flex flex-wrap gap-4 items-center">
-          <AppButton icon="lucide:heart" variant="primary" :loading="true" />
-          <AppButton icon="lucide:star" variant="secondary" :loading="true" />
-          <AppButton icon="lucide:bookmark" variant="outline" :loading="true" />
-          <AppButton icon="lucide:share" variant="ghost" :loading="true" />
-          <AppButton icon="lucide:trash" variant="error" :loading="true" />
+        
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">Loading States - Icon Only</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-start">
+            <AppButton icon="lucide:heart" variant="primary" :loading="true" aria-label="Like" />
+            <AppButton icon="lucide:star" variant="secondary" :loading="true" aria-label="Add to favorites" />
+            <AppButton icon="lucide:bookmark" variant="outline" :loading="true" aria-label="Bookmark" />
+            <AppButton icon="lucide:share" variant="ghost" :loading="true" aria-label="Share" />
+            <AppButton icon="lucide:trash" variant="error" :loading="true" aria-label="Delete" />
+          </div>
         </div>
       </div>
     `,
@@ -225,20 +232,27 @@ export const DisabledStates: Story = {
   render: () => ({
     components: { AppButton },
     template: `
-      <div class="space-y-4">
-        <div class="flex flex-wrap gap-4 items-center">
-          <AppButton label="Primary" variant="primary" :disabled="true" />
-          <AppButton label="Secondary" variant="secondary" :disabled="true" />
-          <AppButton label="Outline" variant="outline" :disabled="true" />
-          <AppButton label="Ghost" variant="ghost" :disabled="true" />
-          <AppButton label="Error" variant="error" :disabled="true" />
+      <div class="space-y-6">
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">Disabled States - With Labels</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            <AppButton label="Primary" variant="primary" :disabled="true" />
+            <AppButton label="Secondary" variant="secondary" :disabled="true" />
+            <AppButton label="Outline" variant="outline" :disabled="true" />
+            <AppButton label="Ghost" variant="ghost" :disabled="true" />
+            <AppButton label="Error" variant="error" :disabled="true" />
+          </div>
         </div>
-        <div class="flex flex-wrap gap-4 items-center">
-          <AppButton icon="lucide:heart" variant="primary" :disabled="true" />
-          <AppButton icon="lucide:star" variant="secondary" :disabled="true" />
-          <AppButton icon="lucide:bookmark" variant="outline" :disabled="true" />
-          <AppButton icon="lucide:share" variant="ghost" :disabled="true" />
-          <AppButton icon="lucide:trash" variant="error" :disabled="true" />
+        
+        <div>
+          <h3 class="mb-4 text-lg font-semibold">Disabled States - Icon Only</h3>
+          <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 place-items-start">
+            <AppButton icon="lucide:heart" variant="primary" :disabled="true" aria-label="Like" />
+            <AppButton icon="lucide:star" variant="secondary" :disabled="true" aria-label="Add to favorites" />
+            <AppButton icon="lucide:bookmark" variant="outline" :disabled="true" aria-label="Bookmark" />
+            <AppButton icon="lucide:share" variant="ghost" :disabled="true" aria-label="Share" />
+            <AppButton icon="lucide:trash" variant="error" :disabled="true" aria-label="Delete" />
+          </div>
         </div>
       </div>
     `,
