@@ -2,13 +2,13 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import ColorModeButton from "./ColorModeButton.vue"
+import AppThemeButton from "./AppThemeButton.vue"
 
-describe("colorModeButton", () => {
+describe("appThemeButton", () => {
   let wrapper: VueWrapper
 
   beforeEach(async () => {
-    wrapper = await mountSuspended(ColorModeButton)
+    wrapper = await mountSuspended(AppThemeButton)
   })
 
   describe("component structure", () => {

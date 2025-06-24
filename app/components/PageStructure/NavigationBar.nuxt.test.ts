@@ -17,7 +17,7 @@ describe("navigationBar", () => {
   const getLogoSection = () => wrapper.find("[data-test-id=\"nav-logo-section\"]")
   const getRightSection = () => wrapper.find("[data-test-id=\"nav-right-section\"]")
   const getDesktopSection = () => wrapper.find("[data-test-id=\"nav-desktop-section\"]")
-  // ColorModeButton is now inside desktop section, no longer has its own section
+  // AppThemeButton is now inside desktop section, no longer has its own section
   const getMobileSection = () => wrapper.find("[data-test-id=\"nav-mobile-section\"]")
 
   describe("component structure", () => {
@@ -48,7 +48,7 @@ describe("navigationBar", () => {
       expect(desktopSection.classes()).toContain("md:flex")
     })
 
-    // ColorModeButton is now inside desktop section - no separate section test needed
+    // AppThemeButton is now inside desktop section - no separate section test needed
 
     it("renders mobile section", () => {
       const mobileSection = getMobileSection()
@@ -75,10 +75,10 @@ describe("navigationBar", () => {
       expect(navAuthButtons.exists()).toBe(true)
     })
 
-    it("renders ColorModeButton in desktop section", () => {
+    it("renders AppThemeButton in desktop section", () => {
       const desktopSection = getDesktopSection()
-      const colorModeButton = desktopSection.findComponent({ name: "ColorModeButton" })
-      expect(colorModeButton.exists()).toBe(true)
+      const AppThemeButton = desktopSection.findComponent({ name: "AppThemeButton" })
+      expect(AppThemeButton.exists()).toBe(true)
     })
 
     it("renders NavMobileMenu in mobile section", () => {

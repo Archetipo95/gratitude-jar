@@ -12,7 +12,7 @@
         <div class="hidden md:flex items-center gap-4" data-test-id="nav-desktop-section">
           <NavGreeting />
           <div class="hidden md:block">
-            <ColorModeButton />
+            <AppThemeButton />
           </div>
           <NavAuthButtons />
         </div>

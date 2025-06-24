@@ -80,12 +80,12 @@ describe("navMobileMenu", () => {
       expect(navAuthButtons.exists()).toBe(true)
     })
 
-    it("renders ColorModeButton in mobile menu when open", async () => {
+    it("renders AppThemeButton in mobile menu when open", async () => {
       const button = getHamburgerButton()
       await button.trigger("click")
 
-      const colorModeButton = wrapper.findComponent({ name: "ColorModeButton" })
-      expect(colorModeButton.exists()).toBe(true)
+      const AppThemeButton = wrapper.findComponent({ name: "AppThemeButton" })
+      expect(AppThemeButton.exists()).toBe(true)
     })
   })
 })
