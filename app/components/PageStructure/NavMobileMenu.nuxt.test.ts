@@ -61,12 +61,12 @@ describe("navMobileMenu", () => {
   })
 
   describe("component integration", () => {
-    it("renders NavGreeting when menu is open", async () => {
+    it("renders AppNavbarGreeting when menu is open", async () => {
       const button = getHamburgerButton()
       await button.trigger("click")
 
-      const navGreeting = wrapper.findComponent({ name: "NavGreeting" })
-      expect(navGreeting.exists()).toBe(true)
+      const AppNavbarGreeting = wrapper.findComponent({ name: "AppNavbarGreeting" })
+      expect(AppNavbarGreeting.exists()).toBe(true)
     })
 
     it("renders NavAuthButtons when menu is open", async () => {

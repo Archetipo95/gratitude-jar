@@ -142,10 +142,10 @@ describe("appNavbar", () => {
   })
 
   describe("component integration", () => {
-    it("renders NavGreeting in desktop section", () => {
+    it("renders AppNavbarGreeting in desktop section", () => {
       const desktopSection = getDesktopSection()
-      const navGreeting = desktopSection.findComponent({ name: "NavGreeting" })
-      expect(navGreeting.exists()).toBe(true)
+      const AppNavbarGreeting = desktopSection.findComponent({ name: "AppNavbarGreeting" })
+      expect(AppNavbarGreeting.exists()).toBe(true)
     })
 
     it("renders NavAuthButtons in desktop section", () => {

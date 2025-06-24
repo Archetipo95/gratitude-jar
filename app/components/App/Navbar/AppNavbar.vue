@@ -15,7 +15,7 @@
       <div class="flex items-center gap-4" data-test-id="nav-right-section">
         <!-- Desktop Only Navigation -->
         <div class="hidden md:flex items-center gap-4" data-test-id="nav-desktop-section">
-          <NavGreeting />
+          <AppNavbarGreeting />
           <div class="hidden md:block">
             <AppThemeButton />
           </div>

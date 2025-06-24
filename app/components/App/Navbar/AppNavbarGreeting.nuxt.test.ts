@@ -2,7 +2,7 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import NavGreeting from "./NavGreeting.vue"
+import AppNavbarGreeting from "./AppNavbarGreeting.vue"
 
 // Mock Supabase user
 let mockUserValue: any = null
@@ -16,7 +16,7 @@ vi.mock("#imports", async () => {
   }
 })
 
-describe("navGreeting", () => {
+describe("appNavbarGreeting", () => {
   let wrapper: VueWrapper
 
   beforeEach(() => {
@@ -31,7 +31,7 @@ describe("navGreeting", () => {
 
   describe("component structure", () => {
     beforeEach(async () => {
-      wrapper = await mountSuspended(NavGreeting)
+      wrapper = await mountSuspended(AppNavbarGreeting)
     })
 
     it("mounts successfully", () => {

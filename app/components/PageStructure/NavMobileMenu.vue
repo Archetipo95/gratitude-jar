@@ -35,7 +35,7 @@ function toggleMenu() {
       >
         <div class="p-6 space-y-4 border-t-2 border-current" data-test-id="mobile-menu-inner">
           <div class="flex gap-2 justify-between items-center">
-            <NavGreeting />
+            <AppNavbarGreeting />
             <AppThemeButton />
           </div>
           <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
