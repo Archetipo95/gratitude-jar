@@ -4,7 +4,7 @@ import { mountSuspended } from "@nuxt/test-utils/runtime"
 
 import AppNavbar from "./AppNavbar.vue"
 
-describe("AppNavbar", () => {
+describe("appNavbar", () => {
   let wrapper: VueWrapper
 
   beforeEach(async () => {
