@@ -138,6 +138,7 @@ const iconSizeMap = {
     <UIcon
       v-if="icon && iconPosition === 'left'"
       :name="icon"
+      class="shrink-0"
       :class="iconSizeMap[size]"
     />
 
@@ -150,6 +151,7 @@ const iconSizeMap = {
     <UIcon
       v-if="icon && iconPosition === 'right'"
       :name="icon"
+      class="shrink-0"
       :class="iconSizeMap[size]"
     />
   </UButton>
