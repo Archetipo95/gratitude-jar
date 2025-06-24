@@ -39,7 +39,7 @@ function toggleMenu() {
             <AppThemeButton />
           </div>
           <div class="flex flex-col gap-2" data-test-id="mobile-auth-container">
-            <NavAuthButtons />
+            <AppNavbarAuthButtons />
           </div>
         </div>
       </div>

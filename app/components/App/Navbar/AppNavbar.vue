@@ -19,12 +19,12 @@
           <div class="hidden md:block">
             <AppThemeButton />
           </div>
-          <NavAuthButtons />
+          <AppNavbarAuthButtons />
         </div>
 
         <!-- Mobile Menu (CSS-only) -->
         <div data-test-id="nav-mobile-section">
-          <NavMobileMenu />
+          <AppNavbarMobileMenu />
         </div>
       </div>
     </div>

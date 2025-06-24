@@ -148,10 +148,10 @@ describe("appNavbar", () => {
       expect(AppNavbarGreeting.exists()).toBe(true)
     })
 
-    it("renders NavAuthButtons in desktop section", () => {
+    it("renders AppNavbarAuthButtons in desktop section", () => {
       const desktopSection = getDesktopSection()
-      const navAuthButtons = desktopSection.findComponent({ name: "NavAuthButtons" })
-      expect(navAuthButtons.exists()).toBe(true)
+      const AppNavbarAuthButtons = desktopSection.findComponent({ name: "AppNavbarAuthButtons" })
+      expect(AppNavbarAuthButtons.exists()).toBe(true)
     })
 
     it("renders AppThemeButton in desktop section", () => {
@@ -160,10 +160,10 @@ describe("appNavbar", () => {
       expect(AppThemeButton.exists()).toBe(true)
     })
 
-    it("renders NavMobileMenu in mobile section", () => {
+    it("renders AppNavbarMobileMenu in mobile section", () => {
       const mobileSection = getMobileSection()
-      const navMobileMenu = mobileSection.findComponent({ name: "NavMobileMenu" })
-      expect(navMobileMenu.exists()).toBe(true)
+      const AppNavbarMobileMenu = mobileSection.findComponent({ name: "AppNavbarMobileMenu" })
+      expect(AppNavbarMobileMenu.exists()).toBe(true)
     })
   })
 })

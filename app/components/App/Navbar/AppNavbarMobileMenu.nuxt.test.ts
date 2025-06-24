@@ -2,13 +2,13 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import NavMobileMenu from "./NavMobileMenu.vue"
+import AppNavbarMobileMenu from "./AppNavbarMobileMenu.vue"
 
-describe("navMobileMenu", () => {
+describe("appNavbarMobileMenu", () => {
   let wrapper: VueWrapper
 
   beforeEach(async () => {
-    wrapper = await mountSuspended(NavMobileMenu)
+    wrapper = await mountSuspended(AppNavbarMobileMenu)
   })
 
   // Helper functions using data-test-ids
@@ -69,15 +69,15 @@ describe("navMobileMenu", () => {
       expect(AppNavbarGreeting.exists()).toBe(true)
     })
 
-    it("renders NavAuthButtons when menu is open", async () => {
+    it("renders AppNavbarAuthButtons when menu is open", async () => {
       const button = getHamburgerButton()
       await button.trigger("click")
 
       const authContainer = getAuthContainer()
       expect(authContainer.exists()).toBe(true)
 
-      const navAuthButtons = authContainer.findComponent({ name: "NavAuthButtons" })
-      expect(navAuthButtons.exists()).toBe(true)
+      const AppNavbarAuthButtons = authContainer.findComponent({ name: "AppNavbarAuthButtons" })
+      expect(AppNavbarAuthButtons.exists()).toBe(true)
     })
 
     it("renders AppThemeButton in mobile menu when open", async () => {

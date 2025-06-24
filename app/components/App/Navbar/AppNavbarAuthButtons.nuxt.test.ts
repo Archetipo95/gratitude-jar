@@ -2,7 +2,7 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import NavAuthButtons from "./NavAuthButtons.vue"
+import AppNavbarAuthButtons from "./AppNavbarAuthButtons.vue"
 
 // Mock Supabase with minimal setup
 let mockUserValue: any = null
@@ -17,7 +17,7 @@ vi.mock("#imports", async () => {
   }
 })
 
-describe("navAuthButtons", () => {
+describe("appNavbarAuthButtons", () => {
   let wrapper: VueWrapper
 
   beforeEach(() => {
@@ -38,13 +38,13 @@ describe("navAuthButtons", () => {
 
   describe("component structure", () => {
     it("mounts successfully", async () => {
-      wrapper = await mountSuspended(NavAuthButtons)
+      wrapper = await mountSuspended(AppNavbarAuthButtons)
       expect(wrapper.exists()).toBe(true)
       expect(wrapper.vm).toBeTruthy()
     })
 
     it("renders login buttons when no user", async () => {
-      wrapper = await mountSuspended(NavAuthButtons)
+      wrapper = await mountSuspended(AppNavbarAuthButtons)
 
       expect(getLoginContainer().exists()).toBe(true)
       expect(getGithubButton().exists()).toBe(true)
@@ -53,7 +53,7 @@ describe("navAuthButtons", () => {
     })
 
     it("has correct button text content", async () => {
-      wrapper = await mountSuspended(NavAuthButtons)
+      wrapper = await mountSuspended(AppNavbarAuthButtons)
 
       const githubButton = getGithubButton()
       const googleButton = getGoogleButton()
