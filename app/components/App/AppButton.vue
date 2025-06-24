@@ -73,6 +73,8 @@ const interactiveClasses = computed(() => props.disabled || props.loading
 const ghostClasses = computed(() => props.variant === "ghost"
   ? [
       "border-transparent shadow-none",
+      // Smooth transition for border and shadow appearance
+      "transition-all duration-150 ease-in-out",
       ...(props.disabled || props.loading
         ? []
         : [
@@ -89,7 +91,7 @@ const textColorClasses = computed(() => {
     return ["text-[#232323]"]
   }
   else if (props.variant === "error") {
-    return ["text-[#181818]", "dark:text-[#040404]"]
+    return ["bg-[#FC7178] text-[#240608]", "dark:text-[#040404]"]
   }
   return []
 })
