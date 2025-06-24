@@ -3,7 +3,7 @@ import type { Meta, StoryObj } from "@storybook/vue3"
 import AppNavbar from "./AppNavbar.vue"
 
 const meta = {
-  title: "App/Navbar",
+  title: "App/Navbar/AppNavbar",
   component: AppNavbar,
   parameters: {
     layout: "fullscreen",
