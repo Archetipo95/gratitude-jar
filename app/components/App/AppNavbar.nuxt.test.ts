@@ -2,17 +2,17 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import NavigationBar from "./NavigationBar.vue"
+import AppNavbar from "./AppNavbar.vue"
 
-describe("navigationBar", () => {
+describe("AppNavbar", () => {
   let wrapper: VueWrapper
 
   beforeEach(async () => {
-    wrapper = await mountSuspended(NavigationBar)
+    wrapper = await mountSuspended(AppNavbar)
   })
 
   // Helper functions using data-test-ids
-  const getNavigationBar = () => wrapper.find("[data-test-id=\"navigation-bar\"]")
+  const getAppNavbar = () => wrapper.find("[data-test-id=\"navigation-bar\"]")
   const getNavContainer = () => wrapper.find("[data-test-id=\"nav-container\"]")
   const getLogoSection = () => wrapper.find("[data-test-id=\"nav-logo-section\"]")
   const getRightSection = () => wrapper.find("[data-test-id=\"nav-right-section\"]")
@@ -22,7 +22,7 @@ describe("navigationBar", () => {
 
   describe("component structure", () => {
     it("renders main navigation bar", () => {
-      const navBar = getNavigationBar()
+      const navBar = getAppNavbar()
       expect(navBar.exists()).toBe(true)
     })
 
