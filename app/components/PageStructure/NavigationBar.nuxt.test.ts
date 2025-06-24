@@ -56,13 +56,92 @@ describe("navigationBar", () => {
     })
   })
 
-  describe("component integration", () => {
-    it("renders NavLogo component in logo section", () => {
+  describe("logo section content and structure", () => {
+    it("displays the application name", () => {
       const logoSection = getLogoSection()
-      const navLogo = logoSection.findComponent({ name: "NavLogo" })
-      expect(navLogo.exists()).toBe(true)
+      expect(logoSection.text()).toContain("Gratitude Jar")
     })
 
+    it("renders the application title as a heading", () => {
+      const logoSection = getLogoSection()
+      const heading = logoSection.find("h1")
+      expect(heading.exists()).toBe(true)
+      expect(heading.text()).toBe("Gratitude Jar")
+    })
+
+    it("includes the gratitude logo component", () => {
+      const logoSection = getLogoSection()
+      const logo = logoSection.findComponent({ name: "AppLogo" })
+      expect(logo.exists()).toBe(true)
+    })
+  })
+
+  describe("logo section navigation behavior", () => {
+    it("functions as a clickable link to the home page", () => {
+      const logoSection = getLogoSection()
+      const homeLink = logoSection.find("a[href='/']")
+      expect(homeLink.exists()).toBe(true)
+    })
+
+    it("wraps both logo and title in a single navigation link", () => {
+      const logoSection = getLogoSection()
+      const link = logoSection.find("a")
+      expect(link.exists()).toBe(true)
+
+      // Both logo and title should be within the same link
+      const logoInLink = link.findComponent({ name: "AppLogo" })
+      const titleInLink = link.find("h1")
+
+      expect(logoInLink.exists()).toBe(true)
+      expect(titleInLink.exists()).toBe(true)
+    })
+
+    it("can be activated by clicking anywhere on the logo area", async () => {
+      const logoSection = getLogoSection()
+      const link = logoSection.find("a")
+
+      // Should be able to click without errors
+      await link.trigger("click")
+      expect(link.attributes("href")).toBe("/")
+    })
+  })
+
+  describe("logo section accessibility", () => {
+    it("provides a semantic heading for the application name", () => {
+      const logoSection = getLogoSection()
+      const heading = logoSection.find("h1")
+      expect(heading.exists()).toBe(true)
+      expect(heading.text()).toBeTruthy()
+    })
+
+    it("creates a navigable home link", () => {
+      const logoSection = getLogoSection()
+      const link = logoSection.find("a")
+      expect(link.attributes("href")).toBe("/")
+      expect(link.element.tagName.toLowerCase()).toBe("a")
+    })
+  })
+
+  describe("logo section component composition", () => {
+    it("correctly integrates the AppLogo component", () => {
+      const logoSection = getLogoSection()
+      const logo = logoSection.findComponent({ name: "AppLogo" })
+      expect(logo.exists()).toBe(true)
+      expect(logo.vm).toBeDefined()
+    })
+
+    it("displays logo and title together as a cohesive unit", () => {
+      const logoSection = getLogoSection()
+      const logo = logoSection.findComponent({ name: "AppLogo" })
+      const title = logoSection.find("h1")
+
+      expect(logo.exists()).toBe(true)
+      expect(title.exists()).toBe(true)
+      expect(title.text()).toBe("Gratitude Jar")
+    })
+  })
+
+  describe("component integration", () => {
     it("renders NavGreeting in desktop section", () => {
       const desktopSection = getDesktopSection()
       const navGreeting = desktopSection.findComponent({ name: "NavGreeting" })
