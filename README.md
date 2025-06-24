@@ -56,6 +56,16 @@ Start the development server on `http://localhost:3000`:
 bun run dev
 ```
 
+### Storybook
+
+Run Storybook for component development and testing:
+
+```
+bun run storybook
+```
+
+This will start Storybook on `http://localhost:6006`.
+
 ### Building for Production
 
 Build the application for production:
@@ -70,17 +80,17 @@ Locally preview production build:
 bun run preview
 ```
 
-## 🛠️ Tech Stack
+## ✨ Nerd stuff
 
-- **Nuxt.js**: A powerful Vue.js framework.
-- **Nuxt UI 3**: Tailwind CSS 4, Nuxt Fonts, Nuxt Icons for a sleek UI.
-- **Supabase**: Backend as a Service for authentication and database.
-
-## ✨ Features
-
-- **🧪 Testing**: Comprehensive tests for all features.
-- **🧹 Lint Project**: Add ESLint and Prettier for code quality.
-- **🔍 Typecheck**: Add TypeScript for type safety.
+- **⚡ Nuxt 4**: A powerful Vue.js framework.
+- **🎨 Nuxt UI 3**: Tailwind CSS 4, Nuxt Fonts, Nuxt Icons for a sleek UI.
+- **🔒 Nuxt Security**: Security headers and best practices for your Nuxt application.
+- **🗄️ Supabase**: Backend as a Service for authentication and database.
+- **🧪 Testing**: Comprehensive unit and E2E tests with Vitest and Playwright.
+- **📚 Storybook**: Tool for building UI components and pages in isolation.
+- **🧹 Code Quality**: ESLint and Prettier for consistent code formatting.
+- **🔍 TypeScript**: Full type safety and better developer experience.
+- **📧 Email Service**: Resend integration for notification features.
 
 ## 🗺️ Roadmap
 
@@ -90,7 +100,6 @@ bun run preview
 - **🗑️ Account Deletion**: Allow users to delete their accounts.
 - **👥 Groups**: Enable shared lists for group gratitude.
 - **🌐 Internationalization**: Support multiple languages.
-- **📚 Storybook**: Integrate Storybook for component testing.
 
 ## 📜 License
 

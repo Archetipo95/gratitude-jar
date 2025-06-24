@@ -16,6 +16,7 @@ export default defineNuxtConfig({
     "@nuxtjs/seo",
     "@nuxt/eslint",
     "@nuxtjs/storybook",
+    "nuxt-security",
   ],
 
   eslint: {
