@@ -10,15 +10,44 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
-// Default
-export const Default: Story = {
-  render: () => ({
-    components: { AppNavbarGreeting },
-    setup() {
-      // Mock useSupabaseUser to return null (guest user)
-      const mockUser = ref(null)
-      return { mockUser }
-    },
-    template: "<AppNavbarGreeting />",
-  }),
+// Helper function to create story configurations
+function createGreetingStory(userData: any) {
+  return {
+    render: () => ({
+      components: { AppNavbarGreeting },
+      setup() {
+        // Create a mock component that replicates the greeting logic
+        const user = ref(userData)
+        const greetingMessage = computed(() => {
+          if (!user.value)
+            return "Hello Guest"
+          return `Hello ${user.value.user_metadata.user_name}`
+        })
+
+        return { greetingMessage }
+      },
+      template: `
+        <h2 class="text-lg text-gray-800 dark:text-gray-200 uppercase wrap-normal">
+          {{ greetingMessage }}
+        </h2>
+      `,
+    }),
+  }
 }
+
+// Default - Guest user
+export const Default: Story = createGreetingStory(null)
+
+// Logged in user
+export const LoggedInUser: Story = createGreetingStory({
+  user_metadata: {
+    user_name: "John Doe",
+  },
+})
+
+// Different user names
+export const WithLongUsername: Story = createGreetingStory({
+  user_metadata: {
+    user_name: "Christopher Alexander Johnson",
+  },
+})
