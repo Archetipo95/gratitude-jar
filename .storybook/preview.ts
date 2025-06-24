@@ -4,6 +4,7 @@ import { h, Suspense } from "vue"
 
 const preview: Preview = {
   parameters: {
+    layout: "centered",
     darkMode: {
       stylePreview: true,
       classTarget: "html",
