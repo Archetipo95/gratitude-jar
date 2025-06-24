@@ -4,7 +4,7 @@
       <AppNavbar />
       <slot />
     </div>
-    <FooterBar />
+    <AppFooter />
 
     <!-- Scroll Navigation -->
     <ScrollNavigator />

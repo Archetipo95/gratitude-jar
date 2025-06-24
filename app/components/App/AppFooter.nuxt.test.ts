@@ -2,7 +2,7 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import Footer from "./FooterBar.vue"
+import Footer from "./AppFooter.vue"
 
 describe("footer", () => {
   let wrapper: VueWrapper
