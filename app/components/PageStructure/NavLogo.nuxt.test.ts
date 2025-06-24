@@ -23,7 +23,7 @@ describe("navLogo", () => {
     })
 
     it("includes the gratitude logo component", () => {
-      const logo = wrapper.findComponent({ name: "GratitudeLogo" })
+      const logo = wrapper.findComponent({ name: "AppLogo" })
       expect(logo.exists()).toBe(true)
     })
   })
@@ -39,7 +39,7 @@ describe("navLogo", () => {
       expect(link.exists()).toBe(true)
 
       // Both logo and title should be within the same link
-      const logoInLink = link.findComponent({ name: "GratitudeLogo" })
+      const logoInLink = link.findComponent({ name: "AppLogo" })
       const titleInLink = link.find("h1")
 
       expect(logoInLink.exists()).toBe(true)
@@ -70,14 +70,14 @@ describe("navLogo", () => {
   })
 
   describe("component composition", () => {
-    it("correctly integrates the GratitudeLogo component", () => {
-      const logo = wrapper.findComponent({ name: "GratitudeLogo" })
+    it("correctly integrates the AppLogo component", () => {
+      const logo = wrapper.findComponent({ name: "AppLogo" })
       expect(logo.exists()).toBe(true)
       expect(logo.vm).toBeDefined()
     })
 
     it("displays logo and title together as a cohesive unit", () => {
-      const logo = wrapper.findComponent({ name: "GratitudeLogo" })
+      const logo = wrapper.findComponent({ name: "AppLogo" })
       const title = wrapper.find("h1")
 
       expect(logo.exists()).toBe(true)
