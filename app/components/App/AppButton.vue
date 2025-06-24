@@ -125,6 +125,7 @@ const iconSizeMap = {
 
 <template>
   <UButton
+    class="disabled:!cursor-not-allowed [&[data-loading='true']]:!cursor-wait cursor"
     :color="uButtonColorMap[variant]"
     :variant="uButtonVariantMap[variant]"
     :size="size"
@@ -132,6 +133,7 @@ const iconSizeMap = {
     :disabled="disabled"
     :class="buttonClasses"
     :ui="uiOverrides"
+    :data-loading="loading"
     @click="handleClick"
   >
     <!-- Left icon -->
