@@ -1,5 +1,5 @@
 <template>
-  <div class="p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600">
+  <div class="p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600 cursor-help">
     <p class="text-lg text-gray-800 dark:text-gray-200 mb-4 leading-relaxed">
       Welcome to the Gratitude Jar! This app allows you to reflect on your week and note down things you're grateful for. Each week, add a message to capture your thoughts, and at the end of the year,
       review all the positive moments you've recorded.
