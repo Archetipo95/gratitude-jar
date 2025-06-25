@@ -10,9 +10,15 @@ const emit = defineEmits<{
   openModal: [value: number]
 }>()
 
+// Use composable utilities for message operations
+const {
+  hasMessage: hasMessageUtil,
+  getMessage: getMessageUtil,
+} = useGratitudeMessages()
+
 // Check if there's a message for the given week
 function hasMessage(weekNumber: number) {
-  return props.messages?.some(message => message.week === weekNumber && message.year === props.selectedYear)
+  return hasMessageUtil(props.messages || [], weekNumber, props.selectedYear)
 }
 
 // Reactive map to track visibility of messages
@@ -30,8 +36,7 @@ function isMessageVisible(weekNumber: number) {
 
 // Get the message for the given week
 function getMessage(weekNumber: number) {
-  const message = props.messages?.find(message => message.week === weekNumber && message.year === props.selectedYear)
-  return message ? message.message : ""
+  return getMessageUtil(props.messages || [], weekNumber, props.selectedYear)
 }
 
 const overlay = useOverlay()

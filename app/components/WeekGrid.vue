@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Database } from "~~/types/database.types"
-
 // Available years for selection
 const currentYear = new Date().getFullYear()
 // calculate availableYears from 2024 to currentYear
@@ -14,9 +12,8 @@ const {
   currentWeekNumber,
 } = useWeek()
 
-const client = useSupabaseClient<Database>()
-
 const { isAuthenticated } = useAuth()
+const { getUserMessages } = useGratitudeMessages()
 
 const {
   data: messages,
@@ -26,11 +23,10 @@ const {
   "messages",
   async () => {
     if (!isAuthenticated.value)
-      return
-    return await client.from("gratitude_messages").select("id, message, week, year").eq("user_id", isAuthenticated.value.id).order("week", { ascending: true })
+      return []
+    return await getUserMessages()
   },
   {
-    transform: result => (result ? result.data : []),
     watch: [isAuthenticated],
   },
 )
