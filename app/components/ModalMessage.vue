@@ -11,9 +11,20 @@ const emit = defineEmits(["messageSubmitted", "failedSubmit", "close"])
 const { isAuthenticated } = useAuth()
 const { submitMessage: submitGratitudeMessage } = useGratitudeMessages()
 
-// Modal state management
-const isSubmitting = ref(false)
-const newMessage = ref<string>("")
+// Modal state management with composable
+const {
+  isSubmitting,
+  formData,
+  setSubmitting,
+  updateFormData,
+  closeModal: closeModalState,
+} = useModal()
+
+// Initialize form data
+const newMessage = computed({
+  get: () => formData.value.message || "",
+  set: value => updateFormData("message", value),
+})
 
 // Submit new message
 async function submitMessage() {
@@ -23,10 +34,10 @@ async function submitMessage() {
   }
 
   if (weekNumber && newMessage.value.trim()) {
-    isSubmitting.value = true
+    setSubmitting(true)
     try {
       await submitGratitudeMessage(weekNumber, selectedYear, newMessage.value)
-      newMessage.value = ""
+      closeModalState()
       emit("messageSubmitted")
       emit("close")
     }
@@ -35,7 +46,7 @@ async function submitMessage() {
       onFailedSubmit()
     }
     finally {
-      isSubmitting.value = false
+      setSubmitting(false)
     }
   }
 }
@@ -45,7 +56,7 @@ function onFailedSubmit() {
 }
 
 function closeModal() {
-  newMessage.value = ""
+  closeModalState()
   emit("close")
 }
 </script>

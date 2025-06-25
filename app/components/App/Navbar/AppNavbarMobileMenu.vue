@@ -1,8 +1,12 @@
 <script setup lang="ts">
-const isMenuOpen = ref(false)
+const {
+  isOpen: isMenuOpen,
+  openModal,
+  closeModal,
+} = useModal()
 
 function toggleMenu() {
-  isMenuOpen.value = !isMenuOpen.value
+  isMenuOpen.value ? closeModal() : openModal()
 }
 </script>
 
