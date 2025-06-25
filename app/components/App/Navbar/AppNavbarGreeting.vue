@@ -1,9 +1,12 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
+const {
+  isAuthenticated,
+  user,
+} = useAuth()
 
 // Greeting message
 const greetingMessage = computed(() => {
-  if (!user.value)
+  if (!isAuthenticated.value)
     return "Hello Guest"
   return `Hello ${user.value.user_metadata.user_name}`
 })

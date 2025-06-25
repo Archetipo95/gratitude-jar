@@ -15,7 +15,8 @@ const {
 } = useWeek()
 
 const client = useSupabaseClient<Database>()
-const user = useSupabaseUser()
+
+const { isAuthenticated } = useAuth()
 
 const {
   data: messages,
@@ -24,13 +25,13 @@ const {
 } = await useAsyncData(
   "messages",
   async () => {
-    if (!user.value)
+    if (!isAuthenticated.value)
       return
-    return await client.from("gratitude_messages").select("id, message, week, year").eq("user_id", user.value.id).order("week", { ascending: true })
+    return await client.from("gratitude_messages").select("id, message, week, year").eq("user_id", isAuthenticated.value.id).order("week", { ascending: true })
   },
   {
     transform: result => (result ? result.data : []),
-    watch: [user],
+    watch: [isAuthenticated],
   },
 )
 

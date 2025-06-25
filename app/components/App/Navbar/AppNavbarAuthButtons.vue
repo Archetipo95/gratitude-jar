@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import type { Database } from "~~/types/database.types"
-
-const client = useSupabaseClient<Database>()
-const user = useSupabaseUser()
+const {
+  isAuthenticated,
+  signOut,
+  signInWithGitHub,
+  signInWithGoogle,
+} = useAuth()
 </script>
 
 <template>
   <AppButton
-    v-if="!!user"
+    v-if="isAuthenticated"
     data-test-id="logout-button"
     variant="error"
     size="lg"
     icon="lucide:log-out"
     label="Log Out"
     aria-label="Log out of your account"
-    @click="client.auth.signOut()"
+    @click="signOut"
   />
   <div
     v-else
@@ -28,7 +30,7 @@ const user = useSupabaseUser()
       icon="lucide:github"
       label="GitHub Login"
       aria-label="Sign in or login with GitHub"
-      @click="client.auth.signInWithOAuth({ provider: 'github' })"
+      @click="signInWithGitHub"
     />
     <AppButton
       data-test-id="google-login-button"
@@ -37,7 +39,7 @@ const user = useSupabaseUser()
       icon="simple-icons:google"
       label="Google Login"
       aria-label="Sign in or login with Google"
-      @click="client.auth.signInWithOAuth({ provider: 'google' })"
+      @click="signInWithGoogle"
     />
   </div>
 </template>

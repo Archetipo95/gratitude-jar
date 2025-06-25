@@ -1,8 +1,8 @@
 <script setup lang="ts">
-const user = useSupabaseUser()
+const { isAuthenticated } = useAuth()
 
 const title = computed(() => {
-  return user.value ? "Weekly Planner" : "Welcome"
+  return isAuthenticated.value ? "Weekly Planner" : "Welcome"
 })
 
 useHead({
@@ -18,9 +18,9 @@ useHead({
 
 <template>
   <div class="space-y-4">
-    <CountDown v-if="user" />
-    <DisclaimerMessage v-if="!user" />
+    <CountDown v-if="isAuthenticated" />
+    <DisclaimerMessage v-if="!isAuthenticated" />
 
-    <WeekGrid v-if="user" />
+    <WeekGrid v-if="isAuthenticated" />
   </div>
 </template>
