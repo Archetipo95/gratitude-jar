@@ -33,7 +33,7 @@ export class EmailService {
     // Future implementation for weekly summaries
     try {
       // This would send a formatted email with all messages for the week
-      console.log("Sending weekly summary to:", userEmail, "Messages:", weeklyMessages)
+      console.warn("Sending weekly summary to:", userEmail, "Messages:", weeklyMessages)
       return true
     }
     catch (error) {
