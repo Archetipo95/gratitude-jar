@@ -22,11 +22,13 @@ const meta = {
 export default meta
 type Story = StoryObj<typeof meta>
 
+// Fixed year for consistent screenshots and development
+const MOCK_YEAR = 2024
+
 // Helper function to create mock week data
 function createMockWeek(weekNumber: number, isCurrentWeek = false): Week {
-  const currentYear = new Date().getFullYear()
-  const weekStart = new Date(currentYear, 0, (weekNumber - 1) * 7 + 1)
-  const weekEnd = new Date(currentYear, 0, weekNumber * 7)
+  const weekStart = new Date(MOCK_YEAR, 0, (weekNumber - 1) * 7 + 1)
+  const weekEnd = new Date(MOCK_YEAR, 0, weekNumber * 7)
 
   return {
     number: weekNumber,
@@ -42,19 +44,19 @@ const mockMessages = [
     id: 1,
     message: "I'm grateful for my family's support during challenging times.",
     week: 5,
-    year: new Date().getFullYear(),
+    year: MOCK_YEAR,
   },
   {
     id: 2,
     message: "Thankful for good health and the ability to exercise daily.",
     week: 10,
-    year: new Date().getFullYear(),
+    year: MOCK_YEAR,
   },
   {
     id: 3,
     message: "Grateful for the beautiful sunset I witnessed today.",
     week: 15,
-    year: new Date().getFullYear(),
+    year: MOCK_YEAR,
   },
 ]
 
@@ -69,8 +71,8 @@ export const Default: Story = {
   }),
   args: {
     week: createMockWeek(25),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: false,
     messages: [],
   },
@@ -87,8 +89,8 @@ export const CurrentWeek: Story = {
   }),
   args: {
     week: createMockWeek(25, true),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: false,
     messages: [],
   },
@@ -105,8 +107,8 @@ export const WeekWithMessage: Story = {
   }),
   args: {
     week: createMockWeek(5),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: false,
     messages: mockMessages,
   },
@@ -123,8 +125,8 @@ export const PastWeekMissing: Story = {
   }),
   args: {
     week: createMockWeek(20),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: false,
     messages: [],
   },
@@ -141,8 +143,8 @@ export const FutureWeek: Story = {
   }),
   args: {
     week: createMockWeek(45),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: false,
     messages: [],
   },
@@ -159,8 +161,8 @@ export const Loading: Story = {
   }),
   args: {
     week: createMockWeek(25, true),
-    selectedYear: new Date().getFullYear(),
-    currentYear: new Date().getFullYear(),
+    selectedYear: MOCK_YEAR,
+    currentYear: MOCK_YEAR,
     isSubmitting: true,
     messages: [],
   },
@@ -171,7 +173,7 @@ export const AllStates: Story = {
   render: () => ({
     components: { WeekTile },
     setup() {
-      const currentYear = new Date().getFullYear()
+      const currentYear = MOCK_YEAR
       const states = [
         {
           title: "Current Week",
