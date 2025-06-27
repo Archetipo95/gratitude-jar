@@ -8,7 +8,7 @@ const {
 const greetingMessage = computed(() => {
   if (!isAuthenticated.value)
     return "Hello Guest"
-  return `Hello ${user.value.user_metadata.user_name}`
+  return `Hello ${user.value?.user_metadata.user_name}`
 })
 </script>
 
