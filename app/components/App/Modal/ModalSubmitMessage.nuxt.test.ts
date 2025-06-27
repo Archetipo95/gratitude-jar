@@ -2,7 +2,7 @@ import type { VueWrapper } from "@vue/test-utils"
 
 import { mountSuspended } from "@nuxt/test-utils/runtime"
 
-import ModalMessage from "./ModalMessage.vue"
+import ModalSubmitMessage from "./ModalSubmitMessage.vue"
 
 // Mock Supabase
 const mockInsert = vi.fn()
@@ -23,7 +23,7 @@ vi.mock("#imports", async () => {
   }
 })
 
-describe("modalMessage", () => {
+describe("modalSubmitMessage", () => {
   let wrapper: VueWrapper
   const defaultProps = {
     weekNumber: 25,
@@ -34,7 +34,7 @@ describe("modalMessage", () => {
   beforeEach(async () => {
     vi.clearAllMocks()
     mockInsert.mockResolvedValue({ error: null })
-    wrapper = await mountSuspended(ModalMessage, {
+    wrapper = await mountSuspended(ModalSubmitMessage, {
       props: defaultProps,
     })
   })

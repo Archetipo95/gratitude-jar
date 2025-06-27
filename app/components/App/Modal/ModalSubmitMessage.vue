@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ModalMessageProps } from "./ModalMessage.props"
+import type { ModalSubmitMessageProps } from "./ModalSubmitMessage.props"
 
 const {
   weekNumber,
   selectedYear,
-} = defineProps<ModalMessageProps>()
+} = defineProps<ModalSubmitMessageProps>()
 const emit = defineEmits(["messageSubmitted", "failedSubmit", "close"])
 
 // Use composables for business logic

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LazyModalMessage } from "#components"
+import { LazyModalSubmitMessage } from "#components"
 
 import type { WeekTileProps } from "./WeekTile.props"
 
@@ -41,7 +41,7 @@ function getMessage(weekNumber: number) {
 
 const overlay = useOverlay()
 
-const modal = overlay.create(LazyModalMessage, {
+const modal = overlay.create(LazyModalSubmitMessage, {
   props: {
     weekNumber: props.week.number,
     selectedYear: props.selectedYear,
