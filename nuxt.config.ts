@@ -113,9 +113,4 @@ export default defineNuxtConfig({
     typeCheck: true,
   },
 
-  storybook: {
-    // Turned off for now, as it's not working with Nuxt
-    // You can launch it manually with `bun storybook`
-    // enabled: false,
-  },
 })
