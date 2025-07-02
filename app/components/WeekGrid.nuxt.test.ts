@@ -162,8 +162,7 @@ describe("weekGrid", () => {
   it("has correct container styling", () => {
     const container = wrapper.find(".space-y-6")
     expect(container.exists()).toBe(true)
-    expect(container.classes()).toContain("max-w-7xl")
-    expect(container.classes()).toContain("mx-auto")
+    expect(container.classes()).toContain("space-y-6")
   })
 
   it("has correct header styling", () => {

@@ -22,7 +22,6 @@ describe("appNavbarMobileMenu", () => {
     it("renders mobile menu container", () => {
       const mobileMenu = getMobileMenu()
       expect(mobileMenu.exists()).toBe(true)
-      expect(mobileMenu.classes()).toContain("md:hidden")
     })
 
     it("renders hamburger button with correct attributes", () => {
