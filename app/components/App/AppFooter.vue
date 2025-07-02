@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-between items-center p-4 md:p-6 border-t-4 dark:border-gray-600 bg-white dark:bg-gray-800 flex-wrap gap-4">
+  <footer class="flex justify-between items-center p-4 md:p-6 border-t-4 dark:border-gray-600 bg-white dark:bg-gray-800 flex-wrap gap-4">
     <p class="flex items-center gap-2 text-gray-800 dark:text-gray-200" data-test="footer-made-by">
       Made with <UIcon
         name="lucide:heart"
@@ -23,5 +23,5 @@
     >
       Info & Disclaimers <UIcon name="lucide:badge-info" size="20" />
     </NuxtLink>
-  </div>
+  </footer>
 </template>

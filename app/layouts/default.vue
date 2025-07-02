@@ -1,12 +1,13 @@
 <template>
-  <UContainer class="min-h-screen flex flex-col justify-between">
-    <div class="space-y-4">
-      <AppNavbar />
+  <div class="min-h-screen flex flex-col gap-10">
+    <AppNavbar />
+
+    <main class="mx-4 md:mx-6">
       <slot />
-    </div>
+    </main>
+
     <AppFooter />
 
-    <!-- Scroll Navigation -->
     <AppScrollTopBottom />
-  </UContainer>
+  </div>
 </template>

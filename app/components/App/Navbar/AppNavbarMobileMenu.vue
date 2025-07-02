@@ -11,7 +11,7 @@ function toggleMenu() {
 </script>
 
 <template>
-  <div class="md:hidden" data-test-id="nav-mobile-menu">
+  <div data-test-id="nav-mobile-menu">
     <!-- Hamburger Button -->
     <AppButton
       icon="lucide-lab:burger"
