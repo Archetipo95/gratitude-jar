@@ -33,7 +33,7 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div data-test-id="scroll-navigator" class="fixed bottom-6 right-4 z-50 flex flex-col gap-2">
+  <div data-test-id="scroll-navigator" class="fixed bottom-6 right-4 lg:right-6 z-50 flex flex-col gap-2">
     <!-- Scroll to Top -->
     <AppButton
       data-test-id="scroll-to-top-button"

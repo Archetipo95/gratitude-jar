@@ -56,7 +56,7 @@ const filteredWeeks = computed(() => {
 </script>
 
 <template>
-  <div class="space-y-6 max-w-7xl mx-auto">
+  <div class="space-y-6">
     <div class="flex items-center justify-between flex-wrap gap-4 p-6 bg-white dark:bg-gray-800 border-4 dark:border-gray-600">
       <label class="flex items-center space-x-2">
         <USelect
